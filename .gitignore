@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.venv/
+*.egg
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Sensitive/temp
+.env
+*.log
+bench_fix*.py
+diagnose_perf.py
+apply_index_and_bench.py
+perf_debug.txt
+perf_result.txt
+_out.txt
+_diag_out.txt
+
+# Database files
+*.mdf
+*.ldf
+*.mdb
