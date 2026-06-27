@@ -1,3 +1,9 @@
+"""@brief Serviços (casos de uso) da camada de aplicação.
+
+Implementa as operações orquestradas do sistema: consulta de ensaios,
+gerenciamento de observações, exportação de dados e diagnósticos.
+"""
+
 from __future__ import annotations
 
 from dataclasses import asdict
@@ -24,13 +30,29 @@ from src.infrastructure.cache import TTLCache
 
 
 class TestReadService:
+    """@brief Serviço para consulta e carregamento de dados de ensaio.
+
+    Orquestra a busca de dados dinâmicos (série temporal) e estáticos
+    (configuração) com cache intermediário para reduzir consultas ao banco.
+    """
+
     __test__ = False
 
     def __init__(self, repository: TestQueryRepository, cache: TTLCache):
+        """@brief Inicializa o serviço com repositório e cache.
+
+        @param repository Repositório de consulta de dados de ensaio.
+        @param cache Cache TTL para evitar consultas repetidas ao banco.
+        """
         self.repository = repository
         self.cache = cache
 
     def list_test_ids(self, cyl_num: int) -> list[str]:
+        """@brief Lista os IDs de teste disponíveis para um cilindro, com cache.
+
+        @param cyl_num Número do cilindro.
+        @return Lista de identificadores de teste.
+        """
         validate_cylinder(cyl_num)
         cache_key = f"ids:{cyl_num}"
         cached = self.cache.get(cache_key)
@@ -41,6 +63,17 @@ class TestReadService:
         return ids
 
     def load_test(self, cyl_num: int, test_id: str, y_columns: list[str] | None = None) -> LoadTestResponse:
+        """@brief Carrega todos os dados de um ensaio (dinâmicos + estáticos) com cache.
+
+        Utiliza uma única conexão ODBC compartilhada para todas as consultas,
+        evitando o overhead de ~300ms por handshake.
+
+        @param cyl_num Número do cilindro.
+        @param test_id Identificador do ensaio.
+        @param y_columns Lista opcional de colunas Y para filtrar.
+        @return LoadTestResponse com dados dinâmicos, estáticos e metadados.
+        @raise NotFoundError Se nenhum dado dinâmico for encontrado.
+        """
         validate_cylinder(cyl_num)
         validate_test_id(test_id)
         cache_key = f"test:{cyl_num}:{test_id}"
@@ -72,15 +105,31 @@ class TestReadService:
 
 
 class ObservationService:
+    """@brief Serviço para operações CRUD de observações por coordenada."""
+
     def __init__(self, repository: ObservationCommandRepository):
+        """@brief Inicializa o serviço com repositório de observações.
+
+        @param repository Repositório de persistência de observações.
+        """
         self.repository = repository
 
     def upsert(self, cmd: ObservationCommand) -> dict[str, object]:
+        """@brief Cria ou atualiza uma observação em uma coordenada.
+
+        @param cmd Comando com dados da observação.
+        @return Dicionário com o resultado da operação.
+        """
         valid_cmd = validate_observation_command(cmd)
         result = self.repository.upsert_observation(valid_cmd)
         return asdict(result)
 
     def get(self, lookup: ObservationLookup) -> dict[str, object] | None:
+        """@brief Recupera uma observação pela chave composta.
+
+        @param lookup Chave de busca (cilindro, teste, coordenada, variável).
+        @return Dicionário com dados da observação ou None se não encontrada.
+        """
         validate_observation_lookup(lookup)
         record = self.repository.get_observation(lookup)
         if record is None:
@@ -88,16 +137,33 @@ class ObservationService:
         return asdict(record)
 
     def delete(self, lookup: ObservationLookup) -> bool:
+        """@brief Remove uma observação pela chave composta.
+
+        @param lookup Chave de busca da observação a remover.
+        @return True se excluída, False se não encontrada.
+        """
         validate_observation_lookup(lookup)
         return self.repository.delete_observation(lookup)
 
 
 class ExportService:
+    """@brief Serviço para exportação de dados em CSV e PDF."""
+
     def __init__(self, csv_exporter: CsvExporter, pdf_exporter: PdfExporter):
+        """@brief Inicializa o serviço com os exportadores.
+
+        @param csv_exporter Implementação do exportador CSV.
+        @param pdf_exporter Implementação do exportador PDF.
+        """
         self.csv_exporter = csv_exporter
         self.pdf_exporter = pdf_exporter
 
     def export_csv(self, rows: pd.DataFrame) -> bytes:
+        """@brief Exporta dados para CSV com separador ponto-e-vírgula.
+
+        @param rows DataFrame com os dados a exportar.
+        @return Bytes do arquivo CSV.
+        """
         return self.csv_exporter.export(rows)
 
     def export_pdf(
@@ -107,6 +173,15 @@ class ExportService:
         static_row: pd.DataFrame,
         request: ExportPdfRequest,
     ) -> bytes:
+        """@brief Gera relatório PDF com gráfico e dados do ensaio.
+
+        No modo "config_atual", limita a amostra da tabela ao máximo configurado.
+
+        @param rows Dados dinâmicos da série temporal.
+        @param static_row Dados estáticos de configuração.
+        @param request Parâmetros de exportação.
+        @return Bytes do arquivo PDF.
+        """
         export_rows = rows
         if request.export_mode == "config_atual" and len(rows) > request.table_sample_max_rows:
             export_rows = rows.head(request.table_sample_max_rows)
@@ -120,10 +195,21 @@ class ExportService:
 
 
 class DiagnosticsService:
+    """@brief Serviço para obtenção de diagnósticos do sistema."""
+
     def __init__(self, repository: DiagnosticsRepository):
+        """@brief Inicializa o serviço com repositório de diagnósticos.
+
+        @param repository Repositório de diagnósticos.
+        """
         self.repository = repository
 
     def get(self, active_context: dict[str, object]) -> dict[str, object]:
+        """@brief Obtém diagnóstico completo da conexão e ambiente.
+
+        @param active_context Contexto ativo para incluir no diagnóstico.
+        @return Dicionário com drivers ODBC, estado da conexão e contexto.
+        """
         data = self.repository.diagnostics(active_context)
         return {
             "odbc_drivers": data.odbc_drivers,

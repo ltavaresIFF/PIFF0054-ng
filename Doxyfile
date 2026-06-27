@@ -1,0 +1,96 @@
+# Doxyfile - Configuração do Doxygen para o Sistema de Câmeras
+# Gerado para documentação em português do Brasil.
+
+#---------------------------------------------------------------------------
+# Configuração do projeto
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = "PIFF2502.0054"
+PROJECT_NUMBER         = "2.0"
+PROJECT_BRIEF          = "Interface de emissão de relatórios dos testes"
+PROJECT_LOGO           =
+OUTPUT_DIRECTORY       = docs/doxygen
+OUTPUT_LANGUAGE        = Brazilian
+
+#---------------------------------------------------------------------------
+# Configuração de entrada
+#---------------------------------------------------------------------------
+
+INPUT                  = main.py src/ README.md docs/
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.py *.md
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */venv/* */__pycache__/* */tools/*
+
+#---------------------------------------------------------------------------
+# Configuração de extração
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+#---------------------------------------------------------------------------
+# Configuração para Python
+#---------------------------------------------------------------------------
+
+# Otimizar saída para linguagens com docstrings (Python/Java)
+OPTIMIZE_OUTPUT_JAVA   = YES
+
+# Permitir que o Doxygen interprete docstrings Python como documentação
+PYTHON_DOCSTRING       = YES
+
+#---------------------------------------------------------------------------
+# Configuração de saída
+#---------------------------------------------------------------------------
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_COLORSTYLE        = LIGHT
+
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+LATEX_CMD_NAME         = pdflatex
+USE_PDFLATEX           = YES
+PDF_HYPERLINKS         = YES
+LATEX_BATCHMODE        = YES
+LATEX_EXTRA_FILES      = docs/doxygen-emoji.sty
+EXTRA_PACKAGES         = doxygen-emoji
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+#---------------------------------------------------------------------------
+# Configuração de gráficos e diagramas
+#---------------------------------------------------------------------------
+
+HAVE_DOT               = NO
+COLLABORATION_GRAPH    = NO
+INCLUDE_GRAPH          = NO
+INCLUDED_BY_GRAPH      = NO
+
+#---------------------------------------------------------------------------
+# Configuração de avisos
+#---------------------------------------------------------------------------
+
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = NO
+
+#---------------------------------------------------------------------------
+# Pré-processamento
+#---------------------------------------------------------------------------
+
+ENABLE_PREPROCESSING   = NO
+
+#---------------------------------------------------------------------------
+# Opções diversas
+#---------------------------------------------------------------------------
+
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = .
+JAVADOC_AUTOBRIEF      = YES
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = NO
+USE_MDFILE_AS_MAINPAGE = README.md

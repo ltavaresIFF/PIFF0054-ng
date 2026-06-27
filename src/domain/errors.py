@@ -1,22 +1,32 @@
+"""@brief Hierarquia de exceções da camada de domínio.
+
+Define os tipos de erro específicos do domínio do Projeto 54,
+permitindo tratamento diferenciado por tipo na camada de aplicação.
+"""
+
+
 class DomainError(Exception):
-    """Erro base da camada de dominio."""
+    """@brief Erro base da camada de domínio.
+
+    Todas as exceções de domínio herdam desta classe.
+    """
 
 
 class ValidationError(DomainError):
-    """Erro de validacao de regra de negocio."""
+    """@brief Erro disparado quando uma regra de validação é violada."""
 
 
 class NotFoundError(DomainError):
-    """Recurso esperado nao encontrado."""
+    """@brief Erro disparado quando um recurso esperado não é encontrado."""
 
 
 class AmbiguousMatchError(DomainError):
-    """Mais de um registro encontrado quando deveria haver unicidade."""
+    """@brief Erro disparado quando múltiplos registros são encontrados onde deveria haver apenas um."""
 
 
 class PersistenceError(DomainError):
-    """Falha em operacao de persistencia."""
+    """@brief Erro disparado quando uma operação de persistência (insert/update/delete) falha."""
 
 
 class InfrastructureError(DomainError):
-    """Falha de infraestrutura, como conexao SQL."""
+    """@brief Erro disparado quando ocorre uma falha de infraestrutura, como conexão SQL."""

@@ -1,3 +1,9 @@
+"""@brief Exportador de relatório técnico em PDF.
+
+Gera relatórios profissionais com ReportLab incluindo gráfico,
+tabela de dados estáticos e amostra da série temporal dinâmica.
+"""
+
 from __future__ import annotations
 
 from io import BytesIO
@@ -10,6 +16,12 @@ from reportlab.platypus import Image, Paragraph, SimpleDocTemplate, Spacer, Tabl
 
 
 class TechnicalPdfExporter:
+    """@brief Gera relatório técnico em PDF com dados de ensaio.
+
+    O relatório inclui: título, metadados, gráfico da série temporal
+    (PNG), tabela de configuração estática e amostra dos dados dinâmicos.
+    """
+
     def export(
         self,
         *,

@@ -1,3 +1,9 @@
+"""@brief Funções seguras para construção de consultas SQL.
+
+Utilitários para escapar identificadores e nomes de tabela usando
+brackets do SQL Server, prevenindo injeção SQL em identificadores dinâmicos.
+"""
+
 from __future__ import annotations
 
 from src.domain.errors import ValidationError
@@ -8,10 +14,14 @@ _FORBIDDEN = frozenset(["\x00"])
 
 
 def escape_identifier(name: str) -> str:
-    """Escapa um identificador SQL Server usando brackets.
+    """@brief Escapa um identificador SQL Server usando brackets.
 
-    Permite Unicode e caracteres especiais validos para SQL Server.
+    Permite Unicode e caracteres especiais válidos para SQL Server.
     Rejeita strings vazias e null bytes.
+
+    @param name Nome do identificador a escapar.
+    @return Identificador entre brackets: [nome].
+    @raise ValidationError Se name for vazio ou contiver null byte.
     """
     if not name:
         raise ValidationError("Identificador SQL invalido: string vazia")
@@ -22,6 +32,14 @@ def escape_identifier(name: str) -> str:
 
 
 def escape_table(name: str) -> str:
+    """@brief Escapa um nome de tabela, com suporte a schema.
+
+    Se o nome conter ponto (ex: dbo.Tabela), escapa ambas as partes.
+
+    @param name Nome da tabela (opcionalmente com schema).
+    @return Nome escapado: [dbo].[Tabela] ou [schema].[tabela].
+    @raise ValidationError Se o formato for inválido.
+    """
     if "." in name:
         parts = name.split(".")
         if len(parts) != 2:
