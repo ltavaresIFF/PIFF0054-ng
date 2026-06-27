@@ -1,0 +1,147 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+sql.\+schema}
+\hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema}{}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema}\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ab30b5d83a72a49fbce9b5ff326ab1522}{cylinder\+\_\+id\+\_\+column}} (int cyl\+\_\+num)
+\item 
+str \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a247e31e4f04788d558db6772866abc22}{dynamic\+\_\+table\+\_\+name}} (int cyl\+\_\+num)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a077665962c1010f79a934bcd75ecbf3f}{static\+\_\+table\+\_\+candidates}} (int cyl\+\_\+num)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a17e58ef19a03e09b722ac2979b7f1991}{CANONICAL\+\_\+\+OBSERVATION\+\_\+\+COLUMNS}}
+\begin{DoxyCompactList}\small\item\em Mapeamento de nomes canônicos para colunas de observação no banco. \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad936bc89941121c6c55132af5a61d0b5}{FORCE\+\_\+\+COLUMN\+\_\+\+CANDIDATES}} = \mbox{[}"{}Forca"{}, "{}For\textbackslash{}u00e7a"{}, "{}FORCA"{}, "{}Carga"{}, "{}Load"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Candidatos a coluna de força (com e sem acento, português e inglês). \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad42f8422f95e78cd654720a4704686f3}{DYNAMIC\+\_\+\+EXCLUDE\+\_\+\+COLUMNS}}
+\begin{DoxyCompactList}\small\item\em Colunas excluídas automaticamente das consultas dinâmicas. \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a6aac20d3e7e470fc989559d05b142b23}{DYNAMIC\+\_\+\+DEFAULT\+\_\+\+COLUMNS}}
+\begin{DoxyCompactList}\small\item\em Conjunto padrão de colunas carregadas das tabelas dinâmicas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Schema do banco de dados Projeto_54.
+
+Centraliza nomes canônicos de tabelas, colunas e funções de derivação
+de identificadores para cada cilindro, garantindo consistência nas consultas.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ab30b5d83a72a49fbce9b5ff326ab1522}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ab30b5d83a72a49fbce9b5ff326ab1522} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!cylinder\_id\_column@{cylinder\_id\_column}}
+\index{cylinder\_id\_column@{cylinder\_id\_column}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{cylinder\_id\_column()}{cylinder\_id\_column()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+sql.\+schema.\+cylinder\+\_\+id\+\_\+column (\begin{DoxyParamCaption}\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Retorna o nome da coluna de ID de teste para um cilindro.
+
+@param cyl_num Número do cilindro (1 a 6).
+@return Nome da coluna: Cilindro_XX_ID_Teste.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a247e31e4f04788d558db6772866abc22}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a247e31e4f04788d558db6772866abc22} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!dynamic\_table\_name@{dynamic\_table\_name}}
+\index{dynamic\_table\_name@{dynamic\_table\_name}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{dynamic\_table\_name()}{dynamic\_table\_name()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+sql.\+schema.\+dynamic\+\_\+table\+\_\+name (\begin{DoxyParamCaption}\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Retorna o nome da tabela dinâmica para um cilindro.
+
+@param cyl_num Número do cilindro (1 a 6).
+@return Nome da tabela: Cilindro_XX (schema dbo).
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a077665962c1010f79a934bcd75ecbf3f}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a077665962c1010f79a934bcd75ecbf3f} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!static\_table\_candidates@{static\_table\_candidates}}
+\index{static\_table\_candidates@{static\_table\_candidates}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{static\_table\_candidates()}{static\_table\_candidates()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+infrastructure.\+sql.\+schema.\+static\+\_\+table\+\_\+candidates (\begin{DoxyParamCaption}\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Retorna candidatos a nome de tabela estática para um cilindro.
+
+Tenta variações com/sem acento para compatibilidade com diferentes
+versões do schema.
+
+@param cyl_num Número do cilindro (1 a 6).
+@return Lista de possíveis nomes de tabela estática.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variáveis}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a17e58ef19a03e09b722ac2979b7f1991}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a17e58ef19a03e09b722ac2979b7f1991} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!CANONICAL\_OBSERVATION\_COLUMNS@{CANONICAL\_OBSERVATION\_COLUMNS}}
+\index{CANONICAL\_OBSERVATION\_COLUMNS@{CANONICAL\_OBSERVATION\_COLUMNS}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{CANONICAL\_OBSERVATION\_COLUMNS}{CANONICAL\_OBSERVATION\_COLUMNS}}
+{\footnotesize\ttfamily dict src.\+infrastructure.\+sql.\+schema.\+CANONICAL\+\_\+\+OBSERVATION\+\_\+\+COLUMNS}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}obs"{}}:\ \textcolor{stringliteral}{"{}OBS"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}val"{}}:\ \textcolor{stringliteral}{"{}val\_obs"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}y\_name"{}}:\ \textcolor{stringliteral}{"{}y\_column\_name"{}},}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+
+
+Mapeamento de nomes canônicos para colunas de observação no banco. 
+
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a6aac20d3e7e470fc989559d05b142b23}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_a6aac20d3e7e470fc989559d05b142b23} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!DYNAMIC\_DEFAULT\_COLUMNS@{DYNAMIC\_DEFAULT\_COLUMNS}}
+\index{DYNAMIC\_DEFAULT\_COLUMNS@{DYNAMIC\_DEFAULT\_COLUMNS}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{DYNAMIC\_DEFAULT\_COLUMNS}{DYNAMIC\_DEFAULT\_COLUMNS}}
+{\footnotesize\ttfamily dict src.\+infrastructure.\+sql.\+schema.\+DYNAMIC\+\_\+\+DEFAULT\+\_\+\+COLUMNS}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Forca"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Pressao\_Compressor"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Pressao\_Reguladora"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Temperatura\_Ambiente"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}Tipo\_Teste"{}},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{"{}LeituraIndice"{}},}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{"{}Em\_Alarme"{}},}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{"{}Setpoint"{}},}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{"{}TimeCol"{}},}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{"{}OBS"{}},}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{"{}val\_obs"{}},}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{"{}y\_column\_name"{}},}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+
+
+Conjunto padrão de colunas carregadas das tabelas dinâmicas. 
+
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad42f8422f95e78cd654720a4704686f3}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad42f8422f95e78cd654720a4704686f3} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!DYNAMIC\_EXCLUDE\_COLUMNS@{DYNAMIC\_EXCLUDE\_COLUMNS}}
+\index{DYNAMIC\_EXCLUDE\_COLUMNS@{DYNAMIC\_EXCLUDE\_COLUMNS}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{DYNAMIC\_EXCLUDE\_COLUMNS}{DYNAMIC\_EXCLUDE\_COLUMNS}}
+{\footnotesize\ttfamily dict src.\+infrastructure.\+sql.\+schema.\+DYNAMIC\+\_\+\+EXCLUDE\+\_\+\+COLUMNS}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}RowId"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}CreatedAt"{}},}
+\DoxyCodeLine{00004\ \}}
+
+\end{DoxyCode}
+
+
+Colunas excluídas automaticamente das consultas dinâmicas. 
+
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad936bc89941121c6c55132af5a61d0b5}\label{namespacesrc_1_1infrastructure_1_1sql_1_1schema_ad936bc89941121c6c55132af5a61d0b5} 
+\index{src.infrastructure.sql.schema@{src.infrastructure.sql.schema}!FORCE\_COLUMN\_CANDIDATES@{FORCE\_COLUMN\_CANDIDATES}}
+\index{FORCE\_COLUMN\_CANDIDATES@{FORCE\_COLUMN\_CANDIDATES}!src.infrastructure.sql.schema@{src.infrastructure.sql.schema}}
+\doxysubsubsection{\texorpdfstring{FORCE\_COLUMN\_CANDIDATES}{FORCE\_COLUMN\_CANDIDATES}}
+{\footnotesize\ttfamily list src.\+infrastructure.\+sql.\+schema.\+FORCE\+\_\+\+COLUMN\+\_\+\+CANDIDATES = \mbox{[}"{}Forca"{}, "{}For\textbackslash{}u00e7a"{}, "{}FORCA"{}, "{}Carga"{}, "{}Load"{}\mbox{]}}
+
+
+
+Candidatos a coluna de força (com e sem acento, português e inglês). 
+

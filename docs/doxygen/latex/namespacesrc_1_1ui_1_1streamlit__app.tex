@@ -1,0 +1,79 @@
+\doxysection{Refência do Namespace src.\+ui.\+streamlit\+\_\+app}
+\hypertarget{namespacesrc_1_1ui_1_1streamlit__app}{}\label{namespacesrc_1_1ui_1_1streamlit__app}\index{src.ui.streamlit\_app@{src.ui.streamlit\_app}}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+tuple\mbox{[}\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService}{Test\+Read\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService}{Observation\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService}{Export\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1DiagnosticsService}{Diagnostics\+Service}}\mbox{]} \mbox{\hyperlink{namespacesrc_1_1ui_1_1streamlit__app_a8d11e07b593af531ed13d60725331ddc}{\+\_\+build\+\_\+services}} ()
+\item 
+go.\+Figure \mbox{\hyperlink{namespacesrc_1_1ui_1_1streamlit__app_ad15397e27081273c86658de8e1c66ff4}{\+\_\+plot\+\_\+multiaxis}} (pd.\+Data\+Frame df, list\mbox{[}str\mbox{]} y\+\_\+cols)
+\item 
+str \mbox{\hyperlink{namespacesrc_1_1ui_1_1streamlit__app_a0dbd5f4d61e05474eda3cf1491de50da}{\+\_\+friendly\+\_\+error}} (Exception exc)
+\item 
+None \mbox{\hyperlink{namespacesrc_1_1ui_1_1streamlit__app_a72c5a7b06640eec8279af497093f9b28}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Aplicação Streamlit do Painel Técnico PIFF-0054.
+
+Interface web para visualização de ensaios industriais com gráficos
+multi-eixo interativos (Plotly), anotação de observações por coordenada
+e exportação de relatórios CSV/PDF.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1ui_1_1streamlit__app_a8d11e07b593af531ed13d60725331ddc}\label{namespacesrc_1_1ui_1_1streamlit__app_a8d11e07b593af531ed13d60725331ddc} 
+\index{src.ui.streamlit\_app@{src.ui.streamlit\_app}!\_build\_services@{\_build\_services}}
+\index{\_build\_services@{\_build\_services}!src.ui.streamlit\_app@{src.ui.streamlit\_app}}
+\doxysubsubsection{\texorpdfstring{\_build\_services()}{\_build\_services()}}
+{\footnotesize\ttfamily  tuple\mbox{[}\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService}{Test\+Read\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService}{Observation\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService}{Export\+Service}}, \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1DiagnosticsService}{Diagnostics\+Service}}\mbox{]} src.\+ui.\+streamlit\+\_\+app.\+\_\+build\+\_\+services (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Constrói ou recupera os serviços da sessão Streamlit.
+
+Os serviços são persistidos em st.session_state para que o cache TTL
+e o cache de colunas do repositório sobrevivam aos rerenders do Streamlit,
+evitando reconstrução em cada interação.
+
+@return Tupla (TestReadService, ObservationService, ExportService, DiagnosticsService).
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1ui_1_1streamlit__app_a0dbd5f4d61e05474eda3cf1491de50da}\label{namespacesrc_1_1ui_1_1streamlit__app_a0dbd5f4d61e05474eda3cf1491de50da} 
+\index{src.ui.streamlit\_app@{src.ui.streamlit\_app}!\_friendly\_error@{\_friendly\_error}}
+\index{\_friendly\_error@{\_friendly\_error}!src.ui.streamlit\_app@{src.ui.streamlit\_app}}
+\doxysubsubsection{\texorpdfstring{\_friendly\_error()}{\_friendly\_error()}}
+{\footnotesize\ttfamily  str src.\+ui.\+streamlit\+\_\+app.\+\_\+friendly\+\_\+error (\begin{DoxyParamCaption}\item[{Exception}]{exc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Normaliza exceções para mensagens amigáveis ao usuário.
+
+@param exc Exceção capturada.
+@return String com mensagem legível para o operador.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1ui_1_1streamlit__app_ad15397e27081273c86658de8e1c66ff4}\label{namespacesrc_1_1ui_1_1streamlit__app_ad15397e27081273c86658de8e1c66ff4} 
+\index{src.ui.streamlit\_app@{src.ui.streamlit\_app}!\_plot\_multiaxis@{\_plot\_multiaxis}}
+\index{\_plot\_multiaxis@{\_plot\_multiaxis}!src.ui.streamlit\_app@{src.ui.streamlit\_app}}
+\doxysubsubsection{\texorpdfstring{\_plot\_multiaxis()}{\_plot\_multiaxis()}}
+{\footnotesize\ttfamily  go.\+Figure src.\+ui.\+streamlit\+\_\+app.\+\_\+plot\+\_\+multiaxis (\begin{DoxyParamCaption}\item[{pd.\+Data\+Frame}]{df,  }\item[{list\mbox{[}str\mbox{]}}]{y\+\_\+cols }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Gera gráfico multi-eixo interativo com Plotly.
+
+Cada variável Y recebe um eixo próprio sobreposto, com posição
+alternada (esquerda/direita) para visualização simultânea.
+Paleta de cores "Industrial Precision" com 6 cores.
+
+@param df DataFrame com os dados dinâmicos.
+@param y_cols Lista de colunas Y a plotar.
+@return Figure do Plotly (go.Figure).
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1ui_1_1streamlit__app_a72c5a7b06640eec8279af497093f9b28}\label{namespacesrc_1_1ui_1_1streamlit__app_a72c5a7b06640eec8279af497093f9b28} 
+\index{src.ui.streamlit\_app@{src.ui.streamlit\_app}!main@{main}}
+\index{main@{main}!src.ui.streamlit\_app@{src.ui.streamlit\_app}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily  None src.\+ui.\+streamlit\+\_\+app.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Ponto de entrada da aplicação Streamlit.
+
+Configura a página, injeta o tema, constrói os serviços e
+renderiza o fluxo completo de interação: seleção de ensaio,
+visualização, anotação, exportação e diagnósticos.
+\end{DoxyVerb}
+ 

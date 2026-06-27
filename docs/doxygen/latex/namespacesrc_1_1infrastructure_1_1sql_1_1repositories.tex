@@ -1,0 +1,21 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+sql.\+repositories}
+\hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1repositories}{}\label{namespacesrc_1_1infrastructure_1_1sql_1_1repositories}\index{src.infrastructure.sql.repositories@{src.infrastructure.sql.repositories}}
+\doxysubsubsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository}{Sql\+Diagnostics\+Repository}}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository}{Sql\+Observation\+Repository}}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository}{Sql\+Test\+Query\+Repository}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Implementações SQL dos protocolos de repositório.
+
+Adaptadores que implementam os protocolos definidos em domain/repositories.py
+utilizando SQL Server via pyodbc. Inclui cache de schema (colunas e tabelas)
+para evitar consultas repetitivas ao catálogo do banco.
+\end{DoxyVerb}
+ 

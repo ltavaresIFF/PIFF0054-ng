@@ -1,0 +1,72 @@
+\doxysection{Referência da Classe src.\+domain.\+repositories.\+Test\+Query\+Repository}
+\hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository}{}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository}\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+Diagrama de hierarquia da classe src.\+domain.\+repositories.\+Test\+Query\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a122d47e991d629c2ad07bc7bd0fc352f}{list\+\_\+test\+\_\+ids}} (self, int cyl\+\_\+num)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DynamicDataResult}{Dynamic\+Data\+Result}} \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a9b404d7246e8961b1c5491254786bc08}{load\+\_\+dynamic\+\_\+rows}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}} ctx, list\mbox{[}str\mbox{]}\texorpdfstring{$\vert$}{|}None selected\+\_\+columns=None)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1StaticDataResult}{Static\+Data\+Result}} \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_aa3f5bb322eed75df41c54d0ebc3d6c4e}{load\+\_\+static\+\_\+row}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}} ctx)
+\item 
+str\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a847dacde02e8a6ca82b33cd32a365ea1}{detect\+\_\+force\+\_\+column}} (self, int cyl\+\_\+num)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a30c8399def1027b3f4b4a125f52cd44c}{load\+\_\+available\+\_\+y\+\_\+columns}} (self, int cyl\+\_\+num)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Protocolo para consulta de dados de ensaio no banco SQL.
+
+Define as operações de leitura para tabelas dinâmicas (série temporal)
+e estáticas (configuração) por cilindro e ID de teste.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a847dacde02e8a6ca82b33cd32a365ea1}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a847dacde02e8a6ca82b33cd32a365ea1} 
+\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}!detect\_force\_column@{detect\_force\_column}}
+\index{detect\_force\_column@{detect\_force\_column}!src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{detect\_force\_column()}{detect\_force\_column()}}
+{\footnotesize\ttfamily  str \texorpdfstring{$\vert$}{|} None src.\+domain.\+repositories.\+Test\+Query\+Repository.\+detect\+\_\+force\+\_\+column (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Detecta automaticamente a coluna de força disponível na tabela dinâmica.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a122d47e991d629c2ad07bc7bd0fc352f}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a122d47e991d629c2ad07bc7bd0fc352f} 
+\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}!list\_test\_ids@{list\_test\_ids}}
+\index{list\_test\_ids@{list\_test\_ids}!src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{list\_test\_ids()}{list\_test\_ids()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+domain.\+repositories.\+Test\+Query\+Repository.\+list\+\_\+test\+\_\+ids (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista os IDs de teste disponíveis para um cilindro.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a30c8399def1027b3f4b4a125f52cd44c}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a30c8399def1027b3f4b4a125f52cd44c} 
+\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}!load\_available\_y\_columns@{load\_available\_y\_columns}}
+\index{load\_available\_y\_columns@{load\_available\_y\_columns}!src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_available\_y\_columns()}{load\_available\_y\_columns()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+domain.\+repositories.\+Test\+Query\+Repository.\+load\+\_\+available\+\_\+y\+\_\+columns (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista as colunas numéricas disponíveis como variáveis Y para plotagem.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a9b404d7246e8961b1c5491254786bc08}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_a9b404d7246e8961b1c5491254786bc08} 
+\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}!load\_dynamic\_rows@{load\_dynamic\_rows}}
+\index{load\_dynamic\_rows@{load\_dynamic\_rows}!src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_dynamic\_rows()}{load\_dynamic\_rows()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DynamicDataResult}{Dynamic\+Data\+Result}} src.\+domain.\+repositories.\+Test\+Query\+Repository.\+load\+\_\+dynamic\+\_\+rows (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}}}]{ctx,  }\item[{list\mbox{[}str\mbox{]} \texorpdfstring{$\vert$}{|} None }]{selected\+\_\+columns = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Carrega as linhas da tabela dinâmica (série temporal) para um ensaio.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_aa3f5bb322eed75df41c54d0ebc3d6c4e}\label{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository_aa3f5bb322eed75df41c54d0ebc3d6c4e} 
+\index{src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}!load\_static\_row@{load\_static\_row}}
+\index{load\_static\_row@{load\_static\_row}!src.domain.repositories.TestQueryRepository@{src.domain.repositories.TestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_static\_row()}{load\_static\_row()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1StaticDataResult}{Static\+Data\+Result}} src.\+domain.\+repositories.\+Test\+Query\+Repository.\+load\+\_\+static\+\_\+row (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}}}]{ctx }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Carrega a linha de configuração estática para um ensaio.\end{DoxyVerb}
+ 
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{domain_2repositories_8py}{domain/repositories.\+py}}\end{DoxyCompactItemize}

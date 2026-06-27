@@ -1,0 +1,197 @@
+\chapter{Engenharia Reversa do Banco SQL Server Projeto\+\_\+54}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54}{}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54}\index{Engenharia Reversa do Banco SQL Server Projeto\_54@{Engenharia Reversa do Banco SQL Server Projeto\_54}}
+\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md31}%
+\Hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md31}%
+ Data da analise\+: 2026-\/06-\/26 ~\newline
+ Origem\+: consultas diretas no SQL Server Express (localhost\textbackslash{}SQLEXPRESS, banco Projeto\+\_\+54) + leitura do codigo de acesso a dados em Report\+\_\+\+PIFF54/modules/dal.\+py.\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md32}{}\doxysection{\texorpdfstring{1) Escopo e metodo}{1) Escopo e metodo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md32}
+Este documento foi gerado para uso por outro agente de IA.
+
+Escopo considerado nesta versao\+:
+\begin{DoxyItemize}
+\item somente tabelas de cilindro 01 a 06 (dinamicas e estaticas)
+\item tabelas de 07 a 13 foram desconsideradas neste documento por inconsistencia no numero de colunas em relacao ao padrao adotado para 01 a 06
+\end{DoxyItemize}
+
+Objetivos\+:
+\begin{DoxyItemize}
+\item mapear estrutura real do recorte (01 a 06)
+\item identificar pontos de melhoria de desempenho dentro do recorte
+\item fornecer plano de implementacao focado no escopo valido
+\end{DoxyItemize}
+
+Metodologia aplicada\+:
+\begin{DoxyItemize}
+\item catalogo\+: sys.\+tables, INFORMATION\+\_\+\+SCHEMA.\+COLUMNS
+\item volume\+: sys.\+partitions
+\item integridade\+: INFORMATION\+\_\+\+SCHEMA.\+TABLE\+\_\+\+CONSTRAINTS, sys.\+foreign\+\_\+keys
+\item indices\+: sys.\+indexes
+\item comportamento da aplicacao\+: leitura do DAL (load\+\_\+test\+\_\+ids, load\+\_\+all\+\_\+test\+\_\+data, load\+\_\+static\+\_\+record)
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md33}{}\doxysection{\texorpdfstring{2) Visao geral do modelo (escopo 01 a 06)}{2) Visao geral do modelo (escopo 01 a 06)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md33}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md34}{}\doxysubsection{\texorpdfstring{2.\+1 Tabelas em escopo}{2.1 Tabelas em escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md34}
+
+\begin{DoxyItemize}
+\item dinamicas\+: Cilindro\+\_\+01, Cilindro\+\_\+02, Cilindro\+\_\+03, Cilindro\+\_\+04, Cilindro\+\_\+05, Cilindro\+\_\+06
+\item estaticas\+: Cilindro\+\_\+01\+\_\+\+Estatico/\+Estatico, Cilindro\+\_\+02\+\_\+\+Estatico/\+Estatico, Cilindro\+\_\+03\+\_\+\+Estatico/\+Estatico, Cilindro\+\_\+04\+\_\+\+Estatico/\+Estatico, Cilindro\+\_\+05\+\_\+\+Estatico/\+Estatico, Cilindro\+\_\+06\+\_\+\+Estatico/\+Estatico
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md35}{}\doxysubsection{\texorpdfstring{2.\+2 Tabelas fora de escopo}{2.2 Tabelas fora de escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md35}
+
+\begin{DoxyItemize}
+\item Cilindro\+\_\+07 a Cilindro\+\_\+13 (dinamicas e estaticas)
+\item motivo\+: inconsistencias de quantidade de colunas em relacao ao modelo usado como referencia neste documento
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md36}{}\doxysubsection{\texorpdfstring{2.\+3 Volume de dados no escopo}{2.3 Volume de dados no escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md36}
+
+\begin{DoxyItemize}
+\item dinamicas (01 a 06)\+: tipicamente 2.\+500 linhas por cilindro
+\item estaticas (01 a 06)\+: tipicamente 25 linhas por cilindro
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md37}{}\doxysection{\texorpdfstring{3) Padroes de schema no escopo}{3) Padroes de schema no escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md37}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md38}{}\doxysubsection{\texorpdfstring{3.\+1 Padrao dinamico (exemplo\+: Cilindro\+\_\+01)}{3.1 Padrao dinamico (exemplo: Cilindro\_01)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md38}
+Colunas principais observadas\+:
+\begin{DoxyItemize}
+\item chave tecnica\+: Row\+Id (bigint)
+\item chave de negocio\+: Cilindro\+\_\+01\+\_\+\+ID\+\_\+\+Teste (nvarchar, NOT NULL)
+\item serie temporal\+: Time\+Col, MSec\+Col, Local\+Col
+\item sinais\+: Setpoint, Forca, Pressao\+\_\+\+Compressor, Pressao\+\_\+\+Reguladora, Temperatura\+\_\+\+Ambiente
+\item estado\+: Tipo\+\_\+\+Teste, Leitura\+Indice, Em\+\_\+\+Alarme, Created\+At
+\item observacoes por coordenada\+: OBS, val\+\_\+obs, y\+\_\+column\+\_\+name
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md39}{}\doxysubsection{\texorpdfstring{3.\+2 Padrao estatico (exemplo\+: Cilindro\+\_\+01\+\_\+\+Estatico)}{3.2 Padrao estatico (exemplo: Cilindro\_01\_Estatico)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md39}
+Colunas principais observadas\+:
+\begin{DoxyItemize}
+\item chave de negocio\+: Cilindro\+\_\+01\+\_\+\+ID\+\_\+\+Teste (nvarchar, NOT NULL)
+\item identificacao\+: Cilindro, Sensor\+\_\+\+Cap, Tipo\+\_\+\+Teste, Status\+\_\+\+Ensaio
+\item parametros\+: Setpoint, Duracao\+\_\+\+Estimada, Temperatura\+\_\+\+Inicial
+\item tempos consolidados\+: Tempo\+\_\+\+Inicial, Tempo\+\_\+\+Final, Tempo\+\_\+\+Decorrido\+\_\+\texorpdfstring{$\ast$}{*}
+\item auditoria\+: Created\+At
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md40}{}\doxysection{\texorpdfstring{4) Integridade referencial no escopo}{4) Integridade referencial no escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md40}
+
+\begin{DoxyItemize}
+\item os pares de 01 a 06 apresentam PK e FK
+\item FK tipica\+: Cilindro\+\_\+nn.\+Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste -\/\texorpdfstring{$>$}{>} Cilindro\+\_\+nn\+\_\+\+Estatico.\+Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md41}{}\doxysection{\texorpdfstring{5) Indices observados no escopo}{5) Indices observados no escopo}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md41}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md42}{}\doxysubsection{\texorpdfstring{5.\+1 Tabelas dinamicas (01 a 06)}{5.1 Tabelas dinamicas (01 a 06)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md42}
+Padrao observado\+:
+\begin{DoxyItemize}
+\item PK clustered
+\item IX\+\_\+\+Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste (nonclustered)
+\item IX\+\_\+\+Cilindro\+\_\+nn\+\_\+\+Local\+Col (nonclustered)
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md43}{}\doxysubsection{\texorpdfstring{5.\+2 Tabelas estaticas (01 a 06)}{5.2 Tabelas estaticas (01 a 06)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md43}
+Padrao observado\+:
+\begin{DoxyItemize}
+\item PK clustered
+\item indice nonclustered filtrado por Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste IS NOT NULL
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md44}{}\doxysection{\texorpdfstring{6) Como a aplicacao consulta o banco (impacto em performance)}{6) Como a aplicacao consulta o banco (impacto em performance)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md44}
+Padroes de query em modules/dal.\+py\+:
+\begin{DoxyItemize}
+\item lista de ensaios\+: SELECT DISTINCT Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste ... ORDER BY Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste
+\item carga principal\+: SELECT $<$colunas$>$ FROM Cilindro\+\_\+nn WHERE Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste = ?
+\item ordenacao por tempo no app (python) em parte do fluxo; em alguns casos ha ORDER BY Local\+Col
+\item carga estatica\+: SELECT \texorpdfstring{$\ast$}{*} FROM Cilindro\+\_\+nn\+\_\+\+Estatico WHERE Cilindro\+\_\+nn\+\_\+\+ID\+\_\+\+Teste = ?
+\item leitura de metadados\+: INFORMATION\+\_\+\+SCHEMA.\+COLUMNS
+\end{DoxyItemize}
+
+Consequencia no escopo 01 a 06\+:
+\begin{DoxyItemize}
+\item os melhores ganhos estao em indices focados em ID\+\_\+\+Teste e Local\+Col
+\item padronizacao de consultas evita custo extra de fallback
+\end{DoxyItemize}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md45}{}\doxysection{\texorpdfstring{7) Melhorias de desempenho recomendadas (priorizadas, escopo 01 a 06)}{7) Melhorias de desempenho recomendadas (priorizadas, escopo 01 a 06)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md45}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md46}{}\doxysection{\texorpdfstring{P0 (alta prioridade)}{P0 (alta prioridade)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md46}
+
+\begin{DoxyEnumerate}
+\item Consolidar indice composto por consulta principal nas dinamicas 01 a 06.
+\item Revisar redundancia entre indice simples e indice composto para reduzir custo de manutencao de indice.
+\end{DoxyEnumerate}
+
+Exemplo\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ NONCLUSTERED\ INDEX\ IX\_Cilindro\_01\_ID\_Teste\_LocalCol}
+\DoxyCodeLine{\textcolor{keyword}{ON}\ dbo.Cilindro\_01\ (Cilindro\_01\_ID\_Teste,\ LocalCol)}
+\DoxyCodeLine{INCLUDE\ (Forca,\ Pressao\_Compressor,\ Pressao\_Reguladora,\ Temperatura\_Ambiente,\ Tipo\_Teste,\ LeituraIndice,\ Em\_Alarme);}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md47}{}\doxysection{\texorpdfstring{P1 (alta prioridade)}{P1 (alta prioridade)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md47}
+
+\begin{DoxyEnumerate}
+\item Manter e validar seletividade dos indices filtrados por ID nas estaticas 01 a 06.
+\item Atualizar estatisticas apos seed/carga em lote.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{EXEC}\ sp\_updatestats;}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md48}{}\doxysection{\texorpdfstring{P2 (media prioridade)}{P2 (media prioridade)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md48}
+
+\begin{DoxyEnumerate}
+\item Substituir SELECT \texorpdfstring{$\ast$}{*} no caminho estatico por lista explicita de colunas.
+\item Validar se convem manter ordenacao no SQL ou no app para reduzir custo total de CPU/\+IO.
+\end{DoxyEnumerate}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md49}{}\doxysection{\texorpdfstring{P3 (evolutivo)}{P3 (evolutivo)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md49}
+
+\begin{DoxyEnumerate}
+\item Criar checklist SQL automatizado para garantir que o recorte 01 a 06 se mantenha consistente.
+\item Versionar scripts de indice e manutencao em migracoes idempotentes.
+\end{DoxyEnumerate}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md50}{}\doxysection{\texorpdfstring{8) Plano de implementacao sugerido para outro agente de IA}{8) Plano de implementacao sugerido para outro agente de IA}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md50}
+
+\begin{DoxyEnumerate}
+\item Executar baseline de tempos para consultas do recorte 01 a 06.
+\item Aplicar indices compostos por cilindro no recorte.
+\item Reavaliar e remover indices redundantes onde houver sobreposicao comprovada.
+\item Atualizar estatisticas.
+\item Reexecutar benchmark de\+:
+\begin{DoxyItemize}
+\item DISTINCT ID\+\_\+\+Teste
+\item carga dinamica por ID\+\_\+\+Teste
+\item carga estatica por ID\+\_\+\+Teste
+\end{DoxyItemize}
+\item Comparar antes/depois com STATISTICS IO e TIME.
+\end{DoxyEnumerate}\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md51}{}\doxysection{\texorpdfstring{9) SQL util para validacao rapida (somente 01 a 06)}{9) SQL util para validacao rapida (somente 01 a 06)}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md51}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ Inventario\ de\ volumes\ (escopo)}}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ t.name\ \textcolor{keyword}{AS}\ table\_name,\ SUM(p.\textcolor{keyword}{rows})\ \textcolor{keyword}{AS}\ row\_count}
+\DoxyCodeLine{\textcolor{keyword}{FROM}\ sys.tables\ t}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.partitions\ p\ \textcolor{keyword}{ON}\ t.object\_id\ =\ p.object\_id\ \textcolor{keyword}{AND}\ p.index\_id\ \textcolor{keyword}{IN}\ (\textcolor{stringliteral}{0},\textcolor{stringliteral}{1})}
+\DoxyCodeLine{\textcolor{keyword}{WHERE}\ t.name\ \textcolor{keyword}{IN}\ (}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01'},\textcolor{stringliteral}{'Cilindro\_02'},\textcolor{stringliteral}{'Cilindro\_03'},\textcolor{stringliteral}{'Cilindro\_04'},\textcolor{stringliteral}{'Cilindro\_05'},\textcolor{stringliteral}{'Cilindro\_06'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estático'},\textcolor{stringliteral}{'Cilindro\_02\_Estático'},\textcolor{stringliteral}{'Cilindro\_03\_Estático'},\textcolor{stringliteral}{'Cilindro\_04\_Estático'},\textcolor{stringliteral}{'Cilindro\_05\_Estático'},\textcolor{stringliteral}{'Cilindro\_06\_Estático'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estatico'},\textcolor{stringliteral}{'Cilindro\_02\_Estatico'},\textcolor{stringliteral}{'Cilindro\_03\_Estatico'},\textcolor{stringliteral}{'Cilindro\_04\_Estatico'},\textcolor{stringliteral}{'Cilindro\_05\_Estatico'},\textcolor{stringliteral}{'Cilindro\_06\_Estatico'}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{\textcolor{keyword}{GROUP}\ \textcolor{keyword}{BY}\ t.name}
+\DoxyCodeLine{\textcolor{keyword}{ORDER}\ \textcolor{keyword}{BY}\ t.name;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ Constraints\ (escopo)}}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ tc.TABLE\_NAME,\ tc.CONSTRAINT\_TYPE,\ tc.CONSTRAINT\_NAME}
+\DoxyCodeLine{\textcolor{keyword}{FROM}\ INFORMATION\_SCHEMA.TABLE\_CONSTRAINTS\ tc}
+\DoxyCodeLine{\textcolor{keyword}{WHERE}\ tc.TABLE\_NAME\ \textcolor{keyword}{IN}\ (}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01'},\textcolor{stringliteral}{'Cilindro\_02'},\textcolor{stringliteral}{'Cilindro\_03'},\textcolor{stringliteral}{'Cilindro\_04'},\textcolor{stringliteral}{'Cilindro\_05'},\textcolor{stringliteral}{'Cilindro\_06'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estático'},\textcolor{stringliteral}{'Cilindro\_02\_Estático'},\textcolor{stringliteral}{'Cilindro\_03\_Estático'},\textcolor{stringliteral}{'Cilindro\_04\_Estático'},\textcolor{stringliteral}{'Cilindro\_05\_Estático'},\textcolor{stringliteral}{'Cilindro\_06\_Estático'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estatico'},\textcolor{stringliteral}{'Cilindro\_02\_Estatico'},\textcolor{stringliteral}{'Cilindro\_03\_Estatico'},\textcolor{stringliteral}{'Cilindro\_04\_Estatico'},\textcolor{stringliteral}{'Cilindro\_05\_Estatico'},\textcolor{stringliteral}{'Cilindro\_06\_Estatico'}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{\textcolor{keyword}{ORDER}\ \textcolor{keyword}{BY}\ tc.TABLE\_NAME;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ FKs\ do\ recorte}}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ fk.name\ \textcolor{keyword}{AS}\ fk\_name,\ tp.name\ \textcolor{keyword}{AS}\ parent\_table,\ cp.name\ \textcolor{keyword}{AS}\ parent\_column,}
+\DoxyCodeLine{\ \ \ \ \ \ \ tr.name\ \textcolor{keyword}{AS}\ ref\_table,\ cr.name\ \textcolor{keyword}{AS}\ ref\_column}
+\DoxyCodeLine{\textcolor{keyword}{FROM}\ sys.foreign\_keys\ fk}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.foreign\_key\_columns\ fkc\ \textcolor{keyword}{ON}\ fk.object\_id\ =\ fkc.constraint\_object\_id}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.tables\ tp\ \textcolor{keyword}{ON}\ fkc.parent\_object\_id\ =\ tp.object\_id}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.columns\ cp\ \textcolor{keyword}{ON}\ fkc.parent\_object\_id\ =\ cp.object\_id\ \textcolor{keyword}{AND}\ fkc.parent\_column\_id\ =\ cp.column\_id}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.tables\ tr\ \textcolor{keyword}{ON}\ fkc.referenced\_object\_id\ =\ tr.object\_id}
+\DoxyCodeLine{\textcolor{keyword}{JOIN}\ sys.columns\ cr\ \textcolor{keyword}{ON}\ fkc.referenced\_object\_id\ =\ cr.object\_id\ \textcolor{keyword}{AND}\ fkc.referenced\_column\_id\ =\ cr.column\_id}
+\DoxyCodeLine{\textcolor{keyword}{WHERE}\ tp.name\ \textcolor{keyword}{IN}\ (\textcolor{stringliteral}{'Cilindro\_01'},\textcolor{stringliteral}{'Cilindro\_02'},\textcolor{stringliteral}{'Cilindro\_03'},\textcolor{stringliteral}{'Cilindro\_04'},\textcolor{stringliteral}{'Cilindro\_05'},\textcolor{stringliteral}{'Cilindro\_06'})}
+\DoxyCodeLine{\textcolor{keyword}{ORDER}\ \textcolor{keyword}{BY}\ tp.name;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ Indices\ do\ recorte}}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ t.name\ \textcolor{keyword}{AS}\ table\_name,\ i.name\ \textcolor{keyword}{AS}\ index\_name,\ i.type\_desc,\ i.is\_unique,\ i.has\_filter,\ i.filter\_definition}
+\DoxyCodeLine{\textcolor{keyword}{FROM}\ sys.tables\ t}
+\DoxyCodeLine{\textcolor{keyword}{LEFT}\ \textcolor{keyword}{JOIN}\ sys.indexes\ i\ \textcolor{keyword}{ON}\ t.object\_id\ =\ i.object\_id\ \textcolor{keyword}{AND}\ i.index\_id\ >\ \textcolor{stringliteral}{0}}
+\DoxyCodeLine{\textcolor{keyword}{WHERE}\ t.name\ \textcolor{keyword}{IN}\ (}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01'},\textcolor{stringliteral}{'Cilindro\_02'},\textcolor{stringliteral}{'Cilindro\_03'},\textcolor{stringliteral}{'Cilindro\_04'},\textcolor{stringliteral}{'Cilindro\_05'},\textcolor{stringliteral}{'Cilindro\_06'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estático'},\textcolor{stringliteral}{'Cilindro\_02\_Estático'},\textcolor{stringliteral}{'Cilindro\_03\_Estático'},\textcolor{stringliteral}{'Cilindro\_04\_Estático'},\textcolor{stringliteral}{'Cilindro\_05\_Estático'},\textcolor{stringliteral}{'Cilindro\_06\_Estático'},}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{'Cilindro\_01\_Estatico'},\textcolor{stringliteral}{'Cilindro\_02\_Estatico'},\textcolor{stringliteral}{'Cilindro\_03\_Estatico'},\textcolor{stringliteral}{'Cilindro\_04\_Estatico'},\textcolor{stringliteral}{'Cilindro\_05\_Estatico'},\textcolor{stringliteral}{'Cilindro\_06\_Estatico'}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{\textcolor{keyword}{ORDER}\ \textcolor{keyword}{BY}\ t.name,\ i.name;}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md52}{}\doxysection{\texorpdfstring{10) Conclusao}{10) Conclusao}}\label{md_docs_2ENGENHARIA__REVERSA__SQL__PROJETO__54_autotoc_md52}
+Este documento considera apenas as tabelas de cilindro 01 a 06. As tabelas de 07 a 13 foram explicitamente desconsideradas por inconsistencia no numero de colunas. No recorte valido, o banco esta estruturado para consultas eficientes e o maior ganho potencial esta na consolidacao de indices compostos alinhados ao padrao de consulta por ID\+\_\+\+Teste + Local\+Col. 

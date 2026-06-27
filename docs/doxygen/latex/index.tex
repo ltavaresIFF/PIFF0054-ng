@@ -1,0 +1,423 @@
+\chapter{PIFF-\/0054-\/ng}
+\hypertarget{index}{}\label{index}\index{PIFF-\/0054-\/ng@{PIFF-\/0054-\/ng}}
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ \begin{quote}
+{\bfseries{Sistema de visualização técnica de ensaios industriais}} — persistência de observações por coordenada, exportação CSV/\+PDF e diagnósticos operacionais. \end{quote}
+\href{https://python.org}{\texttt{ }} \href{https://streamlit.io}{\texttt{ }} \href{https://microsoft.com/sql-server}{\texttt{ }} "{}"{} "{}!\mbox{[}\+Licence\mbox{]}(https\+://img.\+shields.\+io/badge/licence-\/\+Projeto\+\_\+\+\_\+54-\/6bbf6b)"{}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{1. Arquitetura}{1. Arquitetura}}\label{index_autotoc_md2}
+O sistema segue uma arquitetura em camadas ({\itshape clean architecture} simplificada) com separação explícita entre domínio, aplicação, infraestrutura e interface.\hypertarget{index_autotoc_md3}{}\doxysubsection{\texorpdfstring{1.\+1 Diagrama de Contexto (\+C4 Nível 1)}{1.1 Diagrama de Contexto (C4 Nível 1)}}\label{index_autotoc_md3}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{C4Context}
+\DoxyCodeLine{\ \ title\ Diagrama\ de\ Contexto\ —\ PIFF-\/0054-\/ng}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Person(eng,\ "{}Engenheiro\ de\ Ensaios"{},\ "{}Opera\ o\ painel\ técnico\ para\ visualizar\ ensaios,\ anotar\ observações\ e\ exportar\ relatórios"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ System\_Boundary(sistema,\ "{}PIFF-\/0054-\/ng"{})\ \{}
+\DoxyCodeLine{\ \ \ \ System(painel,\ "{}Painel\ Técnico\ Streamlit"{},\ "{}Interface\ web\ para\ visualização,\ anotação\ e\ exportação\ de\ ensaios\ industriais"{})}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ System\_Ext(sql,\ "{}SQL\ Server"{},\ "{}Banco\ Projeto\_54\(\backslash\)nTabelas\ dinâmicas\ e\ estáticas\ por\ cilindro"{})}
+\DoxyCodeLine{\ \ System\_Ext(redis,\ "{}Redis"{},\ "{}Cache\ opcional\ de\ consultas\ (fallback\ em\ memória)"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Rel(eng,\ painel,\ "{}Seleciona\ cilindro/teste,\ visualiza\ gráficos,\ anota\ observações,\ exporta\ CSV/PDF"{})}
+\DoxyCodeLine{\ \ Rel(painel,\ sql,\ "{}Consulta\ dados\ dinâmicos/estáticos,\ CRUD\ de\ observações"{},\ "{}pyodbc"{})}
+\DoxyCodeLine{\ \ Rel(painel,\ redis,\ "{}Cache\ de\ consultas\ frequentes\ (TTL\ 300s)"{},\ "{}redis-\/py"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ UpdateLayoutConfig(\$c4ShapeInRow="{}3"{},\ \$c4BoundaryInRow="{}1"{})}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{\texorpdfstring{1.\+2 Diagrama de Containers (\+C4 Nível 2)}{1.2 Diagrama de Containers (C4 Nível 2)}}\label{index_autotoc_md4}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{C4Container}
+\DoxyCodeLine{\ \ title\ Diagrama\ de\ Containers\ —\ Camadas\ internas}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Person(eng,\ "{}Engenheiro"{},\ "{}Usuário\ do\ painel\ técnico"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ System\_Boundary(painel,\ "{}Painel\ Técnico"{})\ \{}
+\DoxyCodeLine{\ \ \ \ Container(ui,\ "{}UI\ Streamlit"{},\ "{}Python\ ·\ Streamlit"{},\ "{}Interface\ com\ gráficos\ Plotly\ multi-\/eixo,\ formulários\ de\ observação\ e\ exportação"{})}
+\DoxyCodeLine{\ \ \ \ Container(svc,\ "{}Application\ Services"{},\ "{}Python"{},\ "{}Casos\ de\ uso:\ TestReadService,\ ObservationService,\ ExportService,\ DiagnosticsService"{})}
+\DoxyCodeLine{\ \ \ \ Container(domain,\ "{}Domain"{},\ "{}Python"{},\ "{}Entidades,\ protocolos\ (repositórios)\ e\ erros\ de\ domínio"{})}
+\DoxyCodeLine{\ \ \ \ ContainerDb(infra,\ "{}Infrastructure"{},\ "{}Python"{},\ "{}SQL\ Server\ connection,\ Redis\ cache,\ exportadores\ CSV/PDF,\ SQL\ seguro"{})}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ System\_Ext(sql,\ "{}SQL\ Server"{},\ "{}Projeto\_54"{})}
+\DoxyCodeLine{\ \ System\_Ext(redis\_ext,\ "{}Redis"{},\ "{}Cache\ opcional"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Rel(eng,\ ui,\ "{}Interage\ com"{},\ "{}Browser"{})}
+\DoxyCodeLine{\ \ Rel(ui,\ svc,\ "{}Chama\ casos\ de\ uso"{})}
+\DoxyCodeLine{\ \ Rel(svc,\ domain,\ "{}Usa\ entidades\ e\ protocolos"{})}
+\DoxyCodeLine{\ \ Rel(svc,\ infra,\ "{}Implementa\ protocolos"{})}
+\DoxyCodeLine{\ \ Rel(infra,\ sql,\ "{}Consulta"{},\ "{}pyodbc\ ·\ T-\/SQL"{})}
+\DoxyCodeLine{\ \ Rel(infra,\ redis\_ext,\ "{}Cacheia"{},\ "{}redis-\/py\ ·\ JSON"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ UpdateLayoutConfig(\$c4ShapeInRow="{}3"{},\ \$c4BoundaryInRow="{}1"{})}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md5}{}\doxysubsection{\texorpdfstring{1.\+3 Diagrama de Sequência — Fluxo Principal}{1.3 Diagrama de Sequência — Fluxo Principal}}\label{index_autotoc_md5}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sequenceDiagram}
+\DoxyCodeLine{\ \ actor\ Eng\ as\ Engenheiro}
+\DoxyCodeLine{\ \ participant\ UI\ as\ Streamlit\ UI}
+\DoxyCodeLine{\ \ participant\ Svc\ as\ TestReadService}
+\DoxyCodeLine{\ \ participant\ Repo\ as\ SqlTestQueryRepository}
+\DoxyCodeLine{\ \ participant\ Cache\ as\ RedisCache}
+\DoxyCodeLine{\ \ participant\ DB\ as\ SQL\ Server}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Eng-\/>>UI:\ Seleciona\ cilindro\ e\ ID\_Teste}
+\DoxyCodeLine{\ \ UI-\/>>Svc:\ load\_test(cyl\_num,\ test\_id)}
+\DoxyCodeLine{\ \ Svc-\/>>Cache:\ get("{}test:\{cyl\_num\}:\{test\_id\}"{})}
+\DoxyCodeLine{\ \ alt\ Cache\ hit}
+\DoxyCodeLine{\ \ \ \ Cache-\/-\/>>Svc:\ Dados\ em\ cache}
+\DoxyCodeLine{\ \ else\ Cache\ miss}
+\DoxyCodeLine{\ \ \ \ Svc-\/>>Repo:\ load\_dynamic\_rows(ctx)}
+\DoxyCodeLine{\ \ \ \ Repo-\/>>DB:\ SELECT\ colunas\ FROM\ Cilindro\_XX\ WHERE\ ID\_Teste\ =\ ?}
+\DoxyCodeLine{\ \ \ \ DB-\/-\/>>Repo:\ Linhas\ dinâmicas}
+\DoxyCodeLine{\ \ \ \ Repo-\/>>DB:\ SELECT\ *\ FROM\ Cilindro\_XX\_Estático\ WHERE\ ID\_Teste\ =\ ?}
+\DoxyCodeLine{\ \ \ \ DB-\/-\/>>Repo:\ Linha\ estática}
+\DoxyCodeLine{\ \ \ \ Repo-\/-\/>>Svc:\ DynamicDataResult\ +\ StaticDataResult}
+\DoxyCodeLine{\ \ \ \ Svc-\/>>Cache:\ set("{}test:..."{},\ response,\ TTL=300)}
+\DoxyCodeLine{\ \ end}
+\DoxyCodeLine{\ \ Svc-\/-\/>>UI:\ LoadTestResponse}
+\DoxyCodeLine{\ \ UI-\/-\/>>Eng:\ Gráfico\ multi-\/eixo\ +\ tabelas}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Eng-\/>>UI:\ Anota\ observação\ numa\ coordenada}
+\DoxyCodeLine{\ \ UI-\/>>Svc:\ upsert(ObservationCommand)}
+\DoxyCodeLine{\ \ Svc-\/>>Repo:\ upsert\_observation(cmd)}
+\DoxyCodeLine{\ \ Repo-\/>>DB:\ UPDATE\ ...\ SET\ OBS=?,\ val\_obs=?}
+\DoxyCodeLine{\ \ DB-\/-\/>>Repo:\ matched\_rows}
+\DoxyCodeLine{\ \ Repo-\/-\/>>Svc:\ ObservationResult}
+\DoxyCodeLine{\ \ Svc-\/-\/>>UI:\ Resultado}
+\DoxyCodeLine{\ \ UI-\/-\/>>Eng:\ Confirmação}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md6}{}\doxysubsection{\texorpdfstring{1.\+4 Diagrama de Componentes (\+C4 Nível 3) — $<$tt$>$src/$<$/tt$>$}{1.4 Diagrama de Componentes (C4 Nível 3) — <tt>src/</tt>}}\label{index_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{flowchart\ TD}
+\DoxyCodeLine{\ \ subgraph\ domain["{}domain"{}]}
+\DoxyCodeLine{\ \ \ \ models["{}models.py"{}]}
+\DoxyCodeLine{\ \ \ \ repositories["{}repositories.py"{}]}
+\DoxyCodeLine{\ \ \ \ errors["{}errors.py"{}]}
+\DoxyCodeLine{\ \ end}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ subgraph\ application["{}application"{}]}
+\DoxyCodeLine{\ \ \ \ services["{}services.py"{}]}
+\DoxyCodeLine{\ \ \ \ validators["{}validators.py"{}]}
+\DoxyCodeLine{\ \ \ \ dto["{}dto.py"{}]}
+\DoxyCodeLine{\ \ end}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ subgraph\ infrastructure["{}infrastructure"{}]}
+\DoxyCodeLine{\ \ \ \ sql["{}sql"{}]}
+\DoxyCodeLine{\ \ \ \ cache["{}cache"{}]}
+\DoxyCodeLine{\ \ \ \ exporters["{}exporters"{}]}
+\DoxyCodeLine{\ \ end}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ subgraph\ ui["{}ui"{}]}
+\DoxyCodeLine{\ \ \ \ streamlit["{}streamlit\_app.py"{}]}
+\DoxyCodeLine{\ \ \ \ theme["{}theme.py"{}]}
+\DoxyCodeLine{\ \ end}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ services\ -\/-\/>\ models}
+\DoxyCodeLine{\ \ services\ -\/-\/>\ repositories}
+\DoxyCodeLine{\ \ services\ -\/-\/>\ validators}
+\DoxyCodeLine{\ \ services\ -\/-\/>\ dto}
+\DoxyCodeLine{\ \ sql\ -\/-\/>\ repositories}
+\DoxyCodeLine{\ \ cache\ -\/-\/>\ services}
+\DoxyCodeLine{\ \ exporters\ -\/-\/>\ services}
+\DoxyCodeLine{\ \ streamlit\ -\/-\/>\ services}
+\DoxyCodeLine{\ \ streamlit\ -\/-\/>\ theme}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ style\ domain\ fill:\#1a1f24,stroke:\#f0883e,color:\#ece8de}
+\DoxyCodeLine{\ \ style\ application\ fill:\#1a1f24,stroke:\#5b9bd5,color:\#ece8de}
+\DoxyCodeLine{\ \ style\ infrastructure\ fill:\#1a1f24,stroke:\#6bbf6b,color:\#ece8de}
+\DoxyCodeLine{\ \ style\ ui\ fill:\#1a1f24,stroke:\#e8c84a,color:\#ece8de}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{2. Pré-\/requisitos}{2. Pré-requisitos}}\label{index_autotoc_md8}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Recurso   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Versão / Observação    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Recurso   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Versão / Observação    }\\\cline{1-2}
+\endhead
+{\bfseries{Python}}   &3.\+11 ou superior    \\\cline{1-2}
+{\bfseries{SQL Server}}   &2019+ com banco {\ttfamily Projeto\+\_\+54} criado    \\\cline{1-2}
+{\bfseries{Driver ODBC}}   &{\ttfamily ODBC Driver 18 for SQL Server} (ou 17) — \href{https://learn.microsoft.com/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server}{\texttt{ instalação Linux}}    \\\cline{1-2}
+{\bfseries{Redis}}   &Opcional — se indisponível, usa fallback em memória ({\ttfamily TTLCache})   \\\cline{1-2}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md10}{}\doxysection{\texorpdfstring{3. Instalação}{3. Instalação}}\label{index_autotoc_md10}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ 1.\ Clone\ o\ repositório}
+\DoxyCodeLine{git\ clone\ <url-\/do-\/repositorio>}
+\DoxyCodeLine{cd\ PIFF0054-\/ng}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 2.\ Crie\ e\ ative\ o\ ambiente\ virtual}
+\DoxyCodeLine{python\ -\/m\ venv\ .venv}
+\DoxyCodeLine{source\ .venv/bin/activate\ \ \ \ \ \ \ \ \#\ Linux/macOS}
+\DoxyCodeLine{\#\ .venv\(\backslash\)Scripts\(\backslash\)Activate.ps1\ \ \ \ \ \#\ Windows\ PowerShell}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 3.\ Instale\ as\ dependências}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md11}{}\doxysubsection{\texorpdfstring{Dependências ( $<$tt$>$requirements.\+txt$<$/tt$>$ )}{Dependências ( <tt>requirements.txt</tt> )}}\label{index_autotoc_md11}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pacote   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Versão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Finalidade    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pacote   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Versão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Finalidade    }\\\cline{1-3}
+\endhead
+{\ttfamily streamlit}   &≥ 1.\+37.\+0   &Interface web    \\\cline{1-3}
+{\ttfamily pandas}   &≥ 2.\+2.\+2   &Manipulação de dados    \\\cline{1-3}
+{\ttfamily plotly}   &≥ 5.\+23.\+0   &Gráficos multi-\/eixo interativos    \\\cline{1-3}
+{\ttfamily pyodbc}   &≥ 5.\+1.\+0   &Conexão SQL Server    \\\cline{1-3}
+{\ttfamily reportlab}   &≥ 4.\+2.\+2   &Geração de PDF técnico    \\\cline{1-3}
+{\ttfamily redis}   &≥ 5.\+0.\+0   &Cache Redis (fallback opcional)    \\\cline{1-3}
+{\ttfamily pytest}   &≥ 8.\+3.\+2   &Testes    \\\cline{1-3}
+{\ttfamily pytest-\/cov}   &≥ 5.\+0.\+0   &Cobertura de testes   \\\cline{1-3}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md13}{}\doxysection{\texorpdfstring{4. Configuração}{4. Configuração}}\label{index_autotoc_md13}
+O sistema é configurado exclusivamente por {\bfseries{variáveis de ambiente}}. Crie um arquivo {\ttfamily .env} na raiz do projeto ou exporte as variáveis diretamente no shell.\hypertarget{index_autotoc_md14}{}\doxysubsection{\texorpdfstring{4.\+1 Variáveis de Conexão SQL Server}{4.1 Variáveis de Conexão SQL Server}}\label{index_autotoc_md14}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Variável   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Padrão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Variável   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Padrão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-3}
+\endhead
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+SERVER}   &{\ttfamily localhost}   &Host do SQL Server    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+DATABASE}   &{\ttfamily Projeto\+\_\+54}   &Nome do banco de dados    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+USERNAME}   &{\ttfamily sa}   &Usuário (ignorado se {\ttfamily TRUSTED\+\_\+\+CONNECTION=1})    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+PASSWORD}   &{\ttfamily P@ssw0rd\+\_\+\+Projeto54!}   &Senha (ignorado se {\ttfamily TRUSTED\+\_\+\+CONNECTION=1})    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+DRIVER}   &{\ttfamily ODBC Driver 18 for SQL Server}   &Nome do driver ODBC instalado    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+SQL\+\_\+\+TRUSTED\+\_\+\+CONNECTION}   &{\ttfamily false}   &{\ttfamily 1} / {\ttfamily true} para autenticação Windows   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{index_autotoc_md15}{}\doxysubsection{\texorpdfstring{4.\+2 Variáveis de Cache}{4.2 Variáveis de Cache}}\label{index_autotoc_md15}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Variável   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Padrão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Variável   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Padrão   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-3}
+\endhead
+{\ttfamily PIFF\+\_\+\+CACHE\+\_\+\+TTL\+\_\+\+SECONDS}   &{\ttfamily 300}   &Tempo de vida do cache (5 min)    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+REDIS\+\_\+\+HOST}   &{\ttfamily localhost}   &Host Redis (fallback em memória se indisponível)    \\\cline{1-3}
+{\ttfamily PIFF\+\_\+\+REDIS\+\_\+\+PORT}   &{\ttfamily 6379}   &Porta Redis   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{index_autotoc_md16}{}\doxysubsection{\texorpdfstring{4.\+3 Exemplo $<$tt$>$.\+env$<$/tt$>$}{4.3 Exemplo <tt>.env</tt>}}\label{index_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{PIFF\_SQL\_SERVER=192.168.1.100}
+\DoxyCodeLine{PIFF\_SQL\_DATABASE=Projeto\_54}
+\DoxyCodeLine{PIFF\_SQL\_USERNAME=sa}
+\DoxyCodeLine{PIFF\_SQL\_PASSWORD=MinhaSenhaAqui}
+\DoxyCodeLine{PIFF\_SQL\_DRIVER=ODBC\ Driver\ 18\ for\ SQL\ Server}
+\DoxyCodeLine{PIFF\_CACHE\_TTL\_SECONDS=300}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+⚠️ {\bfseries{Cilindros permitidos}}\+: 1 a 6 (definido em {\ttfamily Settings.\+allowed\+\_\+cylinders}). \end{quote}
+\hypertarget{index_autotoc_md17}{}\doxysection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{index_autotoc_md17}
+\hypertarget{index_autotoc_md18}{}\doxysection{\texorpdfstring{5. Uso}{5. Uso}}\label{index_autotoc_md18}
+\hypertarget{index_autotoc_md19}{}\doxysubsection{\texorpdfstring{5.\+1 Executar o Painel}{5.1 Executar o Painel}}\label{index_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{streamlit\ run\ app.py}
+
+\end{DoxyCode}
+
+
+O painel será aberto em {\ttfamily \href{http://localhost:8501}{\texttt{ http\+://localhost\+:8501}}}.\hypertarget{index_autotoc_md20}{}\doxysubsection{\texorpdfstring{5.\+2 Fluxo de Operação}{5.2 Fluxo de Operação}}\label{index_autotoc_md20}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{flowchart\ LR}
+\DoxyCodeLine{\ \ A[Selecionar\ Cilindro<br/>1-\/6]\ -\/-\/>\ B[Selecionar\ ID\_Teste<br/>Lista\ dinâmica\ do\ banco]}
+\DoxyCodeLine{\ \ B\ -\/-\/>\ C[Carregar\ Ensaio]}
+\DoxyCodeLine{\ \ C\ -\/-\/>\ D\{Ensaio\ carregado?\}}
+\DoxyCodeLine{\ \ D\ -\/-\/\ Sim\ -\/-\/>\ E[Visualizar\ Gráfico<br/>Multi-\/eixo\ Plotly]}
+\DoxyCodeLine{\ \ D\ -\/-\/\ Não\ -\/-\/>\ A}
+\DoxyCodeLine{\ \ E\ -\/-\/>\ F[Escolher\ Variáveis\ Y]}
+\DoxyCodeLine{\ \ F\ -\/-\/>\ G[Anotar\ Observação<br/>por\ Coordenada]}
+\DoxyCodeLine{\ \ G\ -\/-\/>\ H[Salvar\ /\ Excluir<br/>Observação]}
+\DoxyCodeLine{\ \ F\ -\/-\/>\ I[Exportar\ CSV]}
+\DoxyCodeLine{\ \ F\ -\/-\/>\ J[Exportar\ PDF\ Técnico]}
+\DoxyCodeLine{\ \ G\ -\/-\/>\ K[Aba\ Diagnósticos<br/>Conexão\ e\ contexto]}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md21}{}\doxysubsection{\texorpdfstring{5.\+3 Funcionalidades da Interface}{5.3 Funcionalidades da Interface}}\label{index_autotoc_md21}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Aba / Seção   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Aba / Seção   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-2}
+\endhead
+{\bfseries{Sidebar}}   &Seleção de cilindro (1–6) e ID\+\_\+\+Teste com botão "{}\+Carregar ensaio"{}    \\\cline{1-2}
+{\bfseries{Gráfico multi-\/eixo}}   &Plotly interativo com eixos Y sobrepostos, cores da paleta industrial    \\\cline{1-2}
+{\bfseries{Observação por coordenada}}   &Seleciona {\ttfamily Local\+Col} + variável Y → consulta observação existente → edita/salva/exclui    \\\cline{1-2}
+{\bfseries{Aba "{}\+Operação"{}}}   &Gráfico + formulário de observação    \\\cline{1-2}
+{\bfseries{Aba "{}\+Evidências"{}}}   &Exportação CSV (separador {\ttfamily ;}) e PDF técnico (com gráfico, dados estáticos e amostra dinâmica)    \\\cline{1-2}
+{\bfseries{Aba "{}\+Diagnósticos"{}}}   &Estado da conexão SQL Server, drivers ODBC instalados, contexto ativo (JSON)   \\\cline{1-2}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md23}{}\doxysection{\texorpdfstring{6. Testes}{6. Testes}}\label{index_autotoc_md23}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Executa\ todos\ os\ testes\ (unitários\ +\ integração)}
+\DoxyCodeLine{pytest}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Com\ cobertura}
+\DoxyCodeLine{pytest\ -\/-\/cov=src\ -\/-\/cov-\/report=term-\/missing}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Apenas\ testes\ unitários\ (sem\ banco)}
+\DoxyCodeLine{pytest\ tests/unit/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Apenas\ testes\ de\ integração\ (requer\ SQL\ Server\ acessível)}
+\DoxyCodeLine{pytest\ tests/integration/}
+
+\end{DoxyCode}
+
+
+Os testes de UI utilizam Streamlit + Playwright para testes end-\/to-\/end com navegador headless.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md25}{}\doxysection{\texorpdfstring{7. Performance SQL}{7. Performance SQL}}\label{index_autotoc_md25}
+Scripts versionados em {\ttfamily sql/performance/} — recorte de otimização (01–06)\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Script   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Script   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descrição    }\\\cline{1-2}
+\endhead
+{\ttfamily 01\+\_\+baseline\+\_\+benchmark.\+sql}   &Benchmark inicial das consultas    \\\cline{1-2}
+{\ttfamily 02\+\_\+create\+\_\+composite\+\_\+indexes.\+sql}   &Cria índices compostos {\ttfamily (ID\+\_\+\+Teste, Local\+Col) INCLUDE (colunas úteis)} para eliminar {\itshape key lookups}    \\\cline{1-2}
+{\ttfamily 03\+\_\+update\+\_\+stats\+\_\+and\+\_\+index\+\_\+review.\+sql}   &Atualiza estatísticas e revisa a eficácia dos índices   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{index_autotoc_md26}{}\doxysubsection{\texorpdfstring{Estratégia de índices}{Estratégia de índices}}\label{index_autotoc_md26}
+
+\begin{DoxyItemize}
+\item Índice composto por cilindro\+: {\ttfamily IX\+\_\+\+Cilindro\+\_\+\+XX\+\_\+\+ID\+\_\+\+Teste\+\_\+\+Local\+Col}
+\item {\ttfamily INCLUDE} com colunas do conjunto {\ttfamily DYNAMIC\+\_\+\+DEFAULT\+\_\+\+COLUMNS} → {\itshape covering index scan}
+\item Redução de \texorpdfstring{$\sim$}{\string~}12s (full table scan) para milissegundos (index seek)
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md28}{}\doxysection{\texorpdfstring{8. Estrutura do Projeto}{8. Estrutura do Projeto}}\label{index_autotoc_md28}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{PIFF0054-\/ng/}
+\DoxyCodeLine{├──\ app.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Entrypoint:\ streamlit\ run\ app.py}
+\DoxyCodeLine{├──\ requirements.txt\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Dependências\ Python}
+\DoxyCodeLine{├──\ pytest.ini\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuração\ do\ pytest}
+\DoxyCodeLine{├──\ .env.example\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Template\ de\ configuração}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ src/}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ domain/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ 🎯\ Núcleo\ do\ domínio}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ models.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Entidades\ (dataclasses\ frozen)}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ repositories.py\ \ \ \ \ \ \ \ \ \#\ \ \ Protocolos\ (interfaces)}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ errors.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Hierarquia\ de\ exceções}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ application/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ️\ \#\ ⚙️\ Casos\ de\ uso}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ services.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ TestReadService,\ ObservationService,\ etc.}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ validators.py\ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Validações\ de\ domínio}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ dto.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Data\ Transfer\ Objects}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ infrastructure/\ \ \ \ \ \ \ \ \ \ \ \ \#\ 🔌\ Adaptadores\ externos}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ sql/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ connection.py\ \ \ \ \ \ \ \#\ \ \ SqlServerConnection\ (ODBC)}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ repositories.py\ \ \ \ \ \#\ \ \ Implementações\ SQL\ dos\ protocolos}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ safe\_sql.py\ \ \ \ \ \ \ \ \ \#\ \ \ Escape\ de\ identificadores\ (brackets)}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ └──\ schema.py\ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Nomes\ canônicos\ de\ tabelas/colunas}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ cache.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ TTLCache\ em\ memória}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ cache\_redis.py\ \ \ \ \ \ \ \ \ \ \#\ \ \ RedisCache\ com\ fallback}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ exporters/}
+\DoxyCodeLine{│\ \ \ │\ \ \ \ \ \ \ ├──\ csv\_exporter.py\ \ \ \ \ \#\ \ \ SemicolonCsvExporter\ (separador\ ;)}
+\DoxyCodeLine{│\ \ \ │\ \ \ \ \ \ \ └──\ pdf\_exporter.py\ \ \ \ \ \#\ \ \ TechnicalPdfExporter\ (ReportLab)}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ └──\ ui/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ 🖥️\ Interface\ com\ o\ usuário}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ streamlit\_app.py\ \ \ \ \ \ \ \ \#\ \ \ Aplicação\ Streamlit\ principal}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ theme.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ \ \ Tema\ industrial\ "{}Steel\ \&\ Amber"{}}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ tests/}
+\DoxyCodeLine{│\ \ \ ├──\ unit/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Testes\ unitários\ (sem\ banco)}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ test\_safe\_sql.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ test\_services.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ test\_validators.py}
+\DoxyCodeLine{│\ \ \ ├──\ integration/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Testes\ de\ integração\ (requer\ SQL\ Server)}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ test\_db\_queries.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ test\_sql\_repositories.py}
+\DoxyCodeLine{│\ \ \ └──\ ui/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Testes\ de\ interface\ (Streamlit\ +\ Playwright)}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ test\_streamlit\_app.py}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ test\_streamlit\_e2e.py}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ sql/}
+\DoxyCodeLine{│\ \ \ ├──\ 03\_create\_projeto\_54\_ng.sql\ \ \ \ \ \ \ \#\ Schema\ do\ banco}
+\DoxyCodeLine{│\ \ \ ├──\ 04\_create\_projeto\_54\_hp.sql\ \ \ \ \ \ \ \#\ Schema\ high-\/performance\ (v1-\/v3)}
+\DoxyCodeLine{│\ \ \ ├──\ migrate\_to\_projeto\_54\_ng.py\ \ \ \ \ \ \ \#\ Migração\ de\ dados}
+\DoxyCodeLine{│\ \ \ ├──\ migrate\_to\_projeto\_54\_hp.py\ \ \ \ \ \ \ \#\ Migração\ HP}
+\DoxyCodeLine{│\ \ \ └──\ performance/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Scripts\ de\ otimização}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ 01\_baseline\_benchmark.sql}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ 02\_create\_composite\_indexes.sql}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ 03\_update\_stats\_and\_index\_review.sql}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ backups/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Backups\ do\ banco\ (.bak)}
+\DoxyCodeLine{├──\ docs/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Documentação\ técnica\ adicional}
+\DoxyCodeLine{│\ \ \ ├──\ ENGENHARIA\_REVERSA\_SQL\_PROJETO\_54.md}
+\DoxyCodeLine{│\ \ \ ├──\ PERFORMANCE\_REPORT\_C01\_TESTE\_001.md}
+\DoxyCodeLine{│\ \ \ └──\ PERFORMANCE\_REPORT\_PROJETO54\_HP\_FINAL.md}
+\DoxyCodeLine{├──\ spec/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Especificações\ de\ projeto}
+\DoxyCodeLine{│\ \ \ ├──\ spec-\/architecture-\/refatoracao-\/report-\/piff54-\/ng.md}
+\DoxyCodeLine{│\ \ \ ├──\ spec-\/process-\/backlog-\/operacional-\/checklist-\/refatoracao-\/piff54-\/ng.md}
+\DoxyCodeLine{│\ \ \ └──\ ...}
+\DoxyCodeLine{└──\ imagens/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Recursos\ visuais}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md30}{}\doxysection{\texorpdfstring{9. Licença}{9. Licença}}\label{index_autotoc_md30}
+Proprietária — Projeto\+\_\+54. Todos os direitos reservados. 

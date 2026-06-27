@@ -1,0 +1,102 @@
+\doxysection{Referência da Classe src.\+application.\+services.\+Test\+Read\+Service}
+\hypertarget{classsrc_1_1application_1_1services_1_1TestReadService}{}\label{classsrc_1_1application_1_1services_1_1TestReadService}\index{src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a38a74b16343934eebfe1d8506d3752ef}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository}{Test\+Query\+Repository}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a8067ba2a3d9d8ae0150e8f509b9d35eb}{repository}}, \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache}{TTLCache}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a17ca2647768d9d447a461cde8e93c0a7}{cache}})
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_afbb527bcea2e8edc244963bf1f83edc8}{list\+\_\+test\+\_\+ids}} (self, int cyl\+\_\+num)
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1dto_1_1LoadTestResponse}{Load\+Test\+Response}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_abd45db7c53273565347dba05e3b97997}{load\+\_\+test}} (self, int cyl\+\_\+num, str test\+\_\+id, list\mbox{[}str\mbox{]}\texorpdfstring{$\vert$}{|}None y\+\_\+columns=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a8067ba2a3d9d8ae0150e8f509b9d35eb}{repository}}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a17ca2647768d9d447a461cde8e93c0a7}{cache}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Privados Estáticos}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1TestReadService_a6e822418dae745875dfb036124b0fc6d}{\+\_\+\+\_\+test\+\_\+\+\_\+}} = False
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Serviço para consulta e carregamento de dados de ensaio.
+
+Orquestra a busca de dados dinâmicos (série temporal) e estáticos
+(configuração) com cache intermediário para reduzir consultas ao banco.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_a38a74b16343934eebfe1d8506d3752ef}\label{classsrc_1_1application_1_1services_1_1TestReadService_a38a74b16343934eebfe1d8506d3752ef} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Test\+Read\+Service.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1TestQueryRepository}{Test\+Query\+Repository}}}]{repository,  }\item[{\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache}{TTLCache}}}]{cache }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o serviço com repositório e cache.
+
+@param repository Repositório de consulta de dados de ensaio.
+@param cache Cache TTL para evitar consultas repetidas ao banco.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_afbb527bcea2e8edc244963bf1f83edc8}\label{classsrc_1_1application_1_1services_1_1TestReadService_afbb527bcea2e8edc244963bf1f83edc8} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!list\_test\_ids@{list\_test\_ids}}
+\index{list\_test\_ids@{list\_test\_ids}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{list\_test\_ids()}{list\_test\_ids()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+application.\+services.\+Test\+Read\+Service.\+list\+\_\+test\+\_\+ids (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista os IDs de teste disponíveis para um cilindro, com cache.
+
+@param cyl_num Número do cilindro.
+@return Lista de identificadores de teste.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_abd45db7c53273565347dba05e3b97997}\label{classsrc_1_1application_1_1services_1_1TestReadService_abd45db7c53273565347dba05e3b97997} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!load\_test@{load\_test}}
+\index{load\_test@{load\_test}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{load\_test()}{load\_test()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1application_1_1dto_1_1LoadTestResponse}{Load\+Test\+Response}} src.\+application.\+services.\+Test\+Read\+Service.\+load\+\_\+test (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num,  }\item[{str}]{test\+\_\+id,  }\item[{list\mbox{[}str\mbox{]} \texorpdfstring{$\vert$}{|} None }]{y\+\_\+columns = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Carrega todos os dados de um ensaio (dinâmicos + estáticos) com cache.
+
+Utiliza uma única conexão ODBC compartilhada para todas as consultas,
+evitando o overhead de ~300ms por handshake.
+
+@param cyl_num Número do cilindro.
+@param test_id Identificador do ensaio.
+@param y_columns Lista opcional de colunas Y para filtrar.
+@return LoadTestResponse com dados dinâmicos, estáticos e metadados.
+@raise NotFoundError Se nenhum dado dinâmico for encontrado.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_a6e822418dae745875dfb036124b0fc6d}\label{classsrc_1_1application_1_1services_1_1TestReadService_a6e822418dae745875dfb036124b0fc6d} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!\_\_test\_\_@{\_\_test\_\_}}
+\index{\_\_test\_\_@{\_\_test\_\_}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{\_\_test\_\_}{\_\_test\_\_}}
+{\footnotesize\ttfamily bool src.\+application.\+services.\+Test\+Read\+Service.\+\_\+\+\_\+test\+\_\+\+\_\+ = False\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_a17ca2647768d9d447a461cde8e93c0a7}\label{classsrc_1_1application_1_1services_1_1TestReadService_a17ca2647768d9d447a461cde8e93c0a7} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!cache@{cache}}
+\index{cache@{cache}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{cache}{cache}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Test\+Read\+Service.\+cache}
+
+\Hypertarget{classsrc_1_1application_1_1services_1_1TestReadService_a8067ba2a3d9d8ae0150e8f509b9d35eb}\label{classsrc_1_1application_1_1services_1_1TestReadService_a8067ba2a3d9d8ae0150e8f509b9d35eb} 
+\index{src.application.services.TestReadService@{src.application.services.TestReadService}!repository@{repository}}
+\index{repository@{repository}!src.application.services.TestReadService@{src.application.services.TestReadService}}
+\doxysubsubsection{\texorpdfstring{repository}{repository}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Test\+Read\+Service.\+repository}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{services_8py}{services.\+py}}\end{DoxyCompactItemize}

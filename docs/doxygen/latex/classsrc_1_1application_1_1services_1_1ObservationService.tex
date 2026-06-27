@@ -1,0 +1,85 @@
+\doxysection{Referência da Classe src.\+application.\+services.\+Observation\+Service}
+\hypertarget{classsrc_1_1application_1_1services_1_1ObservationService}{}\label{classsrc_1_1application_1_1services_1_1ObservationService}\index{src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_a37da690f07a599687b1dbdb487cf9607}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository}{Observation\+Command\+Repository}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_a53d9fceea687df76cbd21331608ba5a8}{repository}})
+\item 
+dict\mbox{[}str, object\mbox{]} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_abd214c9bb1209c7788e224c95823f8c6}{upsert}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} cmd)
+\item 
+dict\mbox{[}str, object\mbox{]}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_a61621fd506746dd735ec7e43d52d57bc}{get}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\item 
+bool \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_a5fdaaa8171250b503fd06bd4cc862950}{delete}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ObservationService_a53d9fceea687df76cbd21331608ba5a8}{repository}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Serviço para operações CRUD de observações por coordenada.\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ObservationService_a37da690f07a599687b1dbdb487cf9607}\label{classsrc_1_1application_1_1services_1_1ObservationService_a37da690f07a599687b1dbdb487cf9607} 
+\index{src.application.services.ObservationService@{src.application.services.ObservationService}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Observation\+Service.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository}{Observation\+Command\+Repository}}}]{repository }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o serviço com repositório de observações.
+
+@param repository Repositório de persistência de observações.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ObservationService_a5fdaaa8171250b503fd06bd4cc862950}\label{classsrc_1_1application_1_1services_1_1ObservationService_a5fdaaa8171250b503fd06bd4cc862950} 
+\index{src.application.services.ObservationService@{src.application.services.ObservationService}!delete@{delete}}
+\index{delete@{delete}!src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily  bool src.\+application.\+services.\+Observation\+Service.\+delete (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Remove uma observação pela chave composta.
+
+@param lookup Chave de busca da observação a remover.
+@return True se excluída, False se não encontrada.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1application_1_1services_1_1ObservationService_a61621fd506746dd735ec7e43d52d57bc}\label{classsrc_1_1application_1_1services_1_1ObservationService_a61621fd506746dd735ec7e43d52d57bc} 
+\index{src.application.services.ObservationService@{src.application.services.ObservationService}!get@{get}}
+\index{get@{get}!src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily  dict\mbox{[}str, object\mbox{]} \texorpdfstring{$\vert$}{|} None src.\+application.\+services.\+Observation\+Service.\+get (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recupera uma observação pela chave composta.
+
+@param lookup Chave de busca (cilindro, teste, coordenada, variável).
+@return Dicionário com dados da observação ou None se não encontrada.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1application_1_1services_1_1ObservationService_abd214c9bb1209c7788e224c95823f8c6}\label{classsrc_1_1application_1_1services_1_1ObservationService_abd214c9bb1209c7788e224c95823f8c6} 
+\index{src.application.services.ObservationService@{src.application.services.ObservationService}!upsert@{upsert}}
+\index{upsert@{upsert}!src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection{\texorpdfstring{upsert()}{upsert()}}
+{\footnotesize\ttfamily  dict\mbox{[}str, object\mbox{]} src.\+application.\+services.\+Observation\+Service.\+upsert (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}}}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Cria ou atualiza uma observação em uma coordenada.
+
+@param cmd Comando com dados da observação.
+@return Dicionário com o resultado da operação.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ObservationService_a53d9fceea687df76cbd21331608ba5a8}\label{classsrc_1_1application_1_1services_1_1ObservationService_a53d9fceea687df76cbd21331608ba5a8} 
+\index{src.application.services.ObservationService@{src.application.services.ObservationService}!repository@{repository}}
+\index{repository@{repository}!src.application.services.ObservationService@{src.application.services.ObservationService}}
+\doxysubsubsection{\texorpdfstring{repository}{repository}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Observation\+Service.\+repository}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{services_8py}{services.\+py}}\end{DoxyCompactItemize}

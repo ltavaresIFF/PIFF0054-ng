@@ -1,0 +1,100 @@
+\doxysection{Referência da Classe src.\+config.\+settings.\+Settings}
+\hypertarget{classsrc_1_1config_1_1settings_1_1Settings}{}\label{classsrc_1_1config_1_1settings_1_1Settings}\index{src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+tuple\mbox{[}int,...\mbox{]} \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_ac1d13b37c32507d37ed00b0f75a0da91}{allowed\+\_\+cylinders}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos Estáticos}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_abed894e27b7c3e9a4f94bf54463c73ed}{sql\+\_\+server}} = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+SERVER"{}, "{}localhost"{})
+\item 
+str \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_abf2c783c0eaac4ee442cd24221ce0ca6}{sql\+\_\+database}} = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+DATABASE"{}, "{}Projeto\+\_\+54"{})
+\item 
+str \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_a48a9d70a175c0f71761771280d4c5eec}{sql\+\_\+username}} = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+USERNAME"{}, "{}sa"{})
+\item 
+str \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_afc53f64e455a5ae871ac7099a3f03281}{sql\+\_\+password}} = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+PASSWORD"{}, "{}P@ssw0rd\+\_\+\+Projeto54!"{})
+\item 
+str \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_a689387e94bdf3f466c87b7080391320b}{sql\+\_\+driver}} = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+DRIVER"{}, "{}ODBC Driver 18 for SQL Server"{})
+\item 
+bool \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_a00d67caff82db8ff893ab47e60b90aa5}{trusted\+\_\+connection}} = \mbox{\hyperlink{namespacesrc_1_1config_1_1settings_a6f2e3182d0cb8f9f32bed6c3a325dc79}{\+\_\+as\+\_\+bool}}(os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+TRUSTED\+\_\+\+CONNECTION"{}), default=False)
+\item 
+int \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings_ad77b95abd1c34f06fffc1395edb40d65}{cache\+\_\+ttl\+\_\+seconds}} = int(os.\+getenv("{}PIFF\+\_\+\+CACHE\+\_\+\+TTL\+\_\+\+SECONDS"{}, "{}300"{}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Configurações imutáveis do sistema.
+
+Lê valores de variáveis de ambiente com fallback para padrões
+que funcionam em ambiente de desenvolvimento local.
+
+@param sql_server Host do SQL Server (PIFF_SQL_SERVER).
+@param sql_database Nome do banco de dados (PIFF_SQL_DATABASE).
+@param sql_username Usuário SQL (PIFF_SQL_USERNAME).
+@param sql_password Senha SQL (PIFF_SQL_PASSWORD).
+@param sql_driver Driver ODBC (PIFF_SQL_DRIVER).
+@param trusted_connection Autenticação Windows (PIFF_SQL_TRUSTED_CONNECTION).
+@param cache_ttl_seconds TTL do cache em segundos (PIFF_CACHE_TTL_SECONDS).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_ac1d13b37c32507d37ed00b0f75a0da91}\label{classsrc_1_1config_1_1settings_1_1Settings_ac1d13b37c32507d37ed00b0f75a0da91} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!allowed\_cylinders@{allowed\_cylinders}}
+\index{allowed\_cylinders@{allowed\_cylinders}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{allowed\_cylinders()}{allowed\_cylinders()}}
+{\footnotesize\ttfamily  tuple\mbox{[}int, ...\mbox{]} src.\+config.\+settings.\+Settings.\+allowed\+\_\+cylinders (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Tupla com os números de cilindros suportados (1 a 6).\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_ad77b95abd1c34f06fffc1395edb40d65}\label{classsrc_1_1config_1_1settings_1_1Settings_ad77b95abd1c34f06fffc1395edb40d65} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!cache\_ttl\_seconds@{cache\_ttl\_seconds}}
+\index{cache\_ttl\_seconds@{cache\_ttl\_seconds}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{cache\_ttl\_seconds}{cache\_ttl\_seconds}}
+{\footnotesize\ttfamily int src.\+config.\+settings.\+Settings.\+cache\+\_\+ttl\+\_\+seconds = int(os.\+getenv("{}PIFF\+\_\+\+CACHE\+\_\+\+TTL\+\_\+\+SECONDS"{}, "{}300"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_abf2c783c0eaac4ee442cd24221ce0ca6}\label{classsrc_1_1config_1_1settings_1_1Settings_abf2c783c0eaac4ee442cd24221ce0ca6} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!sql\_database@{sql\_database}}
+\index{sql\_database@{sql\_database}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{sql\_database}{sql\_database}}
+{\footnotesize\ttfamily str src.\+config.\+settings.\+Settings.\+sql\+\_\+database = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+DATABASE"{}, "{}Projeto\+\_\+54"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_a689387e94bdf3f466c87b7080391320b}\label{classsrc_1_1config_1_1settings_1_1Settings_a689387e94bdf3f466c87b7080391320b} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!sql\_driver@{sql\_driver}}
+\index{sql\_driver@{sql\_driver}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{sql\_driver}{sql\_driver}}
+{\footnotesize\ttfamily str src.\+config.\+settings.\+Settings.\+sql\+\_\+driver = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+DRIVER"{}, "{}ODBC Driver 18 for SQL Server"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_afc53f64e455a5ae871ac7099a3f03281}\label{classsrc_1_1config_1_1settings_1_1Settings_afc53f64e455a5ae871ac7099a3f03281} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!sql\_password@{sql\_password}}
+\index{sql\_password@{sql\_password}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{sql\_password}{sql\_password}}
+{\footnotesize\ttfamily str src.\+config.\+settings.\+Settings.\+sql\+\_\+password = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+PASSWORD"{}, "{}P@ssw0rd\+\_\+\+Projeto54!"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_abed894e27b7c3e9a4f94bf54463c73ed}\label{classsrc_1_1config_1_1settings_1_1Settings_abed894e27b7c3e9a4f94bf54463c73ed} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!sql\_server@{sql\_server}}
+\index{sql\_server@{sql\_server}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{sql\_server}{sql\_server}}
+{\footnotesize\ttfamily str src.\+config.\+settings.\+Settings.\+sql\+\_\+server = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+SERVER"{}, "{}localhost"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_a48a9d70a175c0f71761771280d4c5eec}\label{classsrc_1_1config_1_1settings_1_1Settings_a48a9d70a175c0f71761771280d4c5eec} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!sql\_username@{sql\_username}}
+\index{sql\_username@{sql\_username}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{sql\_username}{sql\_username}}
+{\footnotesize\ttfamily str src.\+config.\+settings.\+Settings.\+sql\+\_\+username = os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+USERNAME"{}, "{}sa"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classsrc_1_1config_1_1settings_1_1Settings_a00d67caff82db8ff893ab47e60b90aa5}\label{classsrc_1_1config_1_1settings_1_1Settings_a00d67caff82db8ff893ab47e60b90aa5} 
+\index{src.config.settings.Settings@{src.config.settings.Settings}!trusted\_connection@{trusted\_connection}}
+\index{trusted\_connection@{trusted\_connection}!src.config.settings.Settings@{src.config.settings.Settings}}
+\doxysubsubsection{\texorpdfstring{trusted\_connection}{trusted\_connection}}
+{\footnotesize\ttfamily bool src.\+config.\+settings.\+Settings.\+trusted\+\_\+connection = \mbox{\hyperlink{namespacesrc_1_1config_1_1settings_a6f2e3182d0cb8f9f32bed6c3a325dc79}{\+\_\+as\+\_\+bool}}(os.\+getenv("{}PIFF\+\_\+\+SQL\+\_\+\+TRUSTED\+\_\+\+CONNECTION"{}), default=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{settings_8py}{settings.\+py}}\end{DoxyCompactItemize}

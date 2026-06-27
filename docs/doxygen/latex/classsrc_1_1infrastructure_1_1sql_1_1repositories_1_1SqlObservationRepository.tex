@@ -1,0 +1,117 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository}
+\hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository}{}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository}\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a3195cd82017861ffd33cc7c3e833057d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a6e01a7fa56905bb3aa8119e43dca75da}{conn}})
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationResult}{Observation\+Result}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a43de6fbb46aa861be8652e79618bdd57}{upsert\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} cmd)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationRecord}{Observation\+Record}}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a81754454e6d4ff305bf3934d2c22abce}{get\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\item 
+bool \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a67ec6d55e3d9571719a9ef6627c78e73}{delete\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a6e01a7fa56905bb3aa8119e43dca75da}{conn}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Membros protegidos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+tuple\mbox{[}str, str, str\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a676d3e27166790d6b5602039f7638545}{\+\_\+match\+\_\+query}} (int cyl\+\_\+num, str y\+\_\+column\+\_\+name, str include\+\_\+select)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Repositório SQL para operações CRUD de observações.
+
+Implementa ObservationCommandRepository utilizando UPDATE direto nas
+colunas OBS, val_obs e y_column_name da tabela dinâmica do cilindro.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a3195cd82017861ffd33cc7c3e833057d}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a3195cd82017861ffd33cc7c3e833057d} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}}}]{conn }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o repositório.
+
+@param conn Gerenciador de conexão ODBC.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a676d3e27166790d6b5602039f7638545}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a676d3e27166790d6b5602039f7638545} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!\_match\_query@{\_match\_query}}
+\index{\_match\_query@{\_match\_query}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{\_match\_query()}{\_match\_query()}}
+{\footnotesize\ttfamily  tuple\mbox{[}str, str, str\mbox{]} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+\_\+match\+\_\+query (\begin{DoxyParamCaption}\item[{int}]{cyl\+\_\+num,  }\item[{str}]{y\+\_\+column\+\_\+name,  }\item[{str}]{include\+\_\+select }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Constrói consulta de matching por tolerância numérica.
+
+@param cyl_num Número do cilindro.
+@param y_column_name Nome da coluna Y.
+@param include_select Cláusula SELECT para a consulta.
+@return Tupla (query, obs_col, val_col_y_name).
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a67ec6d55e3d9571719a9ef6627c78e73}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a67ec6d55e3d9571719a9ef6627c78e73} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!delete\_observation@{delete\_observation}}
+\index{delete\_observation@{delete\_observation}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{delete\_observation()}{delete\_observation()}}
+{\footnotesize\ttfamily  bool src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+delete\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Remove (limpa) a observação de uma coordenada.
+
+Seta as colunas OBS, val_obs e y_column_name para NULL.
+
+@param lookup Chave de busca da observação a remover.
+@return True se uma linha foi alterada.
+@raise AmbiguousMatchError Se mais de uma linha for afetada.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a81754454e6d4ff305bf3934d2c22abce}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a81754454e6d4ff305bf3934d2c22abce} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!get\_observation@{get\_observation}}
+\index{get\_observation@{get\_observation}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{get\_observation()}{get\_observation()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationRecord}{Observation\+Record}} \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+get\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recupera uma observação pela chave composta.
+
+@param lookup Chave de busca.
+@return ObservationRecord ou None se não encontrada.
+@raise AmbiguousMatchError Se mais de um registro for encontrado.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a43de6fbb46aa861be8652e79618bdd57}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a43de6fbb46aa861be8652e79618bdd57} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!upsert\_observation@{upsert\_observation}}
+\index{upsert\_observation@{upsert\_observation}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{upsert\_observation()}{upsert\_observation()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationResult}{Observation\+Result}} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+upsert\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}}}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Cria ou atualiza uma observação em uma coordenada.
+
+Busca a linha exata por ID_Teste, LocalCol e tolerância numérica.
+Se encontrar exatamente 1 linha, faz UPDATE nas colunas de observação.
+
+@param cmd Comando com dados da observação.
+@return ObservationResult com matched_rows e colunas utilizadas.
+@raise NotFoundError Se nenhuma linha corresponder aos critérios.
+@raise AmbiguousMatchError Se mais de uma linha corresponder.
+@raise PersistenceError Se o UPDATE não afetar exatamente 1 linha.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a6e01a7fa56905bb3aa8119e43dca75da}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlObservationRepository_a6e01a7fa56905bb3aa8119e43dca75da} 
+\index{src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}!conn@{conn}}
+\index{conn@{conn}!src.infrastructure.sql.repositories.SqlObservationRepository@{src.infrastructure.sql.repositories.SqlObservationRepository}}
+\doxysubsubsection{\texorpdfstring{conn}{conn}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Observation\+Repository.\+conn}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{infrastructure_2sql_2repositories_8py}{infrastructure/sql/repositories.\+py}}\end{DoxyCompactItemize}

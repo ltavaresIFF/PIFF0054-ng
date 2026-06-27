@@ -1,0 +1,63 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+sql.\+safe\+\_\+sql}
+\hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql}{}\label{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql}\index{src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a8401afaebce753928b6ed61b0d3a6a8d}{escape\+\_\+identifier}} (str name)
+\item 
+str \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a3ccfeae571aa69a40baec764832c296e}{escape\+\_\+table}} (str name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a405707d784261e35dcc25dcc72928d28}{\+\_\+\+FORBIDDEN}} = frozenset(\mbox{[}"{}\textbackslash{}x00"{}\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Funções seguras para construção de consultas SQL.
+
+Utilitários para escapar identificadores e nomes de tabela usando
+brackets do SQL Server, prevenindo injeção SQL em identificadores dinâmicos.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a8401afaebce753928b6ed61b0d3a6a8d}\label{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a8401afaebce753928b6ed61b0d3a6a8d} 
+\index{src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}!escape\_identifier@{escape\_identifier}}
+\index{escape\_identifier@{escape\_identifier}!src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}}
+\doxysubsubsection{\texorpdfstring{escape\_identifier()}{escape\_identifier()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+sql.\+safe\+\_\+sql.\+escape\+\_\+identifier (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Escapa um identificador SQL Server usando brackets.
+
+Permite Unicode e caracteres especiais válidos para SQL Server.
+Rejeita strings vazias e null bytes.
+
+@param name Nome do identificador a escapar.
+@return Identificador entre brackets: [nome].
+@raise ValidationError Se name for vazio ou contiver null byte.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a3ccfeae571aa69a40baec764832c296e}\label{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a3ccfeae571aa69a40baec764832c296e} 
+\index{src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}!escape\_table@{escape\_table}}
+\index{escape\_table@{escape\_table}!src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}}
+\doxysubsubsection{\texorpdfstring{escape\_table()}{escape\_table()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+sql.\+safe\+\_\+sql.\+escape\+\_\+table (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Escapa um nome de tabela, com suporte a schema.
+
+Se o nome conter ponto (ex: dbo.Tabela), escapa ambas as partes.
+
+@param name Nome da tabela (opcionalmente com schema).
+@return Nome escapado: [dbo].[Tabela] ou [schema].[tabela].
+@raise ValidationError Se o formato for inválido.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variáveis}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a405707d784261e35dcc25dcc72928d28}\label{namespacesrc_1_1infrastructure_1_1sql_1_1safe__sql_a405707d784261e35dcc25dcc72928d28} 
+\index{src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}!\_FORBIDDEN@{\_FORBIDDEN}}
+\index{\_FORBIDDEN@{\_FORBIDDEN}!src.infrastructure.sql.safe\_sql@{src.infrastructure.sql.safe\_sql}}
+\doxysubsubsection{\texorpdfstring{\_FORBIDDEN}{\_FORBIDDEN}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+safe\+\_\+sql.\+\_\+\+FORBIDDEN = frozenset(\mbox{[}"{}\textbackslash{}x00"{}\mbox{]})\hspace{0.3cm}{\ttfamily [protected]}}
+

@@ -1,0 +1,53 @@
+\doxysection{Refência do Namespace src.\+config.\+settings}
+\hypertarget{namespacesrc_1_1config_1_1settings}{}\label{namespacesrc_1_1config_1_1settings}\index{src.config.settings@{src.config.settings}}
+\doxysubsubsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings}{Settings}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacesrc_1_1config_1_1settings_a6f2e3182d0cb8f9f32bed6c3a325dc79}{\+\_\+as\+\_\+bool}} (str\texorpdfstring{$\vert$}{|}None value, bool default=True)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesrc_1_1config_1_1settings_a4ca5c3981eed63ac31a05983ed29dc66}{SETTINGS}} = \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings}{Settings}}()
+\begin{DoxyCompactList}\small\item\em Instância singleton das configurações do sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Configurações do sistema via variáveis de ambiente.
+
+Centraliza todas as variáveis de configuração suportadas pelo PIFF-0054-ng,
+com valores padrão sensíveis para desenvolvimento local.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1config_1_1settings_a6f2e3182d0cb8f9f32bed6c3a325dc79}\label{namespacesrc_1_1config_1_1settings_a6f2e3182d0cb8f9f32bed6c3a325dc79} 
+\index{src.config.settings@{src.config.settings}!\_as\_bool@{\_as\_bool}}
+\index{\_as\_bool@{\_as\_bool}!src.config.settings@{src.config.settings}}
+\doxysubsubsection{\texorpdfstring{\_as\_bool()}{\_as\_bool()}}
+{\footnotesize\ttfamily  bool src.\+config.\+settings.\+\_\+as\+\_\+bool (\begin{DoxyParamCaption}\item[{str \texorpdfstring{$\vert$}{|} None}]{value,  }\item[{bool }]{default = {\ttfamily True} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Converte uma string para booleano de forma flexível.
+
+@param value String a ser convertida (ex: "1", "true", "yes").
+@param default Valor padrão caso value seja None.
+@return True se a string representar um valor positivo.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variáveis}
+\Hypertarget{namespacesrc_1_1config_1_1settings_a4ca5c3981eed63ac31a05983ed29dc66}\label{namespacesrc_1_1config_1_1settings_a4ca5c3981eed63ac31a05983ed29dc66} 
+\index{src.config.settings@{src.config.settings}!SETTINGS@{SETTINGS}}
+\index{SETTINGS@{SETTINGS}!src.config.settings@{src.config.settings}}
+\doxysubsubsection{\texorpdfstring{SETTINGS}{SETTINGS}}
+{\footnotesize\ttfamily src.\+config.\+settings.\+SETTINGS = \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings}{Settings}}()}
+
+
+
+Instância singleton das configurações do sistema. 
+

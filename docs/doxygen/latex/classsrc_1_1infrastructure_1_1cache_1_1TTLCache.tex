@@ -1,0 +1,76 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+cache.\+TTLCache}
+\hypertarget{classsrc_1_1infrastructure_1_1cache_1_1TTLCache}{}\label{classsrc_1_1infrastructure_1_1cache_1_1TTLCache}\index{src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a3bda1d2414565cb02f0a78942147b74d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, int \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a615af4004599305d7d0d389e0bb67d9c}{ttl\+\_\+seconds}})
+\item 
+Any\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af773473e8ccfe6ac63636d9c09951684}{get}} (self, str key)
+\item 
+None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af2952bb57111819f2edde867968b8d0c}{set}} (self, str key, Any value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a615af4004599305d7d0d389e0bb67d9c}{ttl\+\_\+seconds}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Cache LRU simplificado com expiração por tempo (TTL).
+
+Thread-safe para uso single-thread (Streamlit). As entradas expiradas
+são removidas na próxima tentativa de leitura (lazy eviction).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a3bda1d2414565cb02f0a78942147b74d}\label{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a3bda1d2414565cb02f0a78942147b74d} 
+\index{src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache.\+TTLCache.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{ttl\+\_\+seconds }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o cache com TTL fixo.
+
+@param ttl_seconds Tempo de vida padrão das entradas em segundos.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af773473e8ccfe6ac63636d9c09951684}\label{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af773473e8ccfe6ac63636d9c09951684} 
+\index{src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}!get@{get}}
+\index{get@{get}!src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily  Any \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+cache.\+TTLCache.\+get (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recupera um valor do cache, ou None se ausente/expirado.
+
+@param key Chave da entrada.
+@return Valor armazenado ou None.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af2952bb57111819f2edde867968b8d0c}\label{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_af2952bb57111819f2edde867968b8d0c} 
+\index{src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}!set@{set}}
+\index{set@{set}!src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily  None src.\+infrastructure.\+cache.\+TTLCache.\+set (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key,  }\item[{Any}]{value }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Armazena um valor no cache com o TTL configurado.
+
+@param key Chave da entrada.
+@param value Valor a armazenar.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a615af4004599305d7d0d389e0bb67d9c}\label{classsrc_1_1infrastructure_1_1cache_1_1TTLCache_a615af4004599305d7d0d389e0bb67d9c} 
+\index{src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}!ttl\_seconds@{ttl\_seconds}}
+\index{ttl\_seconds@{ttl\_seconds}!src.infrastructure.cache.TTLCache@{src.infrastructure.cache.TTLCache}}
+\doxysubsubsection{\texorpdfstring{ttl\_seconds}{ttl\_seconds}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache.\+TTLCache.\+ttl\+\_\+seconds}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cache_8py}{cache.\+py}}\end{DoxyCompactItemize}

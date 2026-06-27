@@ -1,0 +1,85 @@
+\doxysection{Referência da Classe src.\+application.\+services.\+Export\+Service}
+\hypertarget{classsrc_1_1application_1_1services_1_1ExportService}{}\label{classsrc_1_1application_1_1services_1_1ExportService}\index{src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a90967312603fc19798aee57959f74cca}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1CsvExporter}{Csv\+Exporter}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a59ea447c91e681154d29f6f5b5615af0}{csv\+\_\+exporter}}, \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1PdfExporter}{Pdf\+Exporter}} \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a0837ac15bd44a0001a5099fc2c4ad031}{pdf\+\_\+exporter}})
+\item 
+bytes \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a53c9a9e679675d43c446fc60bcc628c8}{export\+\_\+csv}} (self, pd.\+Data\+Frame rows)
+\item 
+bytes \mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a31404ad9ddcee123b2bec3ac0d3bccfd}{export\+\_\+pdf}} (self, \texorpdfstring{$\ast$}{*}pd.\+Data\+Frame rows, pd.\+Data\+Frame static\+\_\+row, \mbox{\hyperlink{classsrc_1_1application_1_1dto_1_1ExportPdfRequest}{Export\+Pdf\+Request}} request)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a59ea447c91e681154d29f6f5b5615af0}{csv\+\_\+exporter}}
+\item 
+\mbox{\hyperlink{classsrc_1_1application_1_1services_1_1ExportService_a0837ac15bd44a0001a5099fc2c4ad031}{pdf\+\_\+exporter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Serviço para exportação de dados em CSV e PDF.\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ExportService_a90967312603fc19798aee57959f74cca}\label{classsrc_1_1application_1_1services_1_1ExportService_a90967312603fc19798aee57959f74cca} 
+\index{src.application.services.ExportService@{src.application.services.ExportService}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Export\+Service.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1CsvExporter}{Csv\+Exporter}}}]{csv\+\_\+exporter,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1PdfExporter}{Pdf\+Exporter}}}]{pdf\+\_\+exporter }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o serviço com os exportadores.
+
+@param csv_exporter Implementação do exportador CSV.
+@param pdf_exporter Implementação do exportador PDF.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ExportService_a53c9a9e679675d43c446fc60bcc628c8}\label{classsrc_1_1application_1_1services_1_1ExportService_a53c9a9e679675d43c446fc60bcc628c8} 
+\index{src.application.services.ExportService@{src.application.services.ExportService}!export\_csv@{export\_csv}}
+\index{export\_csv@{export\_csv}!src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection{\texorpdfstring{export\_csv()}{export\_csv()}}
+{\footnotesize\ttfamily  bytes src.\+application.\+services.\+Export\+Service.\+export\+\_\+csv (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{pd.\+Data\+Frame}]{rows }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Exporta dados para CSV com separador ponto-e-vírgula.
+
+@param rows DataFrame com os dados a exportar.
+@return Bytes do arquivo CSV.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1application_1_1services_1_1ExportService_a31404ad9ddcee123b2bec3ac0d3bccfd}\label{classsrc_1_1application_1_1services_1_1ExportService_a31404ad9ddcee123b2bec3ac0d3bccfd} 
+\index{src.application.services.ExportService@{src.application.services.ExportService}!export\_pdf@{export\_pdf}}
+\index{export\_pdf@{export\_pdf}!src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection{\texorpdfstring{export\_pdf()}{export\_pdf()}}
+{\footnotesize\ttfamily  bytes src.\+application.\+services.\+Export\+Service.\+export\+\_\+pdf (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\texorpdfstring{$\ast$}{*}pd.\+Data\+Frame}]{rows,  }\item[{pd.\+Data\+Frame}]{static\+\_\+row,  }\item[{\mbox{\hyperlink{classsrc_1_1application_1_1dto_1_1ExportPdfRequest}{Export\+Pdf\+Request}}}]{request }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Gera relatório PDF com gráfico e dados do ensaio.
+
+No modo "config_atual", limita a amostra da tabela ao máximo configurado.
+
+@param rows Dados dinâmicos da série temporal.
+@param static_row Dados estáticos de configuração.
+@param request Parâmetros de exportação.
+@return Bytes do arquivo PDF.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1application_1_1services_1_1ExportService_a59ea447c91e681154d29f6f5b5615af0}\label{classsrc_1_1application_1_1services_1_1ExportService_a59ea447c91e681154d29f6f5b5615af0} 
+\index{src.application.services.ExportService@{src.application.services.ExportService}!csv\_exporter@{csv\_exporter}}
+\index{csv\_exporter@{csv\_exporter}!src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection{\texorpdfstring{csv\_exporter}{csv\_exporter}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Export\+Service.\+csv\+\_\+exporter}
+
+\Hypertarget{classsrc_1_1application_1_1services_1_1ExportService_a0837ac15bd44a0001a5099fc2c4ad031}\label{classsrc_1_1application_1_1services_1_1ExportService_a0837ac15bd44a0001a5099fc2c4ad031} 
+\index{src.application.services.ExportService@{src.application.services.ExportService}!pdf\_exporter@{pdf\_exporter}}
+\index{pdf\_exporter@{pdf\_exporter}!src.application.services.ExportService@{src.application.services.ExportService}}
+\doxysubsubsection{\texorpdfstring{pdf\_exporter}{pdf\_exporter}}
+{\footnotesize\ttfamily src.\+application.\+services.\+Export\+Service.\+pdf\+\_\+exporter}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{services_8py}{services.\+py}}\end{DoxyCompactItemize}

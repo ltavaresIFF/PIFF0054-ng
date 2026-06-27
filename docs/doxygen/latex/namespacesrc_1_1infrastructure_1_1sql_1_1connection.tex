@@ -1,0 +1,37 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+sql.\+connection}
+\hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1connection}{}\label{namespacesrc_1_1infrastructure_1_1sql_1_1connection}\index{src.infrastructure.sql.connection@{src.infrastructure.sql.connection}}
+\doxysubsubsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any,...\mbox{]}\mbox{]}\mbox{]} \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1sql_1_1connection_a14fa85b686e9951bc29322a7b07872a7}{\+\_\+execute\+\_\+on}} (pyodbc.\+Connection conn, str query, Iterable\mbox{[}Any\mbox{]} params=())
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Gerenciamento de conexão com o SQL Server via ODBC.
+
+Fornece a classe SqlServerConnection para abrir conexões, executar consultas
+e gerenciar transações com o banco de dados Projeto_54.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1sql_1_1connection_a14fa85b686e9951bc29322a7b07872a7}\label{namespacesrc_1_1infrastructure_1_1sql_1_1connection_a14fa85b686e9951bc29322a7b07872a7} 
+\index{src.infrastructure.sql.connection@{src.infrastructure.sql.connection}!\_execute\_on@{\_execute\_on}}
+\index{\_execute\_on@{\_execute\_on}!src.infrastructure.sql.connection@{src.infrastructure.sql.connection}}
+\doxysubsubsection{\texorpdfstring{\_execute\_on()}{\_execute\_on()}}
+{\footnotesize\ttfamily  tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any, ...\mbox{]}\mbox{]}\mbox{]} src.\+infrastructure.\+sql.\+connection.\+\_\+execute\+\_\+on (\begin{DoxyParamCaption}\item[{pyodbc.\+Connection}]{conn,  }\item[{str}]{query,  }\item[{Iterable\mbox{[}Any\mbox{]} }]{params = {\ttfamily ()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Executa uma consulta SQL em uma conexão já aberta.
+
+@param conn Conexão pyodbc ativa.
+@param query String SQL a executar.
+@param params Parâmetros posicionais (opcional).
+@return Tupla (colunas, linhas) com os resultados.
+\end{DoxyVerb}
+ 

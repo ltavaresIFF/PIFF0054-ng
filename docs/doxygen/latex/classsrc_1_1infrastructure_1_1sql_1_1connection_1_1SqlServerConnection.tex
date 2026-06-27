@@ -1,0 +1,164 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection}
+\hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_ad4558350dfc51218f9f9a0b27280dcaa}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings}{Settings}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a6f701bfba956184a0cec7e634d185abd}{settings}})
+\item 
+str \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a601a122e39e3118e7cbcbbb75103092c}{build\+\_\+connection\+\_\+string}} (self)
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_aa85313d791a2f39b7e56e303105ac5cc}{connect}} (self)
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a77685892c01a17e0329e8f767570b6bd}{connect\+\_\+shared}} (self)
+\item 
+tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any,...\mbox{]}\mbox{]}\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a679a4f1ab41019c8177e9b377273861c}{fetch\+\_\+all}} (self, str query, Iterable\mbox{[}Any\mbox{]} params=())
+\item 
+tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any,...\mbox{]}\mbox{]}\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a3b47afb926c337a15f0fffa4dd902f10}{fetch\+\_\+all\+\_\+on}} (self, pyodbc.\+Connection conn, str query, Iterable\mbox{[}Any\mbox{]} params=())
+\item 
+int \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a59841b50c4c15a99523790368a8d9078}{execute}} (self, str query, Iterable\mbox{[}Any\mbox{]} params=())
+\item 
+list\mbox{[}int\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a9391732853bb1484204a3ac0fc64685f}{execute\+\_\+transaction}} (self, list\mbox{[}tuple\mbox{[}str, tuple\mbox{[}Any,...\mbox{]}\mbox{]}\mbox{]} statements)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a782cc559a6251681569bfd3392c3c055}{list\+\_\+drivers}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a6f701bfba956184a0cec7e634d185abd}{settings}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Gerencia conexões com o SQL Server via ODBC.
+
+Suporta autenticação SQL (usuário/senha) e trusted connection (Windows).
+Oferece conexões compartilhadas para otimizar múltiplas consultas.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_ad4558350dfc51218f9f9a0b27280dcaa}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_ad4558350dfc51218f9f9a0b27280dcaa} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1config_1_1settings_1_1Settings}{Settings}}}]{settings }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa a conexão com as configurações fornecidas.
+
+@param settings Configurações do sistema (servidor, banco, credenciais).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a601a122e39e3118e7cbcbbb75103092c}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a601a122e39e3118e7cbcbbb75103092c} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!build\_connection\_string@{build\_connection\_string}}
+\index{build\_connection\_string@{build\_connection\_string}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{build\_connection\_string()}{build\_connection\_string()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+build\+\_\+connection\+\_\+string (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constrói a string de conexão ODBC.
+
+Suporta trusted connection (autenticação Windows) ou SQL Auth.
+
+@return String formatada para pyodbc.connect().
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_aa85313d791a2f39b7e56e303105ac5cc}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_aa85313d791a2f39b7e56e303105ac5cc} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!connect@{connect}}
+\index{connect@{connect}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+connect (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Abre uma nova conexão com o SQL Server (context manager).
+
+@yield Conexão pyodbc ativa.
+@raise InfrastructureError Se a conexão falhar.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a77685892c01a17e0329e8f767570b6bd}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a77685892c01a17e0329e8f767570b6bd} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!connect\_shared@{connect\_shared}}
+\index{connect\_shared@{connect\_shared}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{connect\_shared()}{connect\_shared()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+connect\+\_\+shared (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Abre uma conexão compartilhada para múltiplas operações.
+
+Todas as chamadas fetch_all_on / execute_on reutilizam esta conexão,
+evitando o overhead de ~300ms do handshake por consulta.
+
+@yield Conexão pyodbc ativa.
+@raise InfrastructureError Se a conexão falhar.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a59841b50c4c15a99523790368a8d9078}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a59841b50c4c15a99523790368a8d9078} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!execute@{execute}}
+\index{execute@{execute}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily  int src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{query,  }\item[{Iterable\mbox{[}Any\mbox{]} }]{params = {\ttfamily ()} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Executa um comando SQL (INSERT/UPDATE/DELETE).
+
+@param query String SQL.
+@param params Parâmetros posicionais.
+@return Número de linhas afetadas.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a9391732853bb1484204a3ac0fc64685f}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a9391732853bb1484204a3ac0fc64685f} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!execute\_transaction@{execute\_transaction}}
+\index{execute\_transaction@{execute\_transaction}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{execute\_transaction()}{execute\_transaction()}}
+{\footnotesize\ttfamily  list\mbox{[}int\mbox{]} src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+execute\+\_\+transaction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{list\mbox{[}tuple\mbox{[}str, tuple\mbox{[}Any, ...\mbox{]}\mbox{]}\mbox{]}}]{statements }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Executa múltiplos comandos em uma transação atômica.
+
+Commit se todos bem-sucedidos, rollback em caso de erro.
+
+@param statements Lista de tuplas (query, params).
+@return Lista com contagem de linhas afetadas por comando.
+@raise InfrastructureError Se qualquer comando falhar.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a679a4f1ab41019c8177e9b377273861c}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a679a4f1ab41019c8177e9b377273861c} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!fetch\_all@{fetch\_all}}
+\index{fetch\_all@{fetch\_all}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{fetch\_all()}{fetch\_all()}}
+{\footnotesize\ttfamily  tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any, ...\mbox{]}\mbox{]}\mbox{]} src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+fetch\+\_\+all (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{query,  }\item[{Iterable\mbox{[}Any\mbox{]} }]{params = {\ttfamily ()} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Executa uma consulta SQL em uma nova conexão.
+
+@param query String SQL.
+@param params Parâmetros posicionais.
+@return Tupla (colunas, linhas).
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a3b47afb926c337a15f0fffa4dd902f10}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a3b47afb926c337a15f0fffa4dd902f10} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!fetch\_all\_on@{fetch\_all\_on}}
+\index{fetch\_all\_on@{fetch\_all\_on}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{fetch\_all\_on()}{fetch\_all\_on()}}
+{\footnotesize\ttfamily  tuple\mbox{[}list\mbox{[}str\mbox{]}, list\mbox{[}tuple\mbox{[}Any, ...\mbox{]}\mbox{]}\mbox{]} src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+fetch\+\_\+all\+\_\+on (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{pyodbc.\+Connection}]{conn,  }\item[{str}]{query,  }\item[{Iterable\mbox{[}Any\mbox{]} }]{params = {\ttfamily ()} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Executa uma consulta em uma conexão já aberta.
+
+@param conn Conexão pyodbc ativa (de connect_shared).
+@param query String SQL.
+@param params Parâmetros posicionais.
+@return Tupla (colunas, linhas).
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a782cc559a6251681569bfd3392c3c055}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a782cc559a6251681569bfd3392c3c055} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!list\_drivers@{list\_drivers}}
+\index{list\_drivers@{list\_drivers}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{list\_drivers()}{list\_drivers()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+list\+\_\+drivers (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista todos os drivers ODBC instalados no sistema.
+
+@return Lista de nomes de drivers ODBC disponíveis.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a6f701bfba956184a0cec7e634d185abd}\label{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection_a6f701bfba956184a0cec7e634d185abd} 
+\index{src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}!settings@{settings}}
+\index{settings@{settings}!src.infrastructure.sql.connection.SqlServerConnection@{src.infrastructure.sql.connection.SqlServerConnection}}
+\doxysubsubsection{\texorpdfstring{settings}{settings}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+connection.\+Sql\+Server\+Connection.\+settings}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{connection_8py}{connection.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+cache\+\_\+redis}
+\hypertarget{namespacesrc_1_1infrastructure_1_1cache__redis}{}\label{namespacesrc_1_1infrastructure_1_1cache__redis}\index{src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}}
+\doxysubsubsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1__CacheEncoder}{\+\_\+\+Cache\+Encoder}}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache}{Redis\+Cache}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+Any \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1cache__redis_a23cdc18f21fa81f535b44a23e3db0460}{\+\_\+cache\+\_\+decoder}} (dict dct)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1cache__redis_a7c9e7b65a8aef8101f5b2c7c871af1e8}{\+\_\+\+HAS\+\_\+\+REDIS}} = True
+\item 
+\mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1cache__redis_a42ba4a3d64395d35fbcd1048e55a88c3}{\+\_\+redis}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Cache Redis com fallback em memória para o Projeto 54.
+
+Interface compatível com TTLCache (get/set) — substituição transparente.
+
+Estratégia:
+  - Conecta ao Redis via variáveis de ambiente PIFF_REDIS_HOST / PIFF_REDIS_PORT
+  - Se Redis estiver indisponível, usa fallback em dicionário em memória
+  - Serialização JSON com suporte a datetime, Decimal, pandas e numpy via encoder customizado
+  - TTL configurável via PIFF_CACHE_TTL_SECONDS (padrão: 300s)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1cache__redis_a23cdc18f21fa81f535b44a23e3db0460}\label{namespacesrc_1_1infrastructure_1_1cache__redis_a23cdc18f21fa81f535b44a23e3db0460} 
+\index{src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}!\_cache\_decoder@{\_cache\_decoder}}
+\index{\_cache\_decoder@{\_cache\_decoder}!src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}}
+\doxysubsubsection{\texorpdfstring{\_cache\_decoder()}{\_cache\_decoder()}}
+{\footnotesize\ttfamily  Any src.\+infrastructure.\+cache\+\_\+redis.\+\_\+cache\+\_\+decoder (\begin{DoxyParamCaption}\item[{dict}]{dct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Decodifica JSON reconhecendo marcadores internos do _CacheEncoder.
+
+Reconstrói pandas DataFrames e Series a partir dos marcadores
+__pandas_df__ e __pandas_series__.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variáveis}
+\Hypertarget{namespacesrc_1_1infrastructure_1_1cache__redis_a7c9e7b65a8aef8101f5b2c7c871af1e8}\label{namespacesrc_1_1infrastructure_1_1cache__redis_a7c9e7b65a8aef8101f5b2c7c871af1e8} 
+\index{src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}!\_HAS\_REDIS@{\_HAS\_REDIS}}
+\index{\_HAS\_REDIS@{\_HAS\_REDIS}!src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}}
+\doxysubsubsection{\texorpdfstring{\_HAS\_REDIS}{\_HAS\_REDIS}}
+{\footnotesize\ttfamily bool src.\+infrastructure.\+cache\+\_\+redis.\+\_\+\+HAS\+\_\+\+REDIS = True\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacesrc_1_1infrastructure_1_1cache__redis_a42ba4a3d64395d35fbcd1048e55a88c3}\label{namespacesrc_1_1infrastructure_1_1cache__redis_a42ba4a3d64395d35fbcd1048e55a88c3} 
+\index{src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}!\_redis@{\_redis}}
+\index{\_redis@{\_redis}!src.infrastructure.cache\_redis@{src.infrastructure.cache\_redis}}
+\doxysubsubsection{\texorpdfstring{\_redis}{\_redis}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache\+\_\+redis.\+\_\+redis = None\hspace{0.3cm}{\ttfamily [protected]}}
+

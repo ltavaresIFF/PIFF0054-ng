@@ -1,0 +1,188 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository}
+\hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository}{}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository}\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a77946a3b6e0d6d3f0ec41aec807ae9c2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a6aad7465c77b28e76e4d33d5fcdfa2a6}{conn}})
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_ac7ecbbcc4287c394a6dc06f601ed7086}{list\+\_\+test\+\_\+ids}} (self, int cyl\+\_\+num)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DynamicDataResult}{Dynamic\+Data\+Result}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_aed195dd591779de2c0582442e25c5d09}{load\+\_\+dynamic\+\_\+rows}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}} ctx, list\mbox{[}str\mbox{]}\texorpdfstring{$\vert$}{|}None selected\+\_\+columns=None, Any \+\_\+conn=None)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1StaticDataResult}{Static\+Data\+Result}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a2946662a1ed9d7ab33d4f439e75e8681}{load\+\_\+static\+\_\+row}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}} ctx, Any \+\_\+conn=None)
+\item 
+str\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a132951e7aa54c58aa145e8b2a0cc0339}{detect\+\_\+force\+\_\+column}} (self, int cyl\+\_\+num, Any \+\_\+conn=None)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_af40af414811ce3c570d981a03c522207}{load\+\_\+available\+\_\+y\+\_\+columns}} (self, int cyl\+\_\+num, Any \+\_\+conn=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a6aad7465c77b28e76e4d33d5fcdfa2a6}{conn}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Membros protegidos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a5ba9f509b1f575366f9455c72da16fd5}{\+\_\+fetch}} (self, str query, tuple params=(), Any \+\_\+conn=None)
+\item 
+bool \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a7300e07c958fb5932d0b187b1310e175}{\+\_\+table\+\_\+exists}} (self, str table\+\_\+name, Any \+\_\+conn=None)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_afc6780c455c7a24b2d6a707cc4651474}{\+\_\+get\+\_\+columns}} (self, str table\+\_\+name, Any \+\_\+conn=None)
+\item 
+str\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a94c157e8252e6cc07b29c405c415a51f}{\+\_\+find\+\_\+static\+\_\+table}} (self, int cyl\+\_\+num, Any \+\_\+conn=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Repositório SQL para consulta de dados de ensaio.
+
+Implementa TestQueryRepository usando SQL Server. Mantém cache interno
+de colunas e tabelas descobertas durante o ciclo de vida da instância.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a77946a3b6e0d6d3f0ec41aec807ae9c2}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a77946a3b6e0d6d3f0ec41aec807ae9c2} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}}}]{conn }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o repositório com uma conexão SQL Server.
+
+@param conn Gerenciador de conexão ODBC.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a5ba9f509b1f575366f9455c72da16fd5}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a5ba9f509b1f575366f9455c72da16fd5} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!\_fetch@{\_fetch}}
+\index{\_fetch@{\_fetch}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{\_fetch()}{\_fetch()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+\_\+fetch (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{query,  }\item[{tuple }]{params = {\ttfamily ()},  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Executa uma consulta, reutilizando conexão compartilhada se disponível.
+
+@param query String SQL.
+@param params Parâmetros posicionais.
+@param _conn Conexão compartilhada opcional.
+@return Tupla (colunas, linhas).
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a94c157e8252e6cc07b29c405c415a51f}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a94c157e8252e6cc07b29c405c415a51f} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!\_find\_static\_table@{\_find\_static\_table}}
+\index{\_find\_static\_table@{\_find\_static\_table}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{\_find\_static\_table()}{\_find\_static\_table()}}
+{\footnotesize\ttfamily  str \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+\_\+find\+\_\+static\+\_\+table (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Descobre a tabela estática para um cilindro em uma única consulta.
+
+Tenta variações do nome (com/sem acento) para compatibilidade.
+
+@param cyl_num Número do cilindro.
+@param _conn Conexão compartilhada opcional.
+@return Nome da tabela encontrada ou None.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_afc6780c455c7a24b2d6a707cc4651474}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_afc6780c455c7a24b2d6a707cc4651474} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!\_get\_columns@{\_get\_columns}}
+\index{\_get\_columns@{\_get\_columns}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{\_get\_columns()}{\_get\_columns()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+\_\+get\+\_\+columns (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{table\+\_\+name,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Obtém a lista de colunas de uma tabela, com cache.
+
+Usa SELECT TOP 0 para obter metadados instantaneamente, evitando
+a consulta lenta INFORMATION_SCHEMA.COLUMNS.
+
+@param table_name Nome da tabela.
+@param _conn Conexão compartilhada opcional.
+@return Lista de nomes de colunas.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a7300e07c958fb5932d0b187b1310e175}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a7300e07c958fb5932d0b187b1310e175} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!\_table\_exists@{\_table\_exists}}
+\index{\_table\_exists@{\_table\_exists}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{\_table\_exists()}{\_table\_exists()}}
+{\footnotesize\ttfamily  bool src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+\_\+table\+\_\+exists (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{table\+\_\+name,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Verifica se uma tabela existe no banco, com cache.
+
+@param table_name Nome da tabela.
+@param _conn Conexão compartilhada opcional.
+@return True se a tabela existir.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a132951e7aa54c58aa145e8b2a0cc0339}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a132951e7aa54c58aa145e8b2a0cc0339} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!detect\_force\_column@{detect\_force\_column}}
+\index{detect\_force\_column@{detect\_force\_column}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{detect\_force\_column()}{detect\_force\_column()}}
+{\footnotesize\ttfamily  str \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+detect\+\_\+force\+\_\+column (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Detecta automaticamente a coluna de força na tabela dinâmica.
+
+@param cyl_num Número do cilindro.
+@param _conn Conexão compartilhada opcional.
+@return Nome da coluna de força encontrada ou None.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_ac7ecbbcc4287c394a6dc06f601ed7086}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_ac7ecbbcc4287c394a6dc06f601ed7086} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!list\_test\_ids@{list\_test\_ids}}
+\index{list\_test\_ids@{list\_test\_ids}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{list\_test\_ids()}{list\_test\_ids()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+list\+\_\+test\+\_\+ids (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista IDs de teste distintos para um cilindro.
+
+@param cyl_num Número do cilindro.
+@return Lista de identificadores de ensaio.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_af40af414811ce3c570d981a03c522207}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_af40af414811ce3c570d981a03c522207} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!load\_available\_y\_columns@{load\_available\_y\_columns}}
+\index{load\_available\_y\_columns@{load\_available\_y\_columns}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_available\_y\_columns()}{load\_available\_y\_columns()}}
+{\footnotesize\ttfamily  list\mbox{[}str\mbox{]} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+load\+\_\+available\+\_\+y\+\_\+columns (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{cyl\+\_\+num,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Lista colunas numéricas disponíveis como variáveis Y.
+
+@param cyl_num Número do cilindro.
+@param _conn Conexão compartilhada opcional.
+@return Lista de nomes de colunas Y disponíveis.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_aed195dd591779de2c0582442e25c5d09}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_aed195dd591779de2c0582442e25c5d09} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!load\_dynamic\_rows@{load\_dynamic\_rows}}
+\index{load\_dynamic\_rows@{load\_dynamic\_rows}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_dynamic\_rows()}{load\_dynamic\_rows()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DynamicDataResult}{Dynamic\+Data\+Result}} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+load\+\_\+dynamic\+\_\+rows (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}}}]{ctx,  }\item[{list\mbox{[}str\mbox{]} \texorpdfstring{$\vert$}{|} None }]{selected\+\_\+columns = {\ttfamily None},  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Carrega os dados dinâmicos (série temporal) de um ensaio.
+
+Usa SELECT com colunas explícitas alinhadas ao índice composto,
+evitando SELECT * que causava key lookups e full table scan de ~12s.
+
+@param ctx Contexto do ensaio (cilindro + test_id).
+@param selected_columns Lista opcional de colunas Y para filtrar.
+@param _conn Conexão compartilhada opcional.
+@return DynamicDataResult com DataFrame ordenado por LocalCol.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a2946662a1ed9d7ab33d4f439e75e8681}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a2946662a1ed9d7ab33d4f439e75e8681} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!load\_static\_row@{load\_static\_row}}
+\index{load\_static\_row@{load\_static\_row}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{load\_static\_row()}{load\_static\_row()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1StaticDataResult}{Static\+Data\+Result}} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+load\+\_\+static\+\_\+row (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1TestContext}{Test\+Context}}}]{ctx,  }\item[{Any }]{\+\_\+conn = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Carrega a linha de dados estáticos (configuração) de um ensaio.
+
+@param ctx Contexto do ensaio.
+@param _conn Conexão compartilhada opcional.
+@return StaticDataResult com DataFrame e nome da tabela utilizada.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a6aad7465c77b28e76e4d33d5fcdfa2a6}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlTestQueryRepository_a6aad7465c77b28e76e4d33d5fcdfa2a6} 
+\index{src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}!conn@{conn}}
+\index{conn@{conn}!src.infrastructure.sql.repositories.SqlTestQueryRepository@{src.infrastructure.sql.repositories.SqlTestQueryRepository}}
+\doxysubsubsection{\texorpdfstring{conn}{conn}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Test\+Query\+Repository.\+conn}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{infrastructure_2sql_2repositories_8py}{infrastructure/sql/repositories.\+py}}\end{DoxyCompactItemize}

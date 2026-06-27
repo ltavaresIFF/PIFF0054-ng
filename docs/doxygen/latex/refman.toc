@@ -1,0 +1,467 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\babel@toc {brazil}{}\relax 
+\contentsline {chapter}{\numberline {1}PIFF-\/0054-\/ng}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}1. Arquitetura}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Diagrama de Contexto (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}C4 Nível 1)}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Diagrama de Containers (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}C4 Nível 2)}{1}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}3 Diagrama de Sequência — Fluxo Principal}{2}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}4 Diagrama de Componentes (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}C4 Nível 3) — $<$tt$>$src/$<$/tt$>$}{2}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}2. Pré-\/requisitos}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}3. Instalação}{3}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Dependências ( $<$tt$>$requirements.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}txt$<$/tt$>$ )}{3}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}4. Configuração}{3}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Variáveis de Conexão SQL Server}{3}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Variáveis de Cache}{3}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}3 Exemplo $<$tt$>$.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}env$<$/tt$>$}{4}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}$<$/blockquote$>$}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}5. Uso}{4}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}5.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Executar o Painel}{4}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}5.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Fluxo de Operação}{4}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}5.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}3 Funcionalidades da Interface}{4}{subsection.1.6.3}%
+\contentsline {section}{\numberline {1.7}6. Testes}{4}{section.1.7}%
+\contentsline {section}{\numberline {1.8}7. Performance SQL}{5}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Estratégia de índices}{5}{subsection.1.8.1}%
+\contentsline {section}{\numberline {1.9}8. Estrutura do Projeto}{5}{section.1.9}%
+\contentsline {section}{\numberline {1.10}9. Licença}{6}{section.1.10}%
+\contentsline {chapter}{\numberline {2}Engenharia Reversa do Banco SQL Server Projeto\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}54}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}1) Escopo e metodo}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}2) Visao geral do modelo (escopo 01 a 06)}{7}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Tabelas em escopo}{7}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Tabelas fora de escopo}{8}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}3 Volume de dados no escopo}{8}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}3) Padroes de schema no escopo}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}3.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Padrao dinamico (exemplo\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: Cilindro\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}01)}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}3.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Padrao estatico (exemplo\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: Cilindro\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}01\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Estatico)}{8}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}4) Integridade referencial no escopo}{8}{section.2.4}%
+\contentsline {section}{\numberline {2.5}5) Indices observados no escopo}{8}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}5.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Tabelas dinamicas (01 a 06)}{8}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}5.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Tabelas estaticas (01 a 06)}{9}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}6) Como a aplicacao consulta o banco (impacto em performance)}{9}{section.2.6}%
+\contentsline {section}{\numberline {2.7}7) Melhorias de desempenho recomendadas (priorizadas, escopo 01 a 06)}{9}{section.2.7}%
+\contentsline {section}{\numberline {2.8}P0 (alta prioridade)}{9}{section.2.8}%
+\contentsline {section}{\numberline {2.9}P1 (alta prioridade)}{9}{section.2.9}%
+\contentsline {section}{\numberline {2.10}P2 (media prioridade)}{9}{section.2.10}%
+\contentsline {section}{\numberline {2.11}P3 (evolutivo)}{9}{section.2.11}%
+\contentsline {section}{\numberline {2.12}8) Plano de implementacao sugerido para outro agente de IA}{10}{section.2.12}%
+\contentsline {section}{\numberline {2.13}9) SQL util para validacao rapida (somente 01 a 06)}{10}{section.2.13}%
+\contentsline {section}{\numberline {2.14}10) Conclusao}{10}{section.2.14}%
+\contentsline {chapter}{\numberline {3}Relatório de Performance — PIFF-\/0054 · Consulta C01\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TESTE\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}001}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}$<$/blockquote$>$}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}1. Pipeline de Carga (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sequência Temporal)}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}2. Distribuição de Tempo por Subsistema}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}3. Fluxograma do Problema}{12}{section.3.4}%
+\contentsline {section}{\numberline {3.5}4. Detalhamento por Etapa}{12}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1 Metadados de Colunas ($<$tt$>$\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}get\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}columns$<$/tt$>$)}{12}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2 Descoberta de Tabela Estática ($<$tt$>$\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}find\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}static\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}table$<$/tt$>$)}{12}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}3 🔴 Query Dinâmica — O Gargalo}{12}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}Por que 12 segundos para 100 linhas?}{12}{subsubsection.3.5.3.1}%
+\contentsline {subsection}{\numberline {3.5.4}4.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}4 Query Estática}{13}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}$<$/blockquote$>$}{13}{section.3.6}%
+\contentsline {section}{\numberline {3.7}5. Causa Raiz}{13}{section.3.7}%
+\contentsline {section}{\numberline {3.8}6. Solução}{13}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Índice Ausente (já documentado no projeto)}{13}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Impacto Estimado}{13}{subsection.3.8.2}%
+\contentsline {section}{\numberline {3.9}7. Recomendações}{14}{section.3.9}%
+\contentsline {section}{\numberline {3.10}8. Notas Técnicas}{14}{section.3.10}%
+\contentsline {chapter}{\numberline {4}Relatório Final\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: Projeto\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}54 — Comparativo de 5 Estratégias}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}1. As 5 Opções em Competição}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}2. Resultados dos Benchmarks}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Consulta de Um Único Ensaio (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cilindro 01, ensaio 001 — 100 linhas)}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Todos os Dados de Um Cilindro (2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}500 linhas)}{15}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}25 Consultas Sequenciais (lote — aplicação real)}{16}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Consulta Cross-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cilindro}{16}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}3. Análise}{16}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Comparação Direta\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: Old + Redis vs HP + Redis}{16}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Por que Old SQL é mais rápido que HP SQL (sem cache)?}{16}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Comparação Visual Completa}{16}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}4. Implementação do Redis}{17}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Arquitetura Atual}{17}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Fluxo de Funcionamento}{17}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Fallback Automático}{17}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}5. Conclusão}{17}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Tabela Decisão Final}{17}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Veredito Final}{17}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Comandos de Operação}{18}{subsection.4.5.3}%
+\contentsline {chapter}{\numberline {5}Namespaces}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lista de pacotes}{19}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Índice Hierárquico}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Hierarquia de Classes}{21}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Índice dos Componentes}{23}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Lista de Classes}{23}{section.7.1}%
+\contentsline {chapter}{\numberline {8}Índice dos Arquivos}{25}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Lista de Arquivos}{25}{section.8.1}%
+\contentsline {chapter}{\numberline {9}Namespace}{27}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Refência do Namespace src}{27}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Descrição detalhada}{27}{subsection.9.1.1}%
+\contentsline {section}{\numberline {9.2}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application}{27}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Descrição detalhada}{27}{subsection.9.2.1}%
+\contentsline {section}{\numberline {9.3}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dto}{27}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Descrição detalhada}{27}{subsection.9.3.1}%
+\contentsline {section}{\numberline {9.4}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}services}{28}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Descrição detalhada}{28}{subsection.9.4.1}%
+\contentsline {section}{\numberline {9.5}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}validators}{28}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Descrição detalhada}{28}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Funções}{28}{subsection.9.5.2}%
+\contentsline {subsubsection}{\numberline {9.5.2.1}validate\_cylinder()}{28}{subsubsection.9.5.2.1}%
+\contentsline {subsubsection}{\numberline {9.5.2.2}validate\_obs\_text()}{28}{subsubsection.9.5.2.2}%
+\contentsline {subsubsection}{\numberline {9.5.2.3}validate\_observation\_command()}{29}{subsubsection.9.5.2.3}%
+\contentsline {subsubsection}{\numberline {9.5.2.4}validate\_observation\_lookup()}{29}{subsubsection.9.5.2.4}%
+\contentsline {subsubsection}{\numberline {9.5.2.5}validate\_test\_id()}{29}{subsubsection.9.5.2.5}%
+\contentsline {subsubsection}{\numberline {9.5.2.6}validate\_y\_column\_name()}{29}{subsubsection.9.5.2.6}%
+\contentsline {section}{\numberline {9.6}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}config}{29}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Descrição detalhada}{29}{subsection.9.6.1}%
+\contentsline {section}{\numberline {9.7}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}settings}{29}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Descrição detalhada}{30}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}Funções}{30}{subsection.9.7.2}%
+\contentsline {subsubsection}{\numberline {9.7.2.1}\_as\_bool()}{30}{subsubsection.9.7.2.1}%
+\contentsline {subsection}{\numberline {9.7.3}Variáveis}{30}{subsection.9.7.3}%
+\contentsline {subsubsection}{\numberline {9.7.3.1}SETTINGS}{30}{subsubsection.9.7.3.1}%
+\contentsline {section}{\numberline {9.8}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain}{30}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}Descrição detalhada}{30}{subsection.9.8.1}%
+\contentsline {section}{\numberline {9.9}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors}{30}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}Descrição detalhada}{30}{subsection.9.9.1}%
+\contentsline {section}{\numberline {9.10}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models}{31}{section.9.10}%
+\contentsline {subsection}{\numberline {9.10.1}Descrição detalhada}{31}{subsection.9.10.1}%
+\contentsline {section}{\numberline {9.11}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories}{31}{section.9.11}%
+\contentsline {subsection}{\numberline {9.11.1}Descrição detalhada}{31}{subsection.9.11.1}%
+\contentsline {section}{\numberline {9.12}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure}{31}{section.9.12}%
+\contentsline {subsection}{\numberline {9.12.1}Descrição detalhada}{31}{subsection.9.12.1}%
+\contentsline {section}{\numberline {9.13}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache}{31}{section.9.13}%
+\contentsline {subsection}{\numberline {9.13.1}Descrição detalhada}{32}{subsection.9.13.1}%
+\contentsline {section}{\numberline {9.14}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}redis}{32}{section.9.14}%
+\contentsline {subsection}{\numberline {9.14.1}Descrição detalhada}{32}{subsection.9.14.1}%
+\contentsline {subsection}{\numberline {9.14.2}Funções}{32}{subsection.9.14.2}%
+\contentsline {subsubsection}{\numberline {9.14.2.1}\_cache\_decoder()}{32}{subsubsection.9.14.2.1}%
+\contentsline {subsection}{\numberline {9.14.3}Variáveis}{32}{subsection.9.14.3}%
+\contentsline {subsubsection}{\numberline {9.14.3.1}\_HAS\_REDIS}{32}{subsubsection.9.14.3.1}%
+\contentsline {subsubsection}{\numberline {9.14.3.2}\_redis}{32}{subsubsection.9.14.3.2}%
+\contentsline {section}{\numberline {9.15}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporters}{32}{section.9.15}%
+\contentsline {subsection}{\numberline {9.15.1}Descrição detalhada}{33}{subsection.9.15.1}%
+\contentsline {section}{\numberline {9.16}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporters.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}csv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter}{33}{section.9.16}%
+\contentsline {subsection}{\numberline {9.16.1}Descrição detalhada}{33}{subsection.9.16.1}%
+\contentsline {section}{\numberline {9.17}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporters.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter}{33}{section.9.17}%
+\contentsline {subsection}{\numberline {9.17.1}Descrição detalhada}{33}{subsection.9.17.1}%
+\contentsline {section}{\numberline {9.18}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql}{33}{section.9.18}%
+\contentsline {subsection}{\numberline {9.18.1}Descrição detalhada}{33}{subsection.9.18.1}%
+\contentsline {section}{\numberline {9.19}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}connection}{33}{section.9.19}%
+\contentsline {subsection}{\numberline {9.19.1}Descrição detalhada}{33}{subsection.9.19.1}%
+\contentsline {subsection}{\numberline {9.19.2}Funções}{34}{subsection.9.19.2}%
+\contentsline {subsubsection}{\numberline {9.19.2.1}\_execute\_on()}{34}{subsubsection.9.19.2.1}%
+\contentsline {section}{\numberline {9.20}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories}{34}{section.9.20}%
+\contentsline {subsection}{\numberline {9.20.1}Descrição detalhada}{34}{subsection.9.20.1}%
+\contentsline {section}{\numberline {9.21}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}safe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql}{34}{section.9.21}%
+\contentsline {subsection}{\numberline {9.21.1}Descrição detalhada}{34}{subsection.9.21.1}%
+\contentsline {subsection}{\numberline {9.21.2}Funções}{34}{subsection.9.21.2}%
+\contentsline {subsubsection}{\numberline {9.21.2.1}escape\_identifier()}{34}{subsubsection.9.21.2.1}%
+\contentsline {subsubsection}{\numberline {9.21.2.2}escape\_table()}{35}{subsubsection.9.21.2.2}%
+\contentsline {subsection}{\numberline {9.21.3}Variáveis}{35}{subsection.9.21.3}%
+\contentsline {subsubsection}{\numberline {9.21.3.1}\_FORBIDDEN}{35}{subsubsection.9.21.3.1}%
+\contentsline {section}{\numberline {9.22}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}schema}{35}{section.9.22}%
+\contentsline {subsection}{\numberline {9.22.1}Descrição detalhada}{35}{subsection.9.22.1}%
+\contentsline {subsection}{\numberline {9.22.2}Funções}{35}{subsection.9.22.2}%
+\contentsline {subsubsection}{\numberline {9.22.2.1}cylinder\_id\_column()}{35}{subsubsection.9.22.2.1}%
+\contentsline {subsubsection}{\numberline {9.22.2.2}dynamic\_table\_name()}{36}{subsubsection.9.22.2.2}%
+\contentsline {subsubsection}{\numberline {9.22.2.3}static\_table\_candidates()}{36}{subsubsection.9.22.2.3}%
+\contentsline {subsection}{\numberline {9.22.3}Variáveis}{36}{subsection.9.22.3}%
+\contentsline {subsubsection}{\numberline {9.22.3.1}CANONICAL\_OBSERVATION\_COLUMNS}{36}{subsubsection.9.22.3.1}%
+\contentsline {subsubsection}{\numberline {9.22.3.2}DYNAMIC\_DEFAULT\_COLUMNS}{36}{subsubsection.9.22.3.2}%
+\contentsline {subsubsection}{\numberline {9.22.3.3}DYNAMIC\_EXCLUDE\_COLUMNS}{36}{subsubsection.9.22.3.3}%
+\contentsline {subsubsection}{\numberline {9.22.3.4}FORCE\_COLUMN\_CANDIDATES}{36}{subsubsection.9.22.3.4}%
+\contentsline {section}{\numberline {9.23}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ui}{37}{section.9.23}%
+\contentsline {subsection}{\numberline {9.23.1}Descrição detalhada}{37}{subsection.9.23.1}%
+\contentsline {section}{\numberline {9.24}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ui.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}streamlit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}app}{37}{section.9.24}%
+\contentsline {subsection}{\numberline {9.24.1}Descrição detalhada}{37}{subsection.9.24.1}%
+\contentsline {subsection}{\numberline {9.24.2}Funções}{37}{subsection.9.24.2}%
+\contentsline {subsubsection}{\numberline {9.24.2.1}\_build\_services()}{37}{subsubsection.9.24.2.1}%
+\contentsline {subsubsection}{\numberline {9.24.2.2}\_friendly\_error()}{37}{subsubsection.9.24.2.2}%
+\contentsline {subsubsection}{\numberline {9.24.2.3}\_plot\_multiaxis()}{37}{subsubsection.9.24.2.3}%
+\contentsline {subsubsection}{\numberline {9.24.2.4}main()}{38}{subsubsection.9.24.2.4}%
+\contentsline {section}{\numberline {9.25}Refência do Namespace src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ui.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}theme}{38}{section.9.25}%
+\contentsline {subsection}{\numberline {9.25.1}Descrição detalhada}{38}{subsection.9.25.1}%
+\contentsline {subsection}{\numberline {9.25.2}Funções}{38}{subsection.9.25.2}%
+\contentsline {subsubsection}{\numberline {9.25.2.1}inject\_theme()}{38}{subsubsection.9.25.2.1}%
+\contentsline {subsubsection}{\numberline {9.25.2.2}render\_kpis()}{38}{subsubsection.9.25.2.2}%
+\contentsline {subsubsection}{\numberline {9.25.2.3}render\_signature\_flow()}{38}{subsubsection.9.25.2.3}%
+\contentsline {chapter}{\numberline {10}Classes}{39}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}redis.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Encoder}{39}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Descrição detalhada}{39}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Documentação das funções}{39}{subsection.10.1.2}%
+\contentsline {subsubsection}{\numberline {10.1.2.1}default()}{39}{subsubsection.10.1.2.1}%
+\contentsline {section}{\numberline {10.2}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry}{39}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Descrição detalhada}{39}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Atributos}{40}{subsection.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.2.2.1}expires\_at}{40}{subsubsection.10.2.2.1}%
+\contentsline {subsubsection}{\numberline {10.2.2.2}value}{40}{subsubsection.10.2.2.2}%
+\contentsline {section}{\numberline {10.3}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ambiguous\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Match\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{40}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Descrição detalhada}{40}{subsection.10.3.1}%
+\contentsline {section}{\numberline {10.4}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Csv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Exporter}{40}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}Descrição detalhada}{40}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}Documentação das funções}{41}{subsection.10.4.2}%
+\contentsline {subsubsection}{\numberline {10.4.2.1}export()}{41}{subsubsection.10.4.2.1}%
+\contentsline {section}{\numberline {10.5}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagnostics\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Info}{41}{section.10.5}%
+\contentsline {subsection}{\numberline {10.5.1}Descrição detalhada}{41}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {10.5.2}Atributos}{41}{subsection.10.5.2}%
+\contentsline {subsubsection}{\numberline {10.5.2.1}active\_context}{41}{subsubsection.10.5.2.1}%
+\contentsline {subsubsection}{\numberline {10.5.2.2}checked\_at}{41}{subsubsection.10.5.2.2}%
+\contentsline {subsubsection}{\numberline {10.5.2.3}connection\_message}{41}{subsubsection.10.5.2.3}%
+\contentsline {subsubsection}{\numberline {10.5.2.4}connection\_ok}{41}{subsubsection.10.5.2.4}%
+\contentsline {subsubsection}{\numberline {10.5.2.5}odbc\_drivers}{41}{subsubsection.10.5.2.5}%
+\contentsline {section}{\numberline {10.6}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagnostics\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{42}{section.10.6}%
+\contentsline {subsection}{\numberline {10.6.1}Descrição detalhada}{42}{subsection.10.6.1}%
+\contentsline {subsection}{\numberline {10.6.2}Documentação das funções}{42}{subsection.10.6.2}%
+\contentsline {subsubsection}{\numberline {10.6.2.1}diagnostics()}{42}{subsubsection.10.6.2.1}%
+\contentsline {section}{\numberline {10.7}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}services.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagnostics\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Service}{42}{section.10.7}%
+\contentsline {subsection}{\numberline {10.7.1}Descrição detalhada}{42}{subsection.10.7.1}%
+\contentsline {subsection}{\numberline {10.7.2}Construtores e Destrutores}{42}{subsection.10.7.2}%
+\contentsline {subsubsection}{\numberline {10.7.2.1}\_\_init\_\_()}{42}{subsubsection.10.7.2.1}%
+\contentsline {subsection}{\numberline {10.7.3}Documentação das funções}{43}{subsection.10.7.3}%
+\contentsline {subsubsection}{\numberline {10.7.3.1}get()}{43}{subsubsection.10.7.3.1}%
+\contentsline {subsection}{\numberline {10.7.4}Atributos}{43}{subsection.10.7.4}%
+\contentsline {subsubsection}{\numberline {10.7.4.1}repository}{43}{subsubsection.10.7.4.1}%
+\contentsline {section}{\numberline {10.8}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Domain\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{43}{section.10.8}%
+\contentsline {subsection}{\numberline {10.8.1}Descrição detalhada}{43}{subsection.10.8.1}%
+\contentsline {section}{\numberline {10.9}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dynamic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Result}{43}{section.10.9}%
+\contentsline {subsection}{\numberline {10.9.1}Descrição detalhada}{43}{subsection.10.9.1}%
+\contentsline {subsection}{\numberline {10.9.2}Documentação das funções}{44}{subsection.10.9.2}%
+\contentsline {subsubsection}{\numberline {10.9.2.1}total\_rows()}{44}{subsubsection.10.9.2.1}%
+\contentsline {subsection}{\numberline {10.9.3}Atributos}{44}{subsection.10.9.3}%
+\contentsline {subsubsection}{\numberline {10.9.3.1}ordered\_by}{44}{subsubsection.10.9.3.1}%
+\contentsline {subsubsection}{\numberline {10.9.3.2}rows\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{44}{subsubsection.10.9.3.2}%
+\contentsline {subsubsection}{\numberline {10.9.3.3}rows\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{44}{subsubsection.10.9.3.3}%
+\contentsline {section}{\numberline {10.10}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dto.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Export\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Request}{44}{section.10.10}%
+\contentsline {subsection}{\numberline {10.10.1}Descrição detalhada}{44}{subsection.10.10.1}%
+\contentsline {subsection}{\numberline {10.10.2}Atributos}{44}{subsection.10.10.2}%
+\contentsline {subsubsection}{\numberline {10.10.2.1}export\_mode}{44}{subsubsection.10.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.10.2.2}graph\_png}{44}{subsubsection.10.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.10.2.3}metadata}{44}{subsubsection.10.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.10.2.4}table\_sample\_max\_rows}{44}{subsubsection.10.10.2.4}%
+\contentsline {section}{\numberline {10.11}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}services.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Export\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Service}{45}{section.10.11}%
+\contentsline {subsection}{\numberline {10.11.1}Descrição detalhada}{45}{subsection.10.11.1}%
+\contentsline {subsection}{\numberline {10.11.2}Construtores e Destrutores}{45}{subsection.10.11.2}%
+\contentsline {subsubsection}{\numberline {10.11.2.1}\_\_init\_\_()}{45}{subsubsection.10.11.2.1}%
+\contentsline {subsection}{\numberline {10.11.3}Documentação das funções}{45}{subsection.10.11.3}%
+\contentsline {subsubsection}{\numberline {10.11.3.1}export\_csv()}{45}{subsubsection.10.11.3.1}%
+\contentsline {subsubsection}{\numberline {10.11.3.2}export\_pdf()}{45}{subsubsection.10.11.3.2}%
+\contentsline {subsection}{\numberline {10.11.4}Atributos}{46}{subsection.10.11.4}%
+\contentsline {subsubsection}{\numberline {10.11.4.1}csv\_exporter}{46}{subsubsection.10.11.4.1}%
+\contentsline {subsubsection}{\numberline {10.11.4.2}pdf\_exporter}{46}{subsubsection.10.11.4.2}%
+\contentsline {section}{\numberline {10.12}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Infrastructure\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{46}{section.10.12}%
+\contentsline {subsection}{\numberline {10.12.1}Descrição detalhada}{46}{subsection.10.12.1}%
+\contentsline {section}{\numberline {10.13}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dto.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Load\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Response}{46}{section.10.13}%
+\contentsline {subsection}{\numberline {10.13.1}Descrição detalhada}{46}{subsection.10.13.1}%
+\contentsline {subsection}{\numberline {10.13.2}Atributos}{46}{subsection.10.13.2}%
+\contentsline {subsubsection}{\numberline {10.13.2.1}available\_y\_columns}{46}{subsubsection.10.13.2.1}%
+\contentsline {subsubsection}{\numberline {10.13.2.2}force\_column}{47}{subsubsection.10.13.2.2}%
+\contentsline {subsubsection}{\numberline {10.13.2.3}meta}{47}{subsubsection.10.13.2.3}%
+\contentsline {subsubsection}{\numberline {10.13.2.4}rows}{47}{subsubsection.10.13.2.4}%
+\contentsline {subsubsection}{\numberline {10.13.2.5}static\_row}{47}{subsubsection.10.13.2.5}%
+\contentsline {section}{\numberline {10.14}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Not\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Found\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{47}{section.10.14}%
+\contentsline {subsection}{\numberline {10.14.1}Descrição detalhada}{47}{subsection.10.14.1}%
+\contentsline {section}{\numberline {10.15}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Command}{47}{section.10.15}%
+\contentsline {subsection}{\numberline {10.15.1}Descrição detalhada}{47}{subsection.10.15.1}%
+\contentsline {subsection}{\numberline {10.15.2}Atributos}{48}{subsection.10.15.2}%
+\contentsline {subsubsection}{\numberline {10.15.2.1}cyl\_num}{48}{subsubsection.10.15.2.1}%
+\contentsline {subsubsection}{\numberline {10.15.2.2}local\_col}{48}{subsubsection.10.15.2.2}%
+\contentsline {subsubsection}{\numberline {10.15.2.3}obs\_text}{48}{subsubsection.10.15.2.3}%
+\contentsline {subsubsection}{\numberline {10.15.2.4}test\_id}{48}{subsubsection.10.15.2.4}%
+\contentsline {subsubsection}{\numberline {10.15.2.5}y\_column\_name}{48}{subsubsection.10.15.2.5}%
+\contentsline {subsubsection}{\numberline {10.15.2.6}y\_value}{48}{subsubsection.10.15.2.6}%
+\contentsline {section}{\numberline {10.16}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Command\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{48}{section.10.16}%
+\contentsline {subsection}{\numberline {10.16.1}Descrição detalhada}{48}{subsection.10.16.1}%
+\contentsline {subsection}{\numberline {10.16.2}Documentação das funções}{49}{subsection.10.16.2}%
+\contentsline {subsubsection}{\numberline {10.16.2.1}delete\_observation()}{49}{subsubsection.10.16.2.1}%
+\contentsline {subsubsection}{\numberline {10.16.2.2}get\_observation()}{49}{subsubsection.10.16.2.2}%
+\contentsline {subsubsection}{\numberline {10.16.2.3}upsert\_observation()}{49}{subsubsection.10.16.2.3}%
+\contentsline {section}{\numberline {10.17}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Lookup}{49}{section.10.17}%
+\contentsline {subsection}{\numberline {10.17.1}Descrição detalhada}{49}{subsection.10.17.1}%
+\contentsline {subsection}{\numberline {10.17.2}Atributos}{49}{subsection.10.17.2}%
+\contentsline {subsubsection}{\numberline {10.17.2.1}cyl\_num}{49}{subsubsection.10.17.2.1}%
+\contentsline {subsubsection}{\numberline {10.17.2.2}local\_col}{49}{subsubsection.10.17.2.2}%
+\contentsline {subsubsection}{\numberline {10.17.2.3}test\_id}{50}{subsubsection.10.17.2.3}%
+\contentsline {subsubsection}{\numberline {10.17.2.4}y\_column\_name}{50}{subsubsection.10.17.2.4}%
+\contentsline {subsubsection}{\numberline {10.17.2.5}y\_value}{50}{subsubsection.10.17.2.5}%
+\contentsline {section}{\numberline {10.18}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Record}{50}{section.10.18}%
+\contentsline {subsection}{\numberline {10.18.1}Descrição detalhada}{50}{subsection.10.18.1}%
+\contentsline {subsection}{\numberline {10.18.2}Atributos}{50}{subsection.10.18.2}%
+\contentsline {subsubsection}{\numberline {10.18.2.1}obs\_text}{50}{subsubsection.10.18.2.1}%
+\contentsline {subsubsection}{\numberline {10.18.2.2}val\_obs}{50}{subsubsection.10.18.2.2}%
+\contentsline {subsubsection}{\numberline {10.18.2.3}y\_column\_name}{50}{subsubsection.10.18.2.3}%
+\contentsline {section}{\numberline {10.19}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Result}{50}{section.10.19}%
+\contentsline {subsection}{\numberline {10.19.1}Descrição detalhada}{50}{subsection.10.19.1}%
+\contentsline {subsection}{\numberline {10.19.2}Atributos}{51}{subsection.10.19.2}%
+\contentsline {subsubsection}{\numberline {10.19.2.1}columns\_used}{51}{subsubsection.10.19.2.1}%
+\contentsline {subsubsection}{\numberline {10.19.2.2}matched\_rows}{51}{subsubsection.10.19.2.2}%
+\contentsline {subsubsection}{\numberline {10.19.2.3}updated}{51}{subsubsection.10.19.2.3}%
+\contentsline {section}{\numberline {10.20}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}services.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Service}{51}{section.10.20}%
+\contentsline {subsection}{\numberline {10.20.1}Descrição detalhada}{51}{subsection.10.20.1}%
+\contentsline {subsection}{\numberline {10.20.2}Construtores e Destrutores}{51}{subsection.10.20.2}%
+\contentsline {subsubsection}{\numberline {10.20.2.1}\_\_init\_\_()}{51}{subsubsection.10.20.2.1}%
+\contentsline {subsection}{\numberline {10.20.3}Documentação das funções}{51}{subsection.10.20.3}%
+\contentsline {subsubsection}{\numberline {10.20.3.1}delete()}{51}{subsubsection.10.20.3.1}%
+\contentsline {subsubsection}{\numberline {10.20.3.2}get()}{52}{subsubsection.10.20.3.2}%
+\contentsline {subsubsection}{\numberline {10.20.3.3}upsert()}{52}{subsubsection.10.20.3.3}%
+\contentsline {subsection}{\numberline {10.20.4}Atributos}{52}{subsection.10.20.4}%
+\contentsline {subsubsection}{\numberline {10.20.4.1}repository}{52}{subsubsection.10.20.4.1}%
+\contentsline {section}{\numberline {10.21}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Exporter}{52}{section.10.21}%
+\contentsline {subsection}{\numberline {10.21.1}Descrição detalhada}{52}{subsection.10.21.1}%
+\contentsline {subsection}{\numberline {10.21.2}Documentação das funções}{52}{subsection.10.21.2}%
+\contentsline {subsubsection}{\numberline {10.21.2.1}export()}{52}{subsubsection.10.21.2.1}%
+\contentsline {section}{\numberline {10.22}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Persistence\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{53}{section.10.22}%
+\contentsline {subsection}{\numberline {10.22.1}Descrição detalhada}{53}{subsection.10.22.1}%
+\contentsline {section}{\numberline {10.23}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}redis.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Redis\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cache}{53}{section.10.23}%
+\contentsline {subsection}{\numberline {10.23.1}Descrição detalhada}{53}{subsection.10.23.1}%
+\contentsline {subsection}{\numberline {10.23.2}Construtores e Destrutores}{54}{subsection.10.23.2}%
+\contentsline {subsubsection}{\numberline {10.23.2.1}\_\_init\_\_()}{54}{subsubsection.10.23.2.1}%
+\contentsline {subsection}{\numberline {10.23.3}Documentação das funções}{54}{subsection.10.23.3}%
+\contentsline {subsubsection}{\numberline {10.23.3.1}\_\_repr\_\_()}{54}{subsubsection.10.23.3.1}%
+\contentsline {subsubsection}{\numberline {10.23.3.2}\_fallback\_get()}{54}{subsubsection.10.23.3.2}%
+\contentsline {subsubsection}{\numberline {10.23.3.3}\_fallback\_set()}{54}{subsubsection.10.23.3.3}%
+\contentsline {subsubsection}{\numberline {10.23.3.4}available()}{54}{subsubsection.10.23.3.4}%
+\contentsline {subsubsection}{\numberline {10.23.3.5}delete()}{54}{subsubsection.10.23.3.5}%
+\contentsline {subsubsection}{\numberline {10.23.3.6}flush()}{54}{subsubsection.10.23.3.6}%
+\contentsline {subsubsection}{\numberline {10.23.3.7}get()}{55}{subsubsection.10.23.3.7}%
+\contentsline {subsubsection}{\numberline {10.23.3.8}set()}{55}{subsubsection.10.23.3.8}%
+\contentsline {subsection}{\numberline {10.23.4}Atributos}{55}{subsection.10.23.4}%
+\contentsline {subsubsection}{\numberline {10.23.4.1}\_client}{55}{subsubsection.10.23.4.1}%
+\contentsline {subsubsection}{\numberline {10.23.4.2}\_connected}{55}{subsubsection.10.23.4.2}%
+\contentsline {subsubsection}{\numberline {10.23.4.3}ttl}{55}{subsubsection.10.23.4.3}%
+\contentsline {section}{\numberline {10.24}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporters.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}csv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Semicolon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Csv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Exporter}{55}{section.10.24}%
+\contentsline {subsection}{\numberline {10.24.1}Descrição detalhada}{55}{subsection.10.24.1}%
+\contentsline {subsection}{\numberline {10.24.2}Documentação das funções}{55}{subsection.10.24.2}%
+\contentsline {subsubsection}{\numberline {10.24.2.1}export()}{55}{subsubsection.10.24.2.1}%
+\contentsline {section}{\numberline {10.25}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}settings.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Settings}{56}{section.10.25}%
+\contentsline {subsection}{\numberline {10.25.1}Descrição detalhada}{56}{subsection.10.25.1}%
+\contentsline {subsection}{\numberline {10.25.2}Documentação das funções}{56}{subsection.10.25.2}%
+\contentsline {subsubsection}{\numberline {10.25.2.1}allowed\_cylinders()}{56}{subsubsection.10.25.2.1}%
+\contentsline {subsection}{\numberline {10.25.3}Atributos}{56}{subsection.10.25.3}%
+\contentsline {subsubsection}{\numberline {10.25.3.1}cache\_ttl\_seconds}{56}{subsubsection.10.25.3.1}%
+\contentsline {subsubsection}{\numberline {10.25.3.2}sql\_database}{56}{subsubsection.10.25.3.2}%
+\contentsline {subsubsection}{\numberline {10.25.3.3}sql\_driver}{57}{subsubsection.10.25.3.3}%
+\contentsline {subsubsection}{\numberline {10.25.3.4}sql\_password}{57}{subsubsection.10.25.3.4}%
+\contentsline {subsubsection}{\numberline {10.25.3.5}sql\_server}{57}{subsubsection.10.25.3.5}%
+\contentsline {subsubsection}{\numberline {10.25.3.6}sql\_username}{57}{subsubsection.10.25.3.6}%
+\contentsline {subsubsection}{\numberline {10.25.3.7}trusted\_connection}{57}{subsubsection.10.25.3.7}%
+\contentsline {section}{\numberline {10.26}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sql\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagnostics\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{57}{section.10.26}%
+\contentsline {subsection}{\numberline {10.26.1}Descrição detalhada}{57}{subsection.10.26.1}%
+\contentsline {subsection}{\numberline {10.26.2}Construtores e Destrutores}{57}{subsection.10.26.2}%
+\contentsline {subsubsection}{\numberline {10.26.2.1}\_\_init\_\_()}{57}{subsubsection.10.26.2.1}%
+\contentsline {subsection}{\numberline {10.26.3}Documentação das funções}{58}{subsection.10.26.3}%
+\contentsline {subsubsection}{\numberline {10.26.3.1}diagnostics()}{58}{subsubsection.10.26.3.1}%
+\contentsline {subsection}{\numberline {10.26.4}Atributos}{58}{subsection.10.26.4}%
+\contentsline {subsubsection}{\numberline {10.26.4.1}conn}{58}{subsubsection.10.26.4.1}%
+\contentsline {section}{\numberline {10.27}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sql\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Observation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{58}{section.10.27}%
+\contentsline {subsection}{\numberline {10.27.1}Descrição detalhada}{58}{subsection.10.27.1}%
+\contentsline {subsection}{\numberline {10.27.2}Construtores e Destrutores}{58}{subsection.10.27.2}%
+\contentsline {subsubsection}{\numberline {10.27.2.1}\_\_init\_\_()}{58}{subsubsection.10.27.2.1}%
+\contentsline {subsection}{\numberline {10.27.3}Documentação das funções}{59}{subsection.10.27.3}%
+\contentsline {subsubsection}{\numberline {10.27.3.1}\_match\_query()}{59}{subsubsection.10.27.3.1}%
+\contentsline {subsubsection}{\numberline {10.27.3.2}delete\_observation()}{59}{subsubsection.10.27.3.2}%
+\contentsline {subsubsection}{\numberline {10.27.3.3}get\_observation()}{59}{subsubsection.10.27.3.3}%
+\contentsline {subsubsection}{\numberline {10.27.3.4}upsert\_observation()}{59}{subsubsection.10.27.3.4}%
+\contentsline {subsection}{\numberline {10.27.4}Atributos}{60}{subsection.10.27.4}%
+\contentsline {subsubsection}{\numberline {10.27.4.1}conn}{60}{subsubsection.10.27.4.1}%
+\contentsline {section}{\numberline {10.28}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}connection.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sql\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Server\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Connection}{60}{section.10.28}%
+\contentsline {subsection}{\numberline {10.28.1}Descrição detalhada}{60}{subsection.10.28.1}%
+\contentsline {subsection}{\numberline {10.28.2}Construtores e Destrutores}{60}{subsection.10.28.2}%
+\contentsline {subsubsection}{\numberline {10.28.2.1}\_\_init\_\_()}{60}{subsubsection.10.28.2.1}%
+\contentsline {subsection}{\numberline {10.28.3}Documentação das funções}{60}{subsection.10.28.3}%
+\contentsline {subsubsection}{\numberline {10.28.3.1}build\_connection\_string()}{60}{subsubsection.10.28.3.1}%
+\contentsline {subsubsection}{\numberline {10.28.3.2}connect()}{61}{subsubsection.10.28.3.2}%
+\contentsline {subsubsection}{\numberline {10.28.3.3}connect\_shared()}{61}{subsubsection.10.28.3.3}%
+\contentsline {subsubsection}{\numberline {10.28.3.4}execute()}{61}{subsubsection.10.28.3.4}%
+\contentsline {subsubsection}{\numberline {10.28.3.5}execute\_transaction()}{61}{subsubsection.10.28.3.5}%
+\contentsline {subsubsection}{\numberline {10.28.3.6}fetch\_all()}{61}{subsubsection.10.28.3.6}%
+\contentsline {subsubsection}{\numberline {10.28.3.7}fetch\_all\_on()}{62}{subsubsection.10.28.3.7}%
+\contentsline {subsubsection}{\numberline {10.28.3.8}list\_drivers()}{62}{subsubsection.10.28.3.8}%
+\contentsline {subsection}{\numberline {10.28.4}Atributos}{62}{subsection.10.28.4}%
+\contentsline {subsubsection}{\numberline {10.28.4.1}settings}{62}{subsubsection.10.28.4.1}%
+\contentsline {section}{\numberline {10.29}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sql\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Query\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{62}{section.10.29}%
+\contentsline {subsection}{\numberline {10.29.1}Descrição detalhada}{63}{subsection.10.29.1}%
+\contentsline {subsection}{\numberline {10.29.2}Construtores e Destrutores}{63}{subsection.10.29.2}%
+\contentsline {subsubsection}{\numberline {10.29.2.1}\_\_init\_\_()}{63}{subsubsection.10.29.2.1}%
+\contentsline {subsection}{\numberline {10.29.3}Documentação das funções}{63}{subsection.10.29.3}%
+\contentsline {subsubsection}{\numberline {10.29.3.1}\_fetch()}{63}{subsubsection.10.29.3.1}%
+\contentsline {subsubsection}{\numberline {10.29.3.2}\_find\_static\_table()}{63}{subsubsection.10.29.3.2}%
+\contentsline {subsubsection}{\numberline {10.29.3.3}\_get\_columns()}{63}{subsubsection.10.29.3.3}%
+\contentsline {subsubsection}{\numberline {10.29.3.4}\_table\_exists()}{64}{subsubsection.10.29.3.4}%
+\contentsline {subsubsection}{\numberline {10.29.3.5}detect\_force\_column()}{64}{subsubsection.10.29.3.5}%
+\contentsline {subsubsection}{\numberline {10.29.3.6}list\_test\_ids()}{64}{subsubsection.10.29.3.6}%
+\contentsline {subsubsection}{\numberline {10.29.3.7}load\_available\_y\_columns()}{64}{subsubsection.10.29.3.7}%
+\contentsline {subsubsection}{\numberline {10.29.3.8}load\_dynamic\_rows()}{64}{subsubsection.10.29.3.8}%
+\contentsline {subsubsection}{\numberline {10.29.3.9}load\_static\_row()}{65}{subsubsection.10.29.3.9}%
+\contentsline {subsection}{\numberline {10.29.4}Atributos}{65}{subsection.10.29.4}%
+\contentsline {subsubsection}{\numberline {10.29.4.1}conn}{65}{subsubsection.10.29.4.1}%
+\contentsline {section}{\numberline {10.30}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Static\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Result}{65}{section.10.30}%
+\contentsline {subsection}{\numberline {10.30.1}Descrição detalhada}{65}{subsection.10.30.1}%
+\contentsline {subsection}{\numberline {10.30.2}Atributos}{65}{subsection.10.30.2}%
+\contentsline {subsubsection}{\numberline {10.30.2.1}row}{65}{subsubsection.10.30.2.1}%
+\contentsline {subsubsection}{\numberline {10.30.2.2}table\_used}{65}{subsubsection.10.30.2.2}%
+\contentsline {section}{\numberline {10.31}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporters.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Technical\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Exporter}{66}{section.10.31}%
+\contentsline {subsection}{\numberline {10.31.1}Descrição detalhada}{66}{subsection.10.31.1}%
+\contentsline {subsection}{\numberline {10.31.2}Documentação das funções}{66}{subsection.10.31.2}%
+\contentsline {subsubsection}{\numberline {10.31.2.1}export()}{66}{subsubsection.10.31.2.1}%
+\contentsline {section}{\numberline {10.32}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Context}{66}{section.10.32}%
+\contentsline {subsection}{\numberline {10.32.1}Descrição detalhada}{66}{subsection.10.32.1}%
+\contentsline {subsection}{\numberline {10.32.2}Atributos}{66}{subsection.10.32.2}%
+\contentsline {subsubsection}{\numberline {10.32.2.1}cyl\_num}{66}{subsubsection.10.32.2.1}%
+\contentsline {subsubsection}{\numberline {10.32.2.2}test\_id}{67}{subsubsection.10.32.2.2}%
+\contentsline {section}{\numberline {10.33}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}repositories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Query\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repository}{67}{section.10.33}%
+\contentsline {subsection}{\numberline {10.33.1}Descrição detalhada}{67}{subsection.10.33.1}%
+\contentsline {subsection}{\numberline {10.33.2}Documentação das funções}{67}{subsection.10.33.2}%
+\contentsline {subsubsection}{\numberline {10.33.2.1}detect\_force\_column()}{67}{subsubsection.10.33.2.1}%
+\contentsline {subsubsection}{\numberline {10.33.2.2}list\_test\_ids()}{67}{subsubsection.10.33.2.2}%
+\contentsline {subsubsection}{\numberline {10.33.2.3}load\_available\_y\_columns()}{67}{subsubsection.10.33.2.3}%
+\contentsline {subsubsection}{\numberline {10.33.2.4}load\_dynamic\_rows()}{68}{subsubsection.10.33.2.4}%
+\contentsline {subsubsection}{\numberline {10.33.2.5}load\_static\_row()}{68}{subsubsection.10.33.2.5}%
+\contentsline {section}{\numberline {10.34}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}services.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Service}{68}{section.10.34}%
+\contentsline {subsection}{\numberline {10.34.1}Descrição detalhada}{68}{subsection.10.34.1}%
+\contentsline {subsection}{\numberline {10.34.2}Construtores e Destrutores}{68}{subsection.10.34.2}%
+\contentsline {subsubsection}{\numberline {10.34.2.1}\_\_init\_\_()}{68}{subsubsection.10.34.2.1}%
+\contentsline {subsection}{\numberline {10.34.3}Documentação das funções}{69}{subsection.10.34.3}%
+\contentsline {subsubsection}{\numberline {10.34.3.1}list\_test\_ids()}{69}{subsubsection.10.34.3.1}%
+\contentsline {subsubsection}{\numberline {10.34.3.2}load\_test()}{69}{subsubsection.10.34.3.2}%
+\contentsline {subsection}{\numberline {10.34.4}Atributos}{69}{subsection.10.34.4}%
+\contentsline {subsubsection}{\numberline {10.34.4.1}\_\_test\_\_}{69}{subsubsection.10.34.4.1}%
+\contentsline {subsubsection}{\numberline {10.34.4.2}cache}{69}{subsubsection.10.34.4.2}%
+\contentsline {subsubsection}{\numberline {10.34.4.3}repository}{69}{subsubsection.10.34.4.3}%
+\contentsline {section}{\numberline {10.35}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}infrastructure.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TTLCache}{69}{section.10.35}%
+\contentsline {subsection}{\numberline {10.35.1}Descrição detalhada}{70}{subsection.10.35.1}%
+\contentsline {subsection}{\numberline {10.35.2}Construtores e Destrutores}{70}{subsection.10.35.2}%
+\contentsline {subsubsection}{\numberline {10.35.2.1}\_\_init\_\_()}{70}{subsubsection.10.35.2.1}%
+\contentsline {subsection}{\numberline {10.35.3}Documentação das funções}{70}{subsection.10.35.3}%
+\contentsline {subsubsection}{\numberline {10.35.3.1}get()}{70}{subsubsection.10.35.3.1}%
+\contentsline {subsubsection}{\numberline {10.35.3.2}set()}{70}{subsubsection.10.35.3.2}%
+\contentsline {subsection}{\numberline {10.35.4}Atributos}{70}{subsection.10.35.4}%
+\contentsline {subsubsection}{\numberline {10.35.4.1}ttl\_seconds}{70}{subsubsection.10.35.4.1}%
+\contentsline {section}{\numberline {10.36}Referência da Classe src.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}domain.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Validation\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error}{70}{section.10.36}%
+\contentsline {subsection}{\numberline {10.36.1}Descrição detalhada}{71}{subsection.10.36.1}%
+\contentsline {chapter}{\numberline {11}Arquivos}{73}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Referência do Arquivo ENGENHARIA\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}REVERSA\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}SQL\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PROJETO\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}54.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md}{73}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Referência do Arquivo PERFORMANCE\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}REPORT\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}C01\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TESTE\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}001.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md}{73}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Referência do Arquivo PERFORMANCE\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}REPORT\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PROJETO54\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}HP\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FINAL.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md}{73}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Referência do Arquivo README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md}{73}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Referência do Arquivo dto.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{73}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Referência do Arquivo services.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{73}{section.11.6}%
+\contentsline {section}{\numberline {11.7}Referência do Arquivo validators.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{74}{section.11.7}%
+\contentsline {section}{\numberline {11.8}Referência do Arquivo settings.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{74}{section.11.8}%
+\contentsline {section}{\numberline {11.9}Referência do Arquivo errors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{74}{section.11.9}%
+\contentsline {section}{\numberline {11.10}Referência do Arquivo models.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{75}{section.11.10}%
+\contentsline {section}{\numberline {11.11}Referência do Arquivo cache.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{75}{section.11.11}%
+\contentsline {section}{\numberline {11.12}Referência do Arquivo cache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}redis.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{75}{section.11.12}%
+\contentsline {section}{\numberline {11.13}Referência do Arquivo csv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{75}{section.11.13}%
+\contentsline {section}{\numberline {11.14}Referência do Arquivo pdf\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}exporter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{76}{section.11.14}%
+\contentsline {section}{\numberline {11.15}Referência do Arquivo \discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{76}{section.11.15}%
+\contentsline {section}{\numberline {11.16}Referência do Arquivo application/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{76}{section.11.16}%
+\contentsline {section}{\numberline {11.17}Referência do Arquivo config/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{76}{section.11.17}%
+\contentsline {section}{\numberline {11.18}Referência do Arquivo domain/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{76}{section.11.18}%
+\contentsline {section}{\numberline {11.19}Referência do Arquivo infrastructure/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{76}{section.11.19}%
+\contentsline {section}{\numberline {11.20}Referência do Arquivo infrastructure/exporters/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{77}{section.11.20}%
+\contentsline {section}{\numberline {11.21}Referência do Arquivo infrastructure/sql/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{77}{section.11.21}%
+\contentsline {section}{\numberline {11.22}Referência do Arquivo ui/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py}{77}{section.11.22}%
+\contentsline {section}{\numberline {11.23}Referência do Arquivo connection.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{77}{section.11.23}%
+\contentsline {section}{\numberline {11.24}Referência do Arquivo domain/repositories.py}{77}{section.11.24}%
+\contentsline {section}{\numberline {11.25}Referência do Arquivo infrastructure/sql/repositories.py}{78}{section.11.25}%
+\contentsline {section}{\numberline {11.26}Referência do Arquivo safe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sql.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{78}{section.11.26}%
+\contentsline {section}{\numberline {11.27}Referência do Arquivo schema.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{78}{section.11.27}%
+\contentsline {section}{\numberline {11.28}Referência do Arquivo streamlit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}app.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{79}{section.11.28}%
+\contentsline {section}{\numberline {11.29}Referência do Arquivo theme.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{79}{section.11.29}%

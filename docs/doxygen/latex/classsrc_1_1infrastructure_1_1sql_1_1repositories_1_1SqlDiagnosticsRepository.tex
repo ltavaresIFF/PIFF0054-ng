@@ -1,0 +1,63 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+sql.\+repositories.\+Sql\+Diagnostics\+Repository}
+\hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository}{}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository}\index{src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_aea815fdfbfd8a2187a55e712b679fa8b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a7238234d8d41cee2d2aec398ca8384ef}{conn}})
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DiagnosticsInfo}{Diagnostics\+Info}} \mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a4832d1cf893b71e60ca625614040c14a}{diagnostics}} (self, dict\mbox{[}str, object\mbox{]} active\+\_\+context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a7238234d8d41cee2d2aec398ca8384ef}{conn}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Repositório SQL para diagnóstico do sistema.
+
+Verifica drivers ODBC instalados, testa a conexão com o banco
+e retorna o contexto ativo para depuração.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_aea815fdfbfd8a2187a55e712b679fa8b}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_aea815fdfbfd8a2187a55e712b679fa8b} 
+\index{src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Diagnostics\+Repository.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1infrastructure_1_1sql_1_1connection_1_1SqlServerConnection}{Sql\+Server\+Connection}}}]{conn }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o repositório.
+
+@param conn Gerenciador de conexão ODBC.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a4832d1cf893b71e60ca625614040c14a}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a4832d1cf893b71e60ca625614040c14a} 
+\index{src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}!diagnostics@{diagnostics}}
+\index{diagnostics@{diagnostics}!src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}}
+\doxysubsubsection{\texorpdfstring{diagnostics()}{diagnostics()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1DiagnosticsInfo}{Diagnostics\+Info}} src.\+infrastructure.\+sql.\+repositories.\+Sql\+Diagnostics\+Repository.\+diagnostics (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{dict\mbox{[}str, object\mbox{]}}]{active\+\_\+context }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Obtém diagnóstico completo do sistema.
+
+@param active_context Contexto ativo (cilindro, teste, linhas carregadas).
+@return DiagnosticsInfo com drivers, status da conexão e contexto.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a7238234d8d41cee2d2aec398ca8384ef}\label{classsrc_1_1infrastructure_1_1sql_1_1repositories_1_1SqlDiagnosticsRepository_a7238234d8d41cee2d2aec398ca8384ef} 
+\index{src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}!conn@{conn}}
+\index{conn@{conn}!src.infrastructure.sql.repositories.SqlDiagnosticsRepository@{src.infrastructure.sql.repositories.SqlDiagnosticsRepository}}
+\doxysubsubsection{\texorpdfstring{conn}{conn}}
+{\footnotesize\ttfamily src.\+infrastructure.\+sql.\+repositories.\+Sql\+Diagnostics\+Repository.\+conn}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{infrastructure_2sql_2repositories_8py}{infrastructure/sql/repositories.\+py}}\end{DoxyCompactItemize}

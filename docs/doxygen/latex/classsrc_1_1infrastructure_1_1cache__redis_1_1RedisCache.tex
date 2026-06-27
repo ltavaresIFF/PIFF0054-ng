@@ -1,0 +1,158 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache}
+\hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache}{}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache}\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a29a52ce25b2cccee0ae210db585c403d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, int\texorpdfstring{$\vert$}{|}None ttl\+\_\+seconds=None)
+\item 
+bool \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a4c900d142a7c83eb98acd5cfe1764652}{available}} (self)
+\item 
+Any\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a1b7cc758abe48aaf7379b6333ac786d2}{get}} (self, str key)
+\item 
+None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aa386e8b800fba224f818e0f0e69b437f}{set}} (self, str key, Any value)
+\item 
+None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a08191d46a78452eefd84059528157fa8}{delete}} (self, str key)
+\item 
+None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_af3f3135a68b3b3e868d88ca35b52a313}{flush}} (self)
+\item 
+str \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aaa1bdc838c4d08e8b1f33290fe7d496c}{\+\_\+\+\_\+repr\+\_\+\+\_\+}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a46d03de6372d5f2417a156ecc8feb887}{ttl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Membros protegidos}
+\begin{DoxyCompactItemize}
+\item 
+Any\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a022197ee7626e0cc1bdde156286334b7}{\+\_\+fallback\+\_\+get}} (self, str key)
+\item 
+None \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a57ef61a42bc32ef66c4716525d26f411}{\+\_\+fallback\+\_\+set}} (self, str key, Any value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos Protegidos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a36622e73c596ff28a8d6943630472820}{\+\_\+connected}}
+\item 
+\mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a910638ddf5f01b035cb1809760653e8c}{\+\_\+client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Cache Redis com fallback transparente em memória.
+
+Interface compatível com TTLCache. Tenta conectar ao Redis na
+inicialização; se falhar, opera em modo fallback com dicionário em memória.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a29a52ce25b2cccee0ae210db585c403d}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a29a52ce25b2cccee0ae210db585c403d} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int \texorpdfstring{$\vert$}{|} None }]{ttl\+\_\+seconds = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicializa o cache Redis com fallback.
+
+@param ttl_seconds TTL em segundos (padrão: PIFF_CACHE_TTL_SECONDS ou 300).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aaa1bdc838c4d08e8b1f33290fe7d496c}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aaa1bdc838c4d08e8b1f33290fe7d496c} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_\_repr\_\_@{\_\_repr\_\_}}
+\index{\_\_repr\_\_@{\_\_repr\_\_}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_\_repr\_\_()}{\_\_repr\_\_()}}
+{\footnotesize\ttfamily  str src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+\+\_\+repr\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Representação textual indicando o modo ativo.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a022197ee7626e0cc1bdde156286334b7}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a022197ee7626e0cc1bdde156286334b7} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_fallback\_get@{\_fallback\_get}}
+\index{\_fallback\_get@{\_fallback\_get}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_fallback\_get()}{\_fallback\_get()}}
+{\footnotesize\ttfamily  Any \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+fallback\+\_\+get (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Recupera do fallback em memória.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a57ef61a42bc32ef66c4716525d26f411}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a57ef61a42bc32ef66c4716525d26f411} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_fallback\_set@{\_fallback\_set}}
+\index{\_fallback\_set@{\_fallback\_set}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_fallback\_set()}{\_fallback\_set()}}
+{\footnotesize\ttfamily  None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+fallback\+\_\+set (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key,  }\item[{Any}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}@brief Armazena no fallback em memória.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a4c900d142a7c83eb98acd5cfe1764652}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a4c900d142a7c83eb98acd5cfe1764652} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!available@{available}}
+\index{available@{available}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily  bool src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+available (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Indica se a conexão com o Redis está ativa.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a08191d46a78452eefd84059528157fa8}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a08191d46a78452eefd84059528157fa8} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!delete@{delete}}
+\index{delete@{delete}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily  None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+delete (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Remove uma entrada do cache.
+
+@param key Chave da entrada a remover.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_af3f3135a68b3b3e868d88ca35b52a313}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_af3f3135a68b3b3e868d88ca35b52a313} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!flush@{flush}}
+\index{flush@{flush}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily  None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+flush (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Limpa todo o cache (Redis e fallback).
+
+@note Use com cuidado — afeta todas as chaves no banco Redis.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a1b7cc758abe48aaf7379b6333ac786d2}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a1b7cc758abe48aaf7379b6333ac786d2} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!get@{get}}
+\index{get@{get}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily  Any \texorpdfstring{$\vert$}{|} None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+get (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recupera um valor do cache (Redis ou fallback).
+
+@param key Chave da entrada.
+@return Valor desserializado ou None.
+\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aa386e8b800fba224f818e0f0e69b437f}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_aa386e8b800fba224f818e0f0e69b437f} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!set@{set}}
+\index{set@{set}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily  None src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+set (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{key,  }\item[{Any}]{value }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Armazena um valor no cache com TTL.
+
+@param key Chave da entrada.
+@param value Valor a armazenar (serializado para JSON).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Atributos}
+\Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a910638ddf5f01b035cb1809760653e8c}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a910638ddf5f01b035cb1809760653e8c} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_client@{\_client}}
+\index{\_client@{\_client}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_client}{\_client}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a36622e73c596ff28a8d6943630472820}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a36622e73c596ff28a8d6943630472820} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!\_connected@{\_connected}}
+\index{\_connected@{\_connected}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{\_connected}{\_connected}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+\_\+connected\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a46d03de6372d5f2417a156ecc8feb887}\label{classsrc_1_1infrastructure_1_1cache__redis_1_1RedisCache_a46d03de6372d5f2417a156ecc8feb887} 
+\index{src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}!ttl@{ttl}}
+\index{ttl@{ttl}!src.infrastructure.cache\_redis.RedisCache@{src.infrastructure.cache\_redis.RedisCache}}
+\doxysubsubsection{\texorpdfstring{ttl}{ttl}}
+{\footnotesize\ttfamily src.\+infrastructure.\+cache\+\_\+redis.\+Redis\+Cache.\+ttl}
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cache__redis_8py}{cache\+\_\+redis.\+py}}\end{DoxyCompactItemize}

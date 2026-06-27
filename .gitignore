@@ -6,6 +6,14 @@ dist/
 .venv/
 *.egg
 
+*.log
+
+#doxygen
+docs/doxygen/html/*
+docs/doxygen/pdf/*
+!docs/doxygen/pdf/refman
+
+
 # Streamlit
 .streamlit/
 

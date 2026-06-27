@@ -1,0 +1,41 @@
+\doxysection{Referência da Classe src.\+infrastructure.\+exporters.\+pdf\+\_\+exporter.\+Technical\+Pdf\+Exporter}
+\hypertarget{classsrc_1_1infrastructure_1_1exporters_1_1pdf__exporter_1_1TechnicalPdfExporter}{}\label{classsrc_1_1infrastructure_1_1exporters_1_1pdf__exporter_1_1TechnicalPdfExporter}\index{src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter@{src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter}}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+bytes \mbox{\hyperlink{classsrc_1_1infrastructure_1_1exporters_1_1pdf__exporter_1_1TechnicalPdfExporter_a1fe2ce33a2cbe7822b74457f05da5324}{export}} (self, \texorpdfstring{$\ast$}{*}pd.\+Data\+Frame rows, pd.\+Data\+Frame static\+\_\+row, dict\mbox{[}str, object\mbox{]} metadata, bytes\texorpdfstring{$\vert$}{|}None graph\+\_\+png, int sample\+\_\+max\+\_\+rows)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Gera relatório técnico em PDF com dados de ensaio.
+
+O relatório inclui: título, metadados, gráfico da série temporal
+(PNG), tabela de configuração estática e amostra dos dados dinâmicos.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1infrastructure_1_1exporters_1_1pdf__exporter_1_1TechnicalPdfExporter_a1fe2ce33a2cbe7822b74457f05da5324}\label{classsrc_1_1infrastructure_1_1exporters_1_1pdf__exporter_1_1TechnicalPdfExporter_a1fe2ce33a2cbe7822b74457f05da5324} 
+\index{src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter@{src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter}!export@{export}}
+\index{export@{export}!src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter@{src.infrastructure.exporters.pdf\_exporter.TechnicalPdfExporter}}
+\doxysubsubsection{\texorpdfstring{export()}{export()}}
+{\footnotesize\ttfamily  bytes src.\+infrastructure.\+exporters.\+pdf\+\_\+exporter.\+Technical\+Pdf\+Exporter.\+export (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\texorpdfstring{$\ast$}{*}pd.\+Data\+Frame}]{rows,  }\item[{pd.\+Data\+Frame}]{static\+\_\+row,  }\item[{dict\mbox{[}str, object\mbox{]}}]{metadata,  }\item[{bytes \texorpdfstring{$\vert$}{|} None}]{graph\+\_\+png,  }\item[{int}]{sample\+\_\+max\+\_\+rows }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Gera o relatório PDF completo.
+
+Compõe o documento com: título, metadados, gráfico PNG,
+tabela de dados estáticos e amostra dos dados dinâmicos.
+
+@param rows Dados dinâmicos da série temporal.
+@param static_row Dados estáticos de configuração.
+@param metadata Metadados do ensaio (banco, cilindro, teste).
+@param graph_png Imagem do gráfico em PNG (opcional).
+@param sample_max_rows Máximo de linhas na amostra da tabela.
+@return Bytes do arquivo PDF gerado.
+\end{DoxyVerb}
+ 
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pdf__exporter_8py}{pdf\+\_\+exporter.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\doxysection{Referência da Classe src.\+domain.\+repositories.\+Observation\+Command\+Repository}
+\hypertarget{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository}{}\label{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository}\index{src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}}
+Diagrama de hierarquia da classe src.\+domain.\+repositories.\+Observation\+Command\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationResult}{Observation\+Result}} \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a3984a0196f07a8d7e84fe4bc7acd27dc}{upsert\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} cmd)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationRecord}{Observation\+Record}}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_aeb69a1c10dd59406ef27216269b86f10}{get\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\item 
+bool \mbox{\hyperlink{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a371e964dcf631817ad31c6dd710786d8}{delete\+\_\+observation}} (self, \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Protocolo para operações CRUD de observações por coordenada.\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a371e964dcf631817ad31c6dd710786d8}\label{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a371e964dcf631817ad31c6dd710786d8} 
+\index{src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}!delete\_observation@{delete\_observation}}
+\index{delete\_observation@{delete\_observation}!src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}}
+\doxysubsubsection{\texorpdfstring{delete\_observation()}{delete\_observation()}}
+{\footnotesize\ttfamily  bool src.\+domain.\+repositories.\+Observation\+Command\+Repository.\+delete\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Remove uma observação pela chave composta.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_aeb69a1c10dd59406ef27216269b86f10}\label{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_aeb69a1c10dd59406ef27216269b86f10} 
+\index{src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}!get\_observation@{get\_observation}}
+\index{get\_observation@{get\_observation}!src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}}
+\doxysubsubsection{\texorpdfstring{get\_observation()}{get\_observation()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationRecord}{Observation\+Record}} \texorpdfstring{$\vert$}{|} None src.\+domain.\+repositories.\+Observation\+Command\+Repository.\+get\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recupera uma observação existente pela chave composta.\end{DoxyVerb}
+ \Hypertarget{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a3984a0196f07a8d7e84fe4bc7acd27dc}\label{classsrc_1_1domain_1_1repositories_1_1ObservationCommandRepository_a3984a0196f07a8d7e84fe4bc7acd27dc} 
+\index{src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}!upsert\_observation@{upsert\_observation}}
+\index{upsert\_observation@{upsert\_observation}!src.domain.repositories.ObservationCommandRepository@{src.domain.repositories.ObservationCommandRepository}}
+\doxysubsubsection{\texorpdfstring{upsert\_observation()}{upsert\_observation()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationResult}{Observation\+Result}} src.\+domain.\+repositories.\+Observation\+Command\+Repository.\+upsert\+\_\+observation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}}}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Cria ou atualiza uma observação em uma coordenada específica.\end{DoxyVerb}
+ 
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{domain_2repositories_8py}{domain/repositories.\+py}}\end{DoxyCompactItemize}

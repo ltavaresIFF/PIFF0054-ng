@@ -1,0 +1,300 @@
+\chapter{Relatório de Performance — PIFF-\/0054 · Consulta C01\+\_\+\+TESTE\+\_\+001}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001}{}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001}\index{Relatório de Performance — PIFF-\/0054 · Consulta C01\_TESTE\_001@{Relatório de Performance — PIFF-\/0054 · Consulta C01\_TESTE\_001}}
+\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md53}%
+\Hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md53}%
+ \begin{quote}
+{\bfseries{Data\+:}} 2026-\/06-\/26 ~\newline
+ {\bfseries{Cilindro\+:}} 1 \texorpdfstring{$\vert$}{|} {\bfseries{Ensaio\+:}} C01\+\_\+\+TESTE\+\_\+001 ~\newline
+ {\bfseries{Objetivo\+:}} Identificar a causa da lentidão na carga e renderização do gráfico \end{quote}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md54}{}\doxysection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md54}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md55}{}\doxysection{\texorpdfstring{1. Pipeline de Carga (\+Sequência Temporal)}{1. Pipeline de Carga (Sequência Temporal)}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md55}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sequenceDiagram}
+\DoxyCodeLine{\ \ \ \ actor\ User\ as\ 👤\ Usuário}
+\DoxyCodeLine{\ \ \ \ participant\ UI\ as\ 🖥️\ Streamlit\ UI}
+\DoxyCodeLine{\ \ \ \ participant\ SVC\ as\ 📦\ TestReadService}
+\DoxyCodeLine{\ \ \ \ participant\ CACHE\ as\ 🗄️\ TTLCache}
+\DoxyCodeLine{\ \ \ \ participant\ REPO\ as\ 🗃️\ SqlTestQueryRepo}
+\DoxyCodeLine{\ \ \ \ participant\ DB\ as\ 🏭\ SQL\ Server}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ User-\/>>UI:\ Clica\ "{}Carregar\ ensaio"{}}
+\DoxyCodeLine{\ \ \ \ UI-\/>>SVC:\ load\_test(1,\ "{}C01\_TESTE\_001"{})}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>CACHE:\ get("{}test:1:C01\_TESTE\_001"{})}
+\DoxyCodeLine{\ \ \ \ CACHE-\/-\/>>SVC:\ ❌\ MISS\ (cold\ path)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Note\ over\ SVC,DB:\ ═══\ FASE\ 1:\ Metadados\ ═══}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>REPO:\ load\_dynamic\_rows(ctx)}
+\DoxyCodeLine{\ \ \ \ REPO-\/>>DB:\ \_get\_columns("{}Cilindro\_01"{})<br/>SELECT\ TOP\ 0\ *\ FROM\ Cilindro\_01}
+\DoxyCodeLine{\ \ \ \ DB-\/-\/>>REPO:\ 20\ colunas\ |\ ⏱️\ 525\ ms}
+\DoxyCodeLine{\ \ \ \ REPO-\/>>DB:\ SELECT\ *\ FROM\ Cilindro\_01<br/>WHERE\ ID\_Teste\ =\ 'C01\_TESTE\_001'<br/>ORDER\ BY\ LocalCol}
+\DoxyCodeLine{\ \ \ \ DB-\/-\/>>REPO:\ 100\ rows\ |\ ⏱️\ 11.965\ ms\ 🔴}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Note\ over\ SVC,DB:\ ═══\ FASE\ 2:\ Dados\ Estáticos\ ═══}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>REPO:\ load\_static\_row(ctx)}
+\DoxyCodeLine{\ \ \ \ REPO-\/>>DB:\ \_find\_static\_table()<br/>sys.tables\ IN\ (...)\ |\ ⏱️\ 88\ ms}
+\DoxyCodeLine{\ \ \ \ REPO-\/>>DB:\ \_get\_columns(static)\ |\ ⏱️\ 249\ ms}
+\DoxyCodeLine{\ \ \ \ REPO-\/>>DB:\ SELECT\ *\ FROM\ static<br/>WHERE\ ID\_Teste\ =\ ?\ |\ ⏱️\ 356\ ms}
+\DoxyCodeLine{\ \ \ \ DB-\/-\/>>REPO:\ 1\ row}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Note\ over\ SVC,DB:\ ═══\ FASE\ 3:\ Metadados\ Y\ ═══}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>REPO:\ detect\_force\_column()\ →\ cached\ |\ ⏱️\ 0\ ms}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>REPO:\ load\_available\_y\_columns()\ →\ cached\ |\ ⏱️\ 0\ ms}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ SVC-\/>>CACHE:\ set("{}test:1:C01\_TESTE\_001"{},\ response)}
+\DoxyCodeLine{\ \ \ \ SVC-\/-\/>>UI:\ LoadTestResponse\ ✅}
+\DoxyCodeLine{\ \ \ \ UI-\/>>UI:\ \_plot\_multiaxis(df,\ y\_cols)<br/>Plotly\ render\ |\ ⏱️\ \string~500\ ms}
+\DoxyCodeLine{\ \ \ \ UI-\/-\/>>User:\ 📊\ Gráfico\ exibido}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md57}{}\doxysection{\texorpdfstring{2. Distribuição de Tempo por Subsistema}{2. Distribuição de Tempo por Subsistema}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md57}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\%\%\{init:\ \{'theme':\ 'base',\ 'themeVariables':\ \{'pie1':\ '\#f0883e',\ 'pie2':\ '\#5b9bd5',\ 'pie3':\ '\#6bbf6b',\ 'pie4':\ '\#e05555'\}\}\}\%\%}
+\DoxyCodeLine{pie\ showData}
+\DoxyCodeLine{\ \ \ \ title\ Tempo\ Total:\ \string~14.0\ segundos}
+\DoxyCodeLine{\ \ \ \ "{}SELECT\ dynamic\ (full\ scan)"{}\ :\ 11965}
+\DoxyCodeLine{\ \ \ \ "{}Plotly\ render"{}\ :\ 500}
+\DoxyCodeLine{\ \ \ \ "{}get\_columns\ (metadata)"{}\ :\ 774}
+\DoxyCodeLine{\ \ \ \ "{}SELECT\ static"{}\ :\ 356}
+\DoxyCodeLine{\ \ \ \ "{}table\_exists\ /\ connect"{}\ :\ 370}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md59}{}\doxysection{\texorpdfstring{3. Fluxograma do Problema}{3. Fluxograma do Problema}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md59}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{flowchart\ TD}
+\DoxyCodeLine{\ \ \ \ A["{}🟢\ Usuário\ clica\ Carregar"{}]\ -\/-\/>\ B["{}📦\ load\_test()\ chamado"{}]}
+\DoxyCodeLine{\ \ \ \ B\ -\/-\/>\ C\{"{}🗄️\ TTLCache\ hit?"{}\}}
+\DoxyCodeLine{\ \ \ \ C\ -\/-\/>|"{}Sim\ ✅\ (hot)"{}|\ Z["{}⚡\ Retorno\ <\ 1ms"{}]}
+\DoxyCodeLine{\ \ \ \ C\ -\/-\/>|"{}Não\ ❌\ (cold)"{}|\ D["{}📐\ \_get\_columns()<br/>⏱️\ 525\ ms"{}]}
+\DoxyCodeLine{\ \ \ \ D\ -\/-\/>\ E["{}🔴\ SELECT\ *\ FROM\ Cilindro\_01<br/>WHERE\ ID\_Teste\ =\ ?<br/>ORDER\ BY\ LocalCol<br/>⏱️\ 11.965\ ms"{}]}
+\DoxyCodeLine{\ \ \ \ E\ -\/-\/>\ F\{"{}❓\ Por\ que\ 12\ segundos<br/>para\ 100\ linhas?"{}\}}
+\DoxyCodeLine{\ \ \ \ F\ -\/-\/>\ G["{}❌\ FULL\ TABLE\ SCAN<br/>sem\ índice\ em\ ID\_Teste"{}]}
+\DoxyCodeLine{\ \ \ \ G\ -\/-\/>\ H["{}📊\ Tabela\ Cilindro\_01<br/>tem\ milhares/milhões\ de\ linhas<br/>varre\ TODAS\ para\ achar\ 100"{}]}
+\DoxyCodeLine{\ \ \ \ H\ -\/-\/>\ I["{}🛠️\ SOLUÇÃO:<br/>CREATE\ INDEX<br/>IX\_Cilindro\_01\_ID\_Teste\_LocalCol<br/>ON\ Cilindro\_01(ID\_Teste,\ LocalCol)<br/>INCLUDE\ (colunas)"{}]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ E\ fill:\#e05555,color:\#fff,stroke:\#a33}
+\DoxyCodeLine{\ \ \ \ style\ G\ fill:\#e05555,color:\#fff,stroke:\#a33}
+\DoxyCodeLine{\ \ \ \ style\ H\ fill:\#e05555,color:\#fff,stroke:\#a33}
+\DoxyCodeLine{\ \ \ \ style\ I\ fill:\#6bbf6b,color:\#fff,stroke:\#3a3}
+\DoxyCodeLine{\ \ \ \ style\ Z\ fill:\#6bbf6b,color:\#fff,stroke:\#3a3}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md61}{}\doxysection{\texorpdfstring{4. Detalhamento por Etapa}{4. Detalhamento por Etapa}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md61}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md62}{}\doxysubsection{\texorpdfstring{4.\+1 Metadados de Colunas ($<$tt$>$\+\_\+get\+\_\+columns$<$/tt$>$)}{4.1 Metadados de Colunas (<tt>\_get\_columns</tt>)}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md62}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Chamada   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Cacheável    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Chamada   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Cacheável    }\\\cline{1-4}
+\endhead
+{\ttfamily \+\_\+get\+\_\+columns("{}\+Cilindro\+\_\+01"{})}   &{\ttfamily SELECT TOP 0 \texorpdfstring{$\ast$}{*} FROM Cilindro\+\_\+01}   &{\bfseries{525 ms}}   &✅ Sim (instância)    \\\cline{1-4}
+{\ttfamily \+\_\+get\+\_\+columns("{}\+Cilindro\+\_\+01\+\_\+\+Estático"{})}   &{\ttfamily SELECT TOP 0 \texorpdfstring{$\ast$}{*} FROM \mbox{[}Cilindro\+\_\+01\+\_\+\+Estático\mbox{]}}   &{\bfseries{249 ms}}   &✅ Sim (instância)    \\\cline{1-4}
+Cache hit (segunda chamada)   &—   &{\bfseries{0 ms}}   &—   \\\cline{1-4}
+\end{longtabu}
+
+
+\begin{quote}
+{\bfseries{Nota\+:}} O {\ttfamily TOP 0} no SQL Server obtém apenas os metadados da tabela (schema) sem ler dados. O tempo de \texorpdfstring{$\sim$}{\string~}500ms reflete latência de rede + parsing do schema. \end{quote}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md63}{}\doxysubsection{\texorpdfstring{4.\+2 Descoberta de Tabela Estática ($<$tt$>$\+\_\+find\+\_\+static\+\_\+table$<$/tt$>$)}{4.2 Descoberta de Tabela Estática (<tt>\_find\_static\_table</tt>)}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md63}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Chamada   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Chamada   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo    }\\\cline{1-3}
+\endhead
+Verificar 4 candidatos   &{\ttfamily SELECT name FROM sys.\+tables WHERE name IN (?,?,?,?)}   &{\bfseries{88 ms}}   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{quote}
+{\bfseries{Nota\+:}} Otimização já aplicada — consulta única com {\ttfamily IN} em vez de 4× {\ttfamily SELECT 1 FROM sys.\+tables}. \end{quote}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md64}{}\doxysubsection{\texorpdfstring{4.\+3 🔴 Query Dinâmica — O Gargalo}{4.3 🔴 Query Dinâmica — O Gargalo}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md64}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Linhas Retornadas   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \% do Total    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Linhas Retornadas   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \% do Total    }\\\cline{1-4}
+\endhead
+`SELECT \texorpdfstring{$\ast$}{*} FROM Cilindro\+\_\+01 WHERE Cilindro\+\_\+01\+\_\+\+ID\+\_\+\+Teste = \textquotesingle{}C01\+\_\+\+TESTE\+\_\+001' ORDER BY Local\+Col\`{}   &100   &{\bfseries{11.\+965 ms}}   &{\bfseries{85.\+5\%}}   \\\cline{1-4}
+\end{longtabu}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md65}{}\doxysubsubsection{\texorpdfstring{Por que 12 segundos para 100 linhas?}{Por que 12 segundos para 100 linhas?}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md65}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{flowchart\ LR}
+\DoxyCodeLine{\ \ \ \ subgraph\ "{}Cilindro\_01\ (sem\ índice)"{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ A["{}Row\ 1"{}]\ -\/-\/>\ B["{}Row\ 2"{}]\ -\/-\/>\ C["{}..."{}]\ -\/-\/>\ D["{}Row\ N"{}]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ style\ A\ fill:\#1a1f24,stroke:\#f0883e,color:\#ece8de}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ style\ B\ fill:\#1a1f24,stroke:\#f0883e,color:\#ece8de}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ style\ C\ fill:\#1a1f24,stroke:\#f0883e,color:\#ece8de}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ style\ D\ fill:\#1a1f24,stroke:\#f0883e,color:\#ece8de}
+\DoxyCodeLine{\ \ \ \ end}
+\DoxyCodeLine{\ \ \ \ E["{}SQL\ Server"{}]\ -\/-\/>|"{}TABLE\ SCAN:\ lê\ TODAS\ as\ N\ linhas"{}|\ A}
+\DoxyCodeLine{\ \ \ \ E\ -\/-\/>|"{}Filtra\ ID\_Teste\ =\ 'C01\_TESTE\_001'"{}|\ F["{}100\ linhas\ ✅"{}]}
+\DoxyCodeLine{\ \ \ \ E\ -\/-\/>|"{}Descarta"{}|\ G["{}N-\/100\ linhas\ ❌"{}]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ E\ fill:\#e05555,color:\#fff}
+\DoxyCodeLine{\ \ \ \ style\ F\ fill:\#6bbf6b,color:\#fff}
+\DoxyCodeLine{\ \ \ \ style\ G\ fill:\#555,color:\#ccc}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item O SQL Server {\bfseries{varre a tabela inteira}} ({\ttfamily Cilindro\+\_\+01}) linha por linha
+\item Para cada linha, verifica se `Cilindro\+\_\+01\+\_\+\+ID\+\_\+\+Teste = \textquotesingle{}C01\+\_\+\+TESTE\+\_\+001'{\ttfamily }
+\item {\ttfamily A tabela contém \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}dezenas/centenas de milhares\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} de linhas (todos os ensaios de todos os tempos)}
+\item {\ttfamily Apenas 100 linhas pertencem ao ensaio}C01\+\_\+\+TESTE\+\_\+001\`{}
+\item {\bfseries{Sem índice}}, o SQL Server não tem como "{}pular"{} direto para as linhas do ensaio
+\end{DoxyItemize}\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md66}{}\doxysubsection{\texorpdfstring{4.\+4 Query Estática}{4.4 Query Estática}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md66}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Linhas   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Query   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Linhas   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo    }\\\cline{1-3}
+\endhead
+{\ttfamily SELECT \texorpdfstring{$\ast$}{*} FROM \mbox{[}Cilindro\+\_\+01\+\_\+\+Estático\mbox{]} WHERE Cilindro\+\_\+01\+\_\+\+ID\+\_\+\+Teste = ?}   &1   &{\bfseries{356 ms}}   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{quote}
+{\bfseries{Nota\+:}} Significativamente mais rápida porque a tabela estática é muito menor (1 linha por ensaio). \end{quote}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md67}{}\doxysection{\texorpdfstring{$<$/blockquote$>$}{</blockquote>}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md67}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md68}{}\doxysection{\texorpdfstring{5. Causa Raiz}{5. Causa Raiz}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md68}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mindmap}
+\DoxyCodeLine{\ \ root((🔴\ Lentidão<br/>\string~14s\ total))}
+\DoxyCodeLine{\ \ \ \ SELECT\ Dynamic}
+\DoxyCodeLine{\ \ \ \ \ \ 12\ segundos}
+\DoxyCodeLine{\ \ \ \ \ \ 85\%\ do\ tempo}
+\DoxyCodeLine{\ \ \ \ \ \ Full\ Table\ Scan}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Sem\ índice\ em\ ID\_Teste}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Milhares\ de\ linhas\ na\ tabela}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Apenas\ 100\ relevantes}
+\DoxyCodeLine{\ \ \ \ Metadados}
+\DoxyCodeLine{\ \ \ \ \ \ \string~800\ ms}
+\DoxyCodeLine{\ \ \ \ \ \ 5\%\ do\ tempo}
+\DoxyCodeLine{\ \ \ \ \ \ TOP\ 0\ query}
+\DoxyCodeLine{\ \ \ \ \ \ Cache\ de\ instância\ eficaz}
+\DoxyCodeLine{\ \ \ \ Conexão\ ODBC}
+\DoxyCodeLine{\ \ \ \ \ \ \string~300\ ms}
+\DoxyCodeLine{\ \ \ \ \ \ 2\%\ do\ tempo}
+\DoxyCodeLine{\ \ \ \ \ \ Pool\ de\ conexão\ ativo}
+\DoxyCodeLine{\ \ \ \ Plotly\ Render}
+\DoxyCodeLine{\ \ \ \ \ \ \string~500\ ms}
+\DoxyCodeLine{\ \ \ \ \ \ 4\%\ do\ tempo}
+\DoxyCodeLine{\ \ \ \ \ \ Aceitável\ para\ 100\ pts}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md70}{}\doxysection{\texorpdfstring{6. Solução}{6. Solução}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md70}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md71}{}\doxysubsection{\texorpdfstring{Índice Ausente (já documentado no projeto)}{Índice Ausente (já documentado no projeto)}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md71}
+O script {\ttfamily sql/performance/02\+\_\+create\+\_\+composite\+\_\+indexes.\+sql} {\bfseries{já existe no workspace}} mas {\bfseries{não foi aplicado}} ao banco {\ttfamily Projeto\+\_\+54}. Ele contém\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ NONCLUSTERED\ INDEX\ IX\_Cilindro\_01\_ID\_Teste\_LocalCol}
+\DoxyCodeLine{\textcolor{keyword}{ON}\ dbo.Cilindro\_01\ (Cilindro\_01\_ID\_Teste,\ LocalCol)}
+\DoxyCodeLine{INCLUDE\ (Forca,\ Pressao\_Compressor,\ Pressao\_Reguladora,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Temperatura\_Ambiente,\ Tipo\_Teste,\ LeituraIndice,\ Em\_Alarme);}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md72}{}\doxysubsection{\texorpdfstring{Impacto Estimado}{Impacto Estimado}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md72}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Cenário   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo SELECT Dynamic   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo Total   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Redução    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Cenário   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo SELECT Dynamic   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo Total   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Redução    }\\\cline{1-4}
+\endhead
+{\bfseries{Atual (sem índice)}}   &11.\+965 ms   &\texorpdfstring{$\sim$}{\string~}14.0 s   &—    \\\cline{1-4}
+{\bfseries{Com índice composto}}   &\texorpdfstring{$\sim$}{\string~}50-\/200 ms (estimado)   &\texorpdfstring{$\sim$}{\string~}1.5 s   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}89\%\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   \\\cline{1-4}
+\end{longtabu}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gantt}
+\DoxyCodeLine{\ \ \ \ title\ Comparação:\ Antes\ vs\ Depois\ do\ Índice}
+\DoxyCodeLine{\ \ \ \ dateFormat\ X}
+\DoxyCodeLine{\ \ \ \ axisFormat\ \%s}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ section\ Antes\ (sem\ índice)}
+\DoxyCodeLine{\ \ \ \ Connect\ +\ Metadata\ \ \ \ :done,\ a1,\ 0,\ 1000}
+\DoxyCodeLine{\ \ \ \ SELECT\ Dynamic\ 🔴\ \ \ \ \ :crit,\ a2,\ 1000,\ 13000}
+\DoxyCodeLine{\ \ \ \ SELECT\ Static\ \ \ \ \ \ \ \ \ :done,\ a3,\ 13000,\ 13400}
+\DoxyCodeLine{\ \ \ \ Plotly\ Render\ \ \ \ \ \ \ \ \ :done,\ a4,\ 13400,\ 14000}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ section\ Depois\ (com\ índice)}
+\DoxyCodeLine{\ \ \ \ Connect\ +\ Metadata\ \ \ \ :done,\ b1,\ 0,\ 1000}
+\DoxyCodeLine{\ \ \ \ SELECT\ Dynamic\ 🟢\ \ \ \ \ :active,\ b2,\ 1000,\ 1200}
+\DoxyCodeLine{\ \ \ \ SELECT\ Static\ \ \ \ \ \ \ \ \ :done,\ b3,\ 1200,\ 1600}
+\DoxyCodeLine{\ \ \ \ Plotly\ Render\ \ \ \ \ \ \ \ \ :done,\ b4,\ 1600,\ 2100}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md74}{}\doxysection{\texorpdfstring{7. Recomendações}{7. Recomendações}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md74}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ação   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Prioridade   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Impacto    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ação   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Prioridade   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Impacto    }\\\cline{1-4}
+\endhead
+1   &Executar {\ttfamily sql/performance/02\+\_\+create\+\_\+composite\+\_\+indexes.\+sql} no banco {\ttfamily Projeto\+\_\+54}   &🔴 {\bfseries{Crítica}}   &89\% de redução    \\\cline{1-4}
+2   &Executar {\ttfamily sql/performance/03\+\_\+update\+\_\+stats\+\_\+and\+\_\+index\+\_\+review.\+sql} para atualizar estatísticas   &🟡 Alta   &Otimizador de queries    \\\cline{1-4}
+3   &Após índice, reexecutar {\ttfamily bench.\+py} para validar melhoria   &🟡 Alta   &Confirmação    \\\cline{1-4}
+4   &Hot path (TTLCache) já cobre segundo acesso — manter TTL de 300s   &🟢 OK   &Cache hit \texorpdfstring{$<$}{<} 1ms   \\\cline{1-4}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md76}{}\doxysection{\texorpdfstring{8. Notas Técnicas}{8. Notas Técnicas}}\label{md_docs_2PERFORMANCE__REPORT__C01__TESTE__001_autotoc_md76}
+
+\begin{DoxyItemize}
+\item {\bfseries{ODBC Driver\+:}} {\ttfamily ODBC Driver 17 for SQL Server} com conexão Windows Authentication
+\item {\bfseries{Pool de conexão\+:}} Cada {\ttfamily fetch\+\_\+all()} abre e fecha uma conexão via {\ttfamily contextmanager}. O ODBC driver mantém pool interno, então o custo é \texorpdfstring{$\sim$}{\string~}280-\/330ms por nova conexão física (amortizado pelo pool após a primeira)
+\item {\bfseries{Cache de schema\+:}} {\ttfamily \+\_\+columns\+\_\+cache} e {\ttfamily \+\_\+tables\+\_\+cache} são dicionários Python na instância do repositório — sobrevivem enquanto o objeto {\ttfamily Sql\+Test\+Query\+Repository} existir (session\+\_\+state no Streamlit)
+\item {\bfseries{Cache de dados\+:}} {\ttfamily TTLCache} com TTL de 300 segundos (5 min) — armazena o {\ttfamily Load\+Test\+Response} completo em memória 
+\end{DoxyItemize}

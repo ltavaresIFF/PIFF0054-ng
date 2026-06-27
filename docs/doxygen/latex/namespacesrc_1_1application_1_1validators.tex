@@ -1,0 +1,102 @@
+\doxysection{Refência do Namespace src.\+application.\+validators}
+\hypertarget{namespacesrc_1_1application_1_1validators}{}\label{namespacesrc_1_1application_1_1validators}\index{src.application.validators@{src.application.validators}}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_a9fe0216fc9d60214b9d6d76785fcf524}{validate\+\_\+cylinder}} (int cyl\+\_\+num)
+\item 
+None \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_a0a2c1eae4f835a2b046191b593a83cab}{validate\+\_\+test\+\_\+id}} (str test\+\_\+id)
+\item 
+str\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_afb1566c93f2a9b9ca429f29516f136d1}{validate\+\_\+obs\+\_\+text}} (str\texorpdfstring{$\vert$}{|}None obs\+\_\+text)
+\item 
+None \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_a7ac70b423164d245c23bf8e960f28b6d}{validate\+\_\+y\+\_\+column\+\_\+name}} (str y\+\_\+column\+\_\+name)
+\item 
+\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_a9ca75842d64c9a94dc5044ba98941fab}{validate\+\_\+observation\+\_\+command}} (\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} cmd)
+\item 
+None \mbox{\hyperlink{namespacesrc_1_1application_1_1validators_a785e943f296407e1b7deb15cba76a1de}{validate\+\_\+observation\+\_\+lookup}} (\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}} lookup)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Funções de validação da camada de aplicação.
+
+Centraliza a validação de dados de entrada antes de alcançar
+o domínio, garantindo integridade das regras de negócio.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Funções}
+\Hypertarget{namespacesrc_1_1application_1_1validators_a9fe0216fc9d60214b9d6d76785fcf524}\label{namespacesrc_1_1application_1_1validators_a9fe0216fc9d60214b9d6d76785fcf524} 
+\index{src.application.validators@{src.application.validators}!validate\_cylinder@{validate\_cylinder}}
+\index{validate\_cylinder@{validate\_cylinder}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_cylinder()}{validate\_cylinder()}}
+{\footnotesize\ttfamily  None src.\+application.\+validators.\+validate\+\_\+cylinder (\begin{DoxyParamCaption}\item[{int}]{cyl\+\_\+num }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida se o número do cilindro está no intervalo permitido (1 a 6).
+
+@param cyl_num Número do cilindro a validar.
+@raise ValidationError Se cyl_num não estiver entre 1 e 6.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1application_1_1validators_afb1566c93f2a9b9ca429f29516f136d1}\label{namespacesrc_1_1application_1_1validators_afb1566c93f2a9b9ca429f29516f136d1} 
+\index{src.application.validators@{src.application.validators}!validate\_obs\_text@{validate\_obs\_text}}
+\index{validate\_obs\_text@{validate\_obs\_text}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_obs\_text()}{validate\_obs\_text()}}
+{\footnotesize\ttfamily  str \texorpdfstring{$\vert$}{|} None src.\+application.\+validators.\+validate\+\_\+obs\+\_\+text (\begin{DoxyParamCaption}\item[{str \texorpdfstring{$\vert$}{|} None}]{obs\+\_\+text }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida e normaliza o texto de observação.
+
+Remove espaços extras e verifica o limite máximo de 500 caracteres.
+
+@param obs_text Texto da observação a validar.
+@return Texto normalizado, ou None se vazio após trim.
+@raise ValidationError Se o texto exceder 500 caracteres.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1application_1_1validators_a9ca75842d64c9a94dc5044ba98941fab}\label{namespacesrc_1_1application_1_1validators_a9ca75842d64c9a94dc5044ba98941fab} 
+\index{src.application.validators@{src.application.validators}!validate\_observation\_command@{validate\_observation\_command}}
+\index{validate\_observation\_command@{validate\_observation\_command}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_observation\_command()}{validate\_observation\_command()}}
+{\footnotesize\ttfamily  \mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}} src.\+application.\+validators.\+validate\+\_\+observation\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationCommand}{Observation\+Command}}}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida e normaliza um comando de observação completo.
+
+Aplica todas as validações individuais e retorna um novo
+ObservationCommand com dados normalizados.
+
+@param cmd Comando de observação a validar.
+@return ObservationCommand validado e normalizado.
+@raise ValidationError Se qualquer campo obrigatório estiver inválido.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1application_1_1validators_a785e943f296407e1b7deb15cba76a1de}\label{namespacesrc_1_1application_1_1validators_a785e943f296407e1b7deb15cba76a1de} 
+\index{src.application.validators@{src.application.validators}!validate\_observation\_lookup@{validate\_observation\_lookup}}
+\index{validate\_observation\_lookup@{validate\_observation\_lookup}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_observation\_lookup()}{validate\_observation\_lookup()}}
+{\footnotesize\ttfamily  None src.\+application.\+validators.\+validate\+\_\+observation\+\_\+lookup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsrc_1_1domain_1_1models_1_1ObservationLookup}{Observation\+Lookup}}}]{lookup }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida os campos de uma chave de busca de observação.
+
+@param lookup Chave de busca a validar.
+@raise ValidationError Se qualquer campo obrigatório estiver inválido.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1application_1_1validators_a0a2c1eae4f835a2b046191b593a83cab}\label{namespacesrc_1_1application_1_1validators_a0a2c1eae4f835a2b046191b593a83cab} 
+\index{src.application.validators@{src.application.validators}!validate\_test\_id@{validate\_test\_id}}
+\index{validate\_test\_id@{validate\_test\_id}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_test\_id()}{validate\_test\_id()}}
+{\footnotesize\ttfamily  None src.\+application.\+validators.\+validate\+\_\+test\+\_\+id (\begin{DoxyParamCaption}\item[{str}]{test\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida se o identificador do teste não está vazio.
+
+@param test_id Identificador do teste a validar.
+@raise ValidationError Se test_id for nulo ou composto apenas por espaços.
+\end{DoxyVerb}
+ \Hypertarget{namespacesrc_1_1application_1_1validators_a7ac70b423164d245c23bf8e960f28b6d}\label{namespacesrc_1_1application_1_1validators_a7ac70b423164d245c23bf8e960f28b6d} 
+\index{src.application.validators@{src.application.validators}!validate\_y\_column\_name@{validate\_y\_column\_name}}
+\index{validate\_y\_column\_name@{validate\_y\_column\_name}!src.application.validators@{src.application.validators}}
+\doxysubsubsection{\texorpdfstring{validate\_y\_column\_name()}{validate\_y\_column\_name()}}
+{\footnotesize\ttfamily  None src.\+application.\+validators.\+validate\+\_\+y\+\_\+column\+\_\+name (\begin{DoxyParamCaption}\item[{str}]{y\+\_\+column\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Valida se o nome da coluna Y não está vazio.
+
+@param y_column_name Nome da coluna Y a validar.
+@raise ValidationError Se y_column_name for nulo ou vazio.
+\end{DoxyVerb}
+ 

@@ -1,0 +1,267 @@
+\chapter{Relatório Final\+: Projeto\+\_\+54 — Comparativo de 5 Estratégias}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL}{}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL}\index{Relatório Final: Projeto\_54 — Comparativo de 5 Estratégias@{Relatório Final: Projeto\_54 — Comparativo de 5 Estratégias}}
+\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md77}%
+\Hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md77}%
+ \hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md78}{}\doxysection{\texorpdfstring{1. As 5 Opções em Competição}{1. As 5 Opções em Competição}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md78}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Motor   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Estratégia    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Motor   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Estratégia    }\\\cline{1-4}
+\endhead
+1   &{\bfseries{Old}}   &SQL Server   &Consulta direta na tabela {\ttfamily Cilindro\+\_\+01}    \\\cline{1-4}
+2   &{\bfseries{Old + Redis}}   &SQL Server + Redis   &Cache Redis\+: busca no banco 1×, depois em RAM    \\\cline{1-4}
+3   &{\bfseries{ng}}   &SQL Server   &JOIN entre 3 tabelas normalizadas    \\\cline{1-4}
+4   &{\bfseries{HP}}   &SQL Server   &Clustered seek + índices covering + compressão    \\\cline{1-4}
+5   &{\bfseries{HP + Redis}}   &SQL Server + Redis   &Cache Redis\+: busca no banco 1×, depois em RAM   \\\cline{1-4}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md80}{}\doxysection{\texorpdfstring{2. Resultados dos Benchmarks}{2. Resultados dos Benchmarks}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md80}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md81}{}\doxysubsection{\texorpdfstring{Consulta de Um Único Ensaio (\+Cilindro 01, ensaio 001 — 100 linhas)}{Consulta de Um Único Ensaio (Cilindro 01, ensaio 001 — 100 linhas)}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md81}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ Old\ SQL\ (1\ tabela)}}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ *\ \textcolor{keyword}{FROM}\ Cilindro\_01\ \textcolor{keyword}{WHERE}\ Cilindro\_01\_ID\_Teste\ =\ \textcolor{stringliteral}{'C01\_TESTE\_001'};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{-\/-\/\ Com\ Redis\ (ambos)}}
+\DoxyCodeLine{cache.\textcolor{keyword}{get}(\textcolor{stringliteral}{"{}test:1:C01\_TESTE\_001"{}})\ \ \#\ →\ \string~\textcolor{stringliteral}{0},\textcolor{stringliteral}{5}\ ms,\ sem\ \textcolor{keyword}{SQL}!}
+
+\end{DoxyCode}
+
+
+{\bfseries{Classificação final (do mais rápido ao mais lento)\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Old\ +\ Redis\ \ ████████████████\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.459\ ms\ \ 🥇}
+\DoxyCodeLine{HP\ +\ Redis\ \ \ ███████████████████\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.516\ ms\ \ 🥈}
+\DoxyCodeLine{Old\ SQL\ \ \ \ \ \ ████████████████████████████████████\ \ 1.140\ ms\ \ 🥉}
+\DoxyCodeLine{ng\ SQL\ \ \ \ \ \ \ ███████████████████████████████████████████\ \ 1.400\ ms}
+\DoxyCodeLine{HP\ SQL\ \ \ \ \ \ \ ████████████████████████████████████████████████\ \ 2.064\ ms}
+
+\end{DoxyCode}
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ vs mais lento   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho    }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ vs mais lento   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho    }\\\cline{1-5}
+\endhead
+🥇   &{\bfseries{Old + Redis}}   &{\bfseries{0,459 ms}}   &{\bfseries{77,8\% mais rápido}}   &{\bfseries{4,5×}}    \\\cline{1-5}
+🥈   &{\bfseries{HP + Redis}}   &0,516 ms   &75,0\% mais rápido   &4,0×    \\\cline{1-5}
+🥉   &Old SQL   &1,140 ms   &44,8\% mais rápido   &1,8×    \\\cline{1-5}
+4   &ng SQL   &1,400 ms   &32,2\% mais rápido   &1,5×    \\\cline{1-5}
+5   &HP SQL   &2,064 ms   &—   &—   \\\cline{1-5}
+\end{longtabu}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md82}{}\doxysubsection{\texorpdfstring{Todos os Dados de Um Cilindro (2.\+500 linhas)}{Todos os Dados de Um Cilindro (2.500 linhas)}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md82}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho vs Old SQL    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho vs Old SQL    }\\\cline{1-4}
+\endhead
+🥇   &{\bfseries{Old + Redis}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,50 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 🏆   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}30× mais rápido\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-4}
+🥇   &{\bfseries{HP + Redis}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,50 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 🏆   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}30× mais rápido\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-4}
+🥉   &Old SQL   &14,78 ms   &—    \\\cline{1-4}
+4   &ng SQL   &22,74 ms   &-\/54\%    \\\cline{1-4}
+5   &HP SQL   &30,62 ms   &-\/107\%   \\\cline{1-4}
+\end{longtabu}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md83}{}\doxysubsection{\texorpdfstring{25 Consultas Sequenciais (lote — aplicação real)}{25 Consultas Sequenciais (lote — aplicação real)}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md83}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo total   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Média/consulta   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho vs Old SQL    }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ \#   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo total   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Média/consulta   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ganho vs Old SQL    }\\\cline{1-5}
+\endhead
+🥇   &{\bfseries{Old + Redis}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,30 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,01 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}100×\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 🏆    \\\cline{1-5}
+🥇   &{\bfseries{HP + Redis}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,30 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,01 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}100×\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 🏆    \\\cline{1-5}
+🥉   &Old SQL   &29,27 ms   &1,17 ms   &—    \\\cline{1-5}
+4   &HP SQL   &43,64 ms   &1,75 ms   &-\/49\%   \\\cline{1-5}
+\end{longtabu}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md84}{}\doxysubsection{\texorpdfstring{Consulta Cross-\/\+Cilindro}{Consulta Cross-Cilindro}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md84}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Viabilidade    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sistema   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tempo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Viabilidade    }\\\cline{1-3}
+\endhead
+🏆 {\bfseries{HP + Redis}}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,10 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &✅ Cacheável    \\\cline{1-3}
+HP (SQL)   &2,86 ms   &✅ Possível    \\\cline{1-3}
+Old + Redis   &❌ {\bfseries{Impossível}}   &❌ Dados em tabelas separadas    \\\cline{1-3}
+Old (SQL)   &❌ {\bfseries{Impossível}}   &❌ Schemas incompatíveis   \\\cline{1-3}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md86}{}\doxysection{\texorpdfstring{3. Análise}{3. Análise}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md86}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md87}{}\doxysubsection{\texorpdfstring{Comparação Direta\+: Old + Redis vs HP + Redis}{Comparação Direta: Old + Redis vs HP + Redis}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md87}
+Ambos entregam {\bfseries{praticamente o mesmo tempo}} quando usam cache Redis\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Aspecto   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old + Redis   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP + Redis    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Aspecto   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old + Redis   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP + Redis    }\\\cline{1-3}
+\endhead
+Tempo (1 ensaio)   &{\bfseries{0,459 ms}} 🥇   &0,516 ms    \\\cline{1-3}
+Tempo (25 lote)   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,30 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,30 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-3}
+Cross-\/cilindro   &❌ Impossível   &✅ {\bfseries{Possível}} 🏆    \\\cline{1-3}
+Schema único   &❌ 27 tabelas   &✅ {\bfseries{3 tabelas}} 🏆    \\\cline{1-3}
+Compressão   &❌   &✅ {\bfseries{PAGE}} 🏆    \\\cline{1-3}
+Fallback Redis   &✅   &✅    \\\cline{1-3}
+Manutenção   &❌ Complexa   &✅ {\bfseries{Simples}} 🏆   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{quote}
+{\bfseries{Conclusão\+:}} A diferença de {\bfseries{0,057 ms}} entre Old+\+Redis e HP+\+Redis é irrelevante. O HP+\+Redis oferece {\bfseries{todos os benefícios arquiteturais}} com a {\bfseries{mesma velocidade}} do cache Redis. \end{quote}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md88}{}\doxysubsection{\texorpdfstring{Por que Old SQL é mais rápido que HP SQL (sem cache)?}{Por que Old SQL é mais rápido que HP SQL (sem cache)?}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md88}
+O banco antigo divide os dados em {\bfseries{1 tabela por cilindro}} (2.\+500 linhas cada). A árvore-\/B do clustered index tem {\bfseries{2 níveis}}. O HP unifica tudo em uma tabela de {\bfseries{30.\+000 linhas}} — a árvore-\/B tem {\bfseries{3 níveis}}, adicionando \texorpdfstring{$\sim$}{\string~}0,9ms por consulta.
+
+{\bfseries{Com Redis, essa diferença desaparece}} — ambos os bancos entregam \texorpdfstring{$\sim$}{\string~}0,5ms.\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md89}{}\doxysubsection{\texorpdfstring{Comparação Visual Completa}{Comparação Visual Completa}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md89}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ 0,0ms\ \ \ \ 0,5ms\ \ \ \ 1,0ms\ \ \ \ 1,5ms\ \ \ \ 2,0ms}
+\DoxyCodeLine{────────────────────┼────────────────────────────────────────────}
+\DoxyCodeLine{Old\ +\ Redis\ \ \ 🥇\ \ \ \ │\ \ ████\ \ 0,459ms}
+\DoxyCodeLine{HP\ +\ Redis\ \ \ \ 🥈\ \ \ \ │\ \ █████\ \ 0,516ms}
+\DoxyCodeLine{Old\ SQL\ \ \ \ \ \ \ 🥉\ \ \ \ │\ \ ██████████████\ \ 1,140ms}
+\DoxyCodeLine{ng\ SQL\ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ ████████████████████\ \ 1,400ms}
+\DoxyCodeLine{HP\ SQL\ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ ██████████████████████████████\ \ 2,064ms}
+\DoxyCodeLine{────────────────────┼────────────────────────────────────────────}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ Redis\ é\ \string~4×\ mais\ rápido\ que\ SQL\ puro!}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md91}{}\doxysection{\texorpdfstring{4. Implementação do Redis}{4. Implementação do Redis}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md91}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md92}{}\doxysubsection{\texorpdfstring{Arquitetura Atual}{Arquitetura Atual}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md92}
+A aplicação ({\ttfamily streamlit\+\_\+app.\+py}) já usa {\ttfamily Redis\+Cache} — substituição direta do {\ttfamily TTLCache}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Antes\ (memória\ local\ —\ reiniciava\ a\ cada\ rerun\ do\ Streamlit)}}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1cache}{src.infrastructure.cache}}\ \textcolor{keyword}{import}\ TTLCache}
+\DoxyCodeLine{cache\ =\ TTLCache(ttl\_seconds=300)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Agora\ (Redis\ compartilhado\ —\ persiste\ entre\ sessões)}}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacesrc_1_1infrastructure_1_1cache__redis}{src.infrastructure.cache\_redis}}\ \textcolor{keyword}{import}\ RedisCache}
+\DoxyCodeLine{cache\ =\ RedisCache(ttl\_seconds=300)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md93}{}\doxysubsection{\texorpdfstring{Fluxo de Funcionamento}{Fluxo de Funcionamento}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md93}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Requisição\ →\ RedisCache.get(chave)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ┌───────┴───────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ▼\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ Cache\ Hit\ \ \ \ \ \ Cache\ Miss}
+\DoxyCodeLine{\ \ \ \ (0,5\ ms)\ \ \ \ \ \ \ (1,1-\/2,0\ ms)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ SQL\ Server\ →\ popula\ Redis}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ cache.set(chave,\ dados)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ └───────┬───────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Retorna\ dados}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md94}{}\doxysubsection{\texorpdfstring{Fallback Automático}{Fallback Automático}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md94}
+Se o Redis estiver indisponível, o {\ttfamily Redis\+Cache} usa {\bfseries{dict em memória}} — a aplicação nunca quebra\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cache\ =\ RedisCache()}
+\DoxyCodeLine{print(cache.available)\ \ \textcolor{comment}{\#\ True\ =\ Redis,\ False\ =\ fallback\ memória}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md96}{}\doxysection{\texorpdfstring{5. Conclusão}{5. Conclusão}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md96}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md97}{}\doxysubsection{\texorpdfstring{Tabela Decisão Final}{Tabela Decisão Final}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md97}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Critério   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old+\+Redis 🥈   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP+\+Redis 🥇    }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Critério   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Old+\+Redis 🥈   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ HP+\+Redis 🥇    }\\\cline{1-5}
+\endhead
+Tempo (1 ensaio)   &1,14 ms   &{\bfseries{0,46 ms}}   &2,06 ms   &{\bfseries{0,52 ms}}    \\\cline{1-5}
+Tempo (25 lote)   &29,3 ms   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,3 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}   &43,6 ms   &\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\sim$}{\string~}0,3 ms\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}    \\\cline{1-5}
+Cross-\/cilindro   &❌   &❌   &✅ 2,86 ms   &✅ {\bfseries{0,1 ms}} 🏆    \\\cline{1-5}
+Schema único   &❌ 27 tabelas   &❌ 27   &✅ {\bfseries{3 tabelas}}   &✅ {\bfseries{3 tabelas}} 🏆    \\\cline{1-5}
+Compressão PAGE   &❌   &❌   &✅   &✅ 🏆    \\\cline{1-5}
+Integridade (FK)   &❌   &❌   &✅   &✅ 🏆    \\\cline{1-5}
+Fallback Redis   &❌   &✅   &❌   &✅ 🏆    \\\cline{1-5}
+Manutenção   &❌   &❌   &✅   &✅ 🏆   \\\cline{1-5}
+\end{longtabu}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md98}{}\doxysubsection{\texorpdfstring{Veredito Final}{Veredito Final}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md98}
+{\bfseries{🏆 {\ttfamily Projeto\+\_\+54\+\_\+\+HP + Redis} é a escolha definitiva.}}
+
+A diferença de {\bfseries{0,057 ms}} entre Old+\+Redis e HP+\+Redis é irrelevante (0,0057\% de 1 segundo). O HP+\+Redis oferece\+:
+
+
+\begin{DoxyItemize}
+\item ✅ {\bfseries{Mesma velocidade}} que o Old+\+Redis (\texorpdfstring{$\sim$}{\string~}0,5ms)
+\item ✅ {\bfseries{Cross-\/cilindro}} — impossível no schema antigo
+\item ✅ {\bfseries{3 tabelas}} vs 27 tabelas (manutenção simples)
+\item ✅ {\bfseries{Compressão PAGE}} — 63\% menos espaço
+\item ✅ {\bfseries{Integridade referencial}} com chaves estrangeiras
+\item ✅ {\bfseries{Fallback automático}} — se Redis cair, memória assume
+\item ✅ {\bfseries{Tipos {\ttfamily NUMERIC}}} — precisão exata
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{🥇\ HP\ +\ Redis\ =\ 0,516\ ms\ +\ cross-\/cilindro\ +\ manutenção\ simples}
+\DoxyCodeLine{🥈\ Old\ +\ Redis\ =\ 0,459\ ms\ (0,057ms\ mais\ rápido,\ mas\ sem\ cross-\/cilindro)}
+\DoxyCodeLine{🥉\ Old\ SQL\ =\ 1,140\ ms\ (funciona,\ sem\ os\ benefícios)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md99}{}\doxysubsection{\texorpdfstring{Comandos de Operação}{Comandos de Operação}}\label{md_docs_2PERFORMANCE__REPORT__PROJETO54__HP__FINAL_autotoc_md99}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Redis}
+\DoxyCodeLine{docker\ exec\ piff54-\/redis\ redis-\/cli\ ping\ \ \ \ \ \ \ \ \ \ \ \ \#\ →\ PONG}
+\DoxyCodeLine{docker\ exec\ piff54-\/redis\ redis-\/cli\ dbsize\ \ \ \ \ \ \ \ \ \ \#\ →\ (integer)\ N}
+\DoxyCodeLine{docker\ exec\ piff54-\/redis\ redis-\/cli\ flushdb\ \ \ \ \ \ \ \ \ \#\ limpar\ cache}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ver\ статус\ dos\ containers}
+\DoxyCodeLine{docker\ ps\ -\/-\/format\ "{}table\ \{\{.Names\}\}\(\backslash\)t\{\{.Status\}\}"{}\ |\ grep\ -\/E\ "{}piff54|redis"{}}
+
+\end{DoxyCode}
+ 

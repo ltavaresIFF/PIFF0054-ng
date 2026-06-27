@@ -1,0 +1,19 @@
+\doxysection{Refência do Namespace src.\+infrastructure.\+cache}
+\hypertarget{namespacesrc_1_1infrastructure_1_1cache}{}\label{namespacesrc_1_1infrastructure_1_1cache}\index{src.infrastructure.cache@{src.infrastructure.cache}}
+\doxysubsubsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1__Entry}{\+\_\+\+Entry}}
+\item 
+class \mbox{\hyperlink{classsrc_1_1infrastructure_1_1cache_1_1TTLCache}{TTLCache}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+\begin{DoxyVerb}@brief Cache simples em memória com expiração por TTL.
+
+Implementa a interface TTLCache (get/set) usando um dicionário em memória
+com expiração automática de entradas. Usado como fallback quando o Redis
+não está disponível.
+\end{DoxyVerb}
+ 
