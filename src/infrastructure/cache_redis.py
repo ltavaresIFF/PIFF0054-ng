@@ -1,12 +1,12 @@
-"""Cache Redis para o Projeto_54_HP.
+"""@brief Cache Redis com fallback em memória para o Projeto 54.
 
 Interface compatível com TTLCache (get/set) — substituição transparente.
 
 Estratégia:
   - Conecta ao Redis via variáveis de ambiente PIFF_REDIS_HOST / PIFF_REDIS_PORT
-  - Se Redis estiver indisponível, usa fallback em memória (dict)
-  - Serialização JSON com suporte a datetime/Decimal/pandas/numpy via custom encoder
-  - TTL configurável via PIFF_CACHE_TTL_SECONDS (default 300s)
+  - Se Redis estiver indisponível, usa fallback em dicionário em memória
+  - Serialização JSON com suporte a datetime, Decimal, pandas e numpy via encoder customizado
+  - TTL configurável via PIFF_CACHE_TTL_SECONDS (padrão: 300s)
 """
 
 from __future__ import annotations
@@ -25,7 +25,11 @@ except ImportError:
 
 
 class _CacheEncoder(json.JSONEncoder):
-    """Encoder JSON que serializa pandas DataFrames, numpy, Decimal e datetime."""
+    """@brief Encoder JSON que serializa pandas DataFrames, numpy, Decimal e datetime.
+
+    Permite armazenar objetos complexos do ecossistema científico Python
+    no Redis sem necessidade de serialização manual.
+    """
 
     def default(self, obj: Any) -> Any:
         try:
@@ -58,7 +62,11 @@ class _CacheEncoder(json.JSONEncoder):
 
 
 def _cache_decoder(dct: dict) -> Any:
-    """Decoder que reconstrói pandas DataFrames a partir do marcador __pandas_df__."""
+    """@brief Decodifica JSON reconhecendo marcadores internos do _CacheEncoder.
+
+    Reconstrói pandas DataFrames e Series a partir dos marcadores
+    __pandas_df__ e __pandas_series__.
+    """
     if "__pandas_df__" in dct:
         try:
             import pandas as pd
@@ -71,9 +79,17 @@ def _cache_decoder(dct: dict) -> Any:
 
 
 class RedisCache:
-    """Cache Redis com fallback em memória."""
+    """@brief Cache Redis com fallback transparente em memória.
+
+    Interface compatível com TTLCache. Tenta conectar ao Redis na
+    inicialização; se falhar, opera em modo fallback com dicionário em memória.
+    """
 
     def __init__(self, ttl_seconds: int | None = None):
+        """@brief Inicializa o cache Redis com fallback.
+
+        @param ttl_seconds TTL em segundos (padrão: PIFF_CACHE_TTL_SECONDS ou 300).
+        """
         self.ttl = ttl_seconds or int(os.getenv("PIFF_CACHE_TTL_SECONDS", "300"))
         self._connected = False
         self._client: _redis.Redis | None = None  # type: ignore[assignment]
@@ -88,11 +104,17 @@ class RedisCache:
                     port=port,
                     socket_connect_timeout=2,
                     decode_responses=True,
-                )
-                self._client.ping()
-                self._connected = True
-            except Exception:
-                self._connected = False
+        """@brief Indica se a conexão com o Redis está ativa."""
+        return self._connected
+
+    # ---- interface pública (compatível com TTLCache) ----
+
+    def get(self, key: str) -> Any | None:
+        """@brief Recupera um valor do cache (Redis ou fallback).
+
+        @param key Chave da entrada.
+        @return Valor desserializado ou None.
+        """
 
     @property
     def available(self) -> bool:
