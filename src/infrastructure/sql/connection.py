@@ -38,6 +38,7 @@ class SqlServerConnection:
             f"DATABASE={self.settings.sql_database};"
             f"UID={self.settings.sql_username};"
             f"PWD={self.settings.sql_password};"
+            "TrustServerCertificate=yes;"
         )
 
     @contextmanager

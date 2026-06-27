@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from io import BytesIO
 
@@ -11,7 +11,7 @@ from src.application.services import DiagnosticsService, ExportService, Observat
 from src.config.settings import SETTINGS
 from src.domain.errors import DomainError
 from src.domain.models import ObservationCommand, ObservationLookup
-from src.infrastructure.cache import TTLCache
+from src.infrastructure.cache_redis import RedisCache
 from src.infrastructure.exporters.csv_exporter import SemicolonCsvExporter
 from src.infrastructure.exporters.pdf_exporter import TechnicalPdfExporter
 from src.infrastructure.sql.connection import SqlServerConnection
@@ -28,7 +28,7 @@ def _build_services() -> tuple[TestReadService, ObservationService, ExportServic
     # survive across Streamlit rerenders (avoids rebuilding on every interaction).
     if "_svc" not in st.session_state:
         conn = SqlServerConnection(SETTINGS)
-        cache = TTLCache(ttl_seconds=SETTINGS.cache_ttl_seconds)
+        cache = RedisCache(ttl_seconds=SETTINGS.cache_ttl_seconds)
         test_repo = SqlTestQueryRepository(conn)
         obs_repo = SqlObservationRepository(conn)
         diag_repo = SqlDiagnosticsRepository(conn)
@@ -419,3 +419,7 @@ def main() -> None:
                 st.json(diagnostics)
             except Exception as exc:
                 st.error(_friendly_error(exc))
+
+
+if __name__ == "__main__":
+    main()

@@ -12,12 +12,12 @@ def _as_bool(value: str | None, default: bool = True) -> bool:
 
 @dataclass(frozen=True)
 class Settings:
-    sql_server: str = os.getenv("PIFF_SQL_SERVER", "localhost\\SQLEXPRESS")
+    sql_server: str = os.getenv("PIFF_SQL_SERVER", "localhost")
     sql_database: str = os.getenv("PIFF_SQL_DATABASE", "Projeto_54")
-    sql_username: str = os.getenv("PIFF_SQL_USERNAME", "")
-    sql_password: str = os.getenv("PIFF_SQL_PASSWORD", "")
-    sql_driver: str = os.getenv("PIFF_SQL_DRIVER", "ODBC Driver 17 for SQL Server")
-    trusted_connection: bool = _as_bool(os.getenv("PIFF_SQL_TRUSTED_CONNECTION"), default=True)
+    sql_username: str = os.getenv("PIFF_SQL_USERNAME", "sa")
+    sql_password: str = os.getenv("PIFF_SQL_PASSWORD", "P@ssw0rd_Projeto54!")
+    sql_driver: str = os.getenv("PIFF_SQL_DRIVER", "ODBC Driver 18 for SQL Server")
+    trusted_connection: bool = _as_bool(os.getenv("PIFF_SQL_TRUSTED_CONNECTION"), default=False)
     cache_ttl_seconds: int = int(os.getenv("PIFF_CACHE_TTL_SECONDS", "300"))
 
     @property
