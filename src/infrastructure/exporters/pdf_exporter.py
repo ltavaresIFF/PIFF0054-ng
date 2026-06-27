@@ -31,6 +31,18 @@ class TechnicalPdfExporter:
         graph_png: bytes | None,
         sample_max_rows: int,
     ) -> bytes:
+        """@brief Gera o relatório PDF completo.
+
+        Compõe o documento com: título, metadados, gráfico PNG,
+        tabela de dados estáticos e amostra dos dados dinâmicos.
+
+        @param rows Dados dinâmicos da série temporal.
+        @param static_row Dados estáticos de configuração.
+        @param metadata Metadados do ensaio (banco, cilindro, teste).
+        @param graph_png Imagem do gráfico em PNG (opcional).
+        @param sample_max_rows Máximo de linhas na amostra da tabela.
+        @return Bytes do arquivo PDF gerado.
+        """
         out = BytesIO()
         doc = SimpleDocTemplate(out, pagesize=A4, title="Relatorio Tecnico PIFF0054")
         styles = getSampleStyleSheet()

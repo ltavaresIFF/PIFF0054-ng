@@ -1,3 +1,10 @@
+"""@brief Aplicação Streamlit do Painel Técnico PIFF-0054.
+
+Interface web para visualização de ensaios industriais com gráficos
+multi-eixo interativos (Plotly), anotação de observações por coordenada
+e exportação de relatórios CSV/PDF.
+"""
+
 from __future__ import annotations
 
 from io import BytesIO
@@ -24,6 +31,14 @@ from src.ui.theme import inject_theme, render_kpis, render_signature_flow
 
 
 def _build_services() -> tuple[TestReadService, ObservationService, ExportService, DiagnosticsService]:
+    """@brief Constrói ou recupera os serviços da sessão Streamlit.
+
+    Os serviços são persistidos em st.session_state para que o cache TTL
+    e o cache de colunas do repositório sobrevivam aos rerenders do Streamlit,
+    evitando reconstrução em cada interação.
+
+    @return Tupla (TestReadService, ObservationService, ExportService, DiagnosticsService).
+    """
     # Persist services in session_state so TTLCache and repository column-cache
     # survive across Streamlit rerenders (avoids rebuilding on every interaction).
     if "_svc" not in st.session_state:
@@ -41,6 +56,16 @@ def _build_services() -> tuple[TestReadService, ObservationService, ExportServic
 
 
 def _plot_multiaxis(df: pd.DataFrame, y_cols: list[str]) -> go.Figure:
+    """@brief Gera gráfico multi-eixo interativo com Plotly.
+
+    Cada variável Y recebe um eixo próprio sobreposto, com posição
+    alternada (esquerda/direita) para visualização simultânea.
+    Paleta de cores "Industrial Precision" com 6 cores.
+
+    @param df DataFrame com os dados dinâmicos.
+    @param y_cols Lista de colunas Y a plotar.
+    @return Figure do Plotly (go.Figure).
+    """
     # Industrial Precision colour sequence
     _TRACE_COLORS = [
         "#f0883e",  # amber
@@ -118,12 +143,23 @@ def _plot_multiaxis(df: pd.DataFrame, y_cols: list[str]) -> go.Figure:
 
 
 def _friendly_error(exc: Exception) -> str:
+    """@brief Normaliza exceções para mensagens amigáveis ao usuário.
+
+    @param exc Exceção capturada.
+    @return String com mensagem legível para o operador.
+    """
     if isinstance(exc, DomainError):
         return str(exc)
     return "Falha inesperada. Verifique diagnosticos e configuracao de conexao."
 
 
 def main() -> None:
+    """@brief Ponto de entrada da aplicação Streamlit.
+
+    Configura a página, injeta o tema, constrói os serviços e
+    renderiza o fluxo completo de interação: seleção de ensaio,
+    visualização, anotação, exportação e diagnósticos.
+    """
     st.set_page_config(
         page_title="PIFF-0054 · Painel Tecnico",
         page_icon="⬡",

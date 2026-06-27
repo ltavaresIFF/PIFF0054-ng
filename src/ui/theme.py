@@ -1,9 +1,21 @@
+"""@brief Tema CSS personalizado "Industrial Precision" para o PIFF-0054.
+
+Define um tema escuro com paleta Steel & Amber, tipografia técnica
+(Barlow Condensed + IBM Plex Mono) e sistema de design tokenizado
+para consistência visual em toda a aplicação Streamlit.
+"""
+
 from __future__ import annotations
 
 import streamlit as st
 
 
 def inject_theme() -> None:
+    """@brief Injeta o CSS do tema industrial no Streamlit.
+
+    Aplica estilos para: fundo escuro com gradientes sutis, tipografia
+    técnica, inputs, seletores, botões, abas, tabelas e animações.
+    """
     st.markdown(
         """
         <style>

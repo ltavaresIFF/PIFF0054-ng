@@ -104,6 +104,14 @@ class RedisCache:
                     port=port,
                     socket_connect_timeout=2,
                     decode_responses=True,
+                )
+                self._client.ping()
+                self._connected = True
+            except Exception:
+                self._connected = False
+
+    @property
+    def available(self) -> bool:
         """@brief Indica se a conexão com o Redis está ativa."""
         return self._connected
 
@@ -115,14 +123,6 @@ class RedisCache:
         @param key Chave da entrada.
         @return Valor desserializado ou None.
         """
-
-    @property
-    def available(self) -> bool:
-        return self._connected
-
-    # ---- interface pública (compatível com TTLCache) ----
-
-    def get(self, key: str) -> Any | None:
         if self._connected and self._client:
             try:
                 raw = self._client.get(key)
@@ -134,6 +134,11 @@ class RedisCache:
         return self._fallback_get(key)
 
     def set(self, key: str, value: Any) -> None:
+        """@brief Armazena um valor no cache com TTL.
+
+        @param key Chave da entrada.
+        @param value Valor a armazenar (serializado para JSON).
+        """
         if self._connected and self._client:
             try:
                 serialized = json.dumps(value, cls=_CacheEncoder, ensure_ascii=False)
@@ -144,6 +149,10 @@ class RedisCache:
         self._fallback_set(key, value)
 
     def delete(self, key: str) -> None:
+        """@brief Remove uma entrada do cache.
+
+        @param key Chave da entrada a remover.
+        """
         if self._connected and self._client:
             try:
                 self._client.delete(key)
@@ -152,6 +161,10 @@ class RedisCache:
         self._fallback.pop(key, None)
 
     def flush(self) -> None:
+        """@brief Limpa todo o cache (Redis e fallback).
+
+        @note Use com cuidado — afeta todas as chaves no banco Redis.
+        """
         if self._connected and self._client:
             try:
                 self._client.flushdb()
@@ -162,6 +175,7 @@ class RedisCache:
     # ---- fallback em memória (TTLCache-like) ----
 
     def _fallback_get(self, key: str) -> Any | None:
+        """@brief Recupera do fallback em memória."""
         entry = self._fallback.get(key)
         if entry is None:
             return None
@@ -172,8 +186,10 @@ class RedisCache:
         return value
 
     def _fallback_set(self, key: str, value: Any) -> None:
+        """@brief Armazena no fallback em memória."""
         self._fallback[key] = (time.time() + self.ttl, value)
 
     def __repr__(self) -> str:
-        status = "Redis" if self._connected else "Memória (fallback)"
+        """@brief Representação textual indicando o modo ativo."""
+        status = "Redis" if self._connected else "Mem\u00f3ria (fallback)"
         return f"<RedisCache:{status} ttl={self.ttl}s>"
