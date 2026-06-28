@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-06-28T10:00:00.000Z" agent="Mozilla/5.0" version="24.7.6" etag="piff-54-arch">
+  <diagram name="Arquitetura PIFF-0054-ng" id="piff-54-arch">
+    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- LEGENDA / TÍTULO                                        -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="title" value="Arquitetura PIFF-0054-ng" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#f0883e;" vertex="1" parent="1">
+          <mxGeometry x="30" y="10" width="1340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Painel Técnico de Ensaios Industriais — Streamlit + SQL Server + Redis" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="30" y="48" width="1340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CAMADA DE APRESENTAÇÃO (UI)                              -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="layer-ui" value="Camada de Apresentação (UI)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=4;rounded=1;shadow=0;strokeColor=#f0883e;fillColor=#1a1f24;fontColor=#f0883e;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="300" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-app" value="app.py (ponto de entrada)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="40" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-streamlit" value="streamlit_app.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="78" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-tabs" value="Abas: Operação | Evidências | Diagnósticos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="116" width="276" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-plotly" value="Gráfico multi-eixo (Plotly)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="150" width="276" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-forms" value="Formulários: seleção, anotação, exportação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="184" width="276" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-kpi" value="KPIs e indicadores (render_kpis)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="218" width="276" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-theme" value="theme.py — Tema Industrial Precision" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="252" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-sig" value="Fluxo de controle de versão (render_signature_flow)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-ui">
+          <mxGeometry x="12" y="290" width="276" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CAMADA DE APLICAÇÃO                                       -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="layer-app" value="Camada de Aplicação (Application)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=4;rounded=1;shadow=0;strokeColor=#5b9bd5;fillColor=#1a1f24;fontColor=#5b9bd5;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="370" y="80" width="300" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="app-services" value="services.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="40" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="app-svc1" value="TestReadService — consulta com cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="78" width="276" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="app-svc2" value="ObservationService — CRUD observações" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="110" width="276" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="app-svc3" value="ExportService — CSV / PDF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="142" width="276" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="app-svc4" value="DiagnosticsService — diagnóstico do sistema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="174" width="276" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="app-dto" value="dto.py — LoadTestResponse, ExportPdfRequest" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="206" width="276" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="app-valid" value="validators.py — validação de entrada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="242" width="276" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="app-diag" value="Valida: cilindro (1-6), test_id, obs_text, y_column" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-app">
+          <mxGeometry x="12" y="278" width="276" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CAMADA DE DOMÍNIO                                         -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="layer-domain" value="Camada de Domínio (Domain)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=4;rounded=1;shadow=0;strokeColor=#6bbf6b;fillColor=#1a1f24;fontColor=#6bbf6b;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="710" y="80" width="300" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-models" value="models.py — Entidades e Value Objects" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="40" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-ent1" value="TestContext (cyl_num + test_id)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="78" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-ent2" value="ObservationCommand / ObservationLookup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="108" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-ent3" value="DynamicDataResult / StaticDataResult" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="138" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-ent4" value="ObservationRecord / ObservationResult" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="168" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-repos" value="repositories.py — Protocolos (interfaces)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="198" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-prot1" value="TestQueryRepository (leitura)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="236" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-prot2" value="ObservationCommandRepository (CRUD)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="266" width="276" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="domain-prot3" value="DiagnosticsRepository / CsvExporter / PdfExporter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-domain">
+          <mxGeometry x="12" y="296" width="276" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CAMADA DE INFRAESTRUTURA                                  -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="layer-infra" value="Camada de Infraestrutura (Infrastructure)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=4;rounded=1;shadow=0;strokeColor=#e8c84a;fillColor=#1a1f24;fontColor=#e8c84a;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="370" y="440" width="640" height="310" as="geometry" />
+        </mxCell>
+
+        <!-- SQL Block -->
+        <mxCell id="infra-sql-title" value="sql/ — Acesso a Dados (SQL Server)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-infra">
+          <mxGeometry x="12" y="40" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-conn" value="connection.py — SqlServerConnection (ODBC / pyodbc)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="12" y="78" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-repos" value="repositories.py — Implementações SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="12" y="110" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-sql-repo1" value="SqlTestQueryRepository (consulta dinâmica/estática)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="24" y="142" width="276" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-sql-repo2" value="SqlObservationRepository (CRUD observações)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="24" y="170" width="276" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-sql-repo3" value="SqlDiagnosticsRepository (diagnóstico)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="24" y="198" width="276" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-safe" value="safe_sql.py — Escape de identificadores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="12" y="226" width="300" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-schema" value="schema.py — Nomes canônicos de tabelas/colunas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="12" y="256" width="300" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Cache Block -->
+        <mxCell id="infra-cache-title" value="cache/ — Cache em Camadas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="40" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-cache-mem" value="cache.py — TTLCache (memória, fallback)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="78" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-cache-redis" value="cache_redis.py — RedisCache (com fallback)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="110" width="300" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-cache-enc" value="_CacheEncoder — JSON com pandas/numpy/datetime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="142" width="300" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Exporters Block -->
+        <mxCell id="infra-export-title" value="exporters/ — Exportação de Relatórios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="176" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-csv" value="csv_exporter.py — SemicolonCsvExporter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="214" width="300" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-pdf" value="pdf_exporter.py — TechnicalPdfExporter (ReportLab)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;fontStyle=0;" vertex="1" parent="layer-infra">
+          <mxGeometry x="328" y="244" width="300" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CONFIGURAÇÃO                                              -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="layer-config" value="Configuração (Config)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=4;rounded=1;shadow=0;strokeColor=#e05555;fillColor=#1a1f24;fontColor=#e05555;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="440" width="300" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-settings" value="settings.py — Settings (dataclass imutável)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e05555;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="layer-config">
+          <mxGeometry x="12" y="40" width="276" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-env1" value="PIFF_SQL_SERVER / PIFF_SQL_DATABASE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e05555;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-config">
+          <mxGeometry x="12" y="78" width="276" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-env2" value="PIFF_SQL_USERNAME / PIFF_SQL_PASSWORD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e05555;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-config">
+          <mxGeometry x="12" y="100" width="276" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-env3" value="PIFF_CACHE_TTL_SECONDS / PIFF_REDIS_HOST:PORT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e05555;fontColor=#ece8de;fontSize=9;arcSize=6;fontStyle=0;" vertex="1" parent="layer-config">
+          <mxGeometry x="12" y="122" width="276" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SISTEMAS EXTERNOS                                         -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="ext-sqlserver" value="SQL Server&#xa;Projeto_54" style="cylinder;html=1;whiteSpace=wrap;fillColor=#14181c;strokeColor=#9b8ec4;fontColor=#ece8de;fontSize=12;arcSize=6;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="650" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-redis" value="Redis&#xa;(cache opcional)" style="cylinder;html=1;whiteSpace=wrap;fillColor=#14181c;strokeColor=#9b8ec4;fontColor=#ece8de;fontSize=12;arcSize=6;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="170" y="650" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-output" value="Arquivos Gerados&#xa;CSV / PDF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#9b8ec4;fontColor=#ece8de;fontSize=12;arcSize=6;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="680" y="650" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS DE CONEXÃO — Camada de Apresentação → Aplicação    -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-ui-app" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f0883e;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-ui" target="layer-app">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-ui-app-label" value="Chama serviços" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="420" y="225" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS — Aplicação → Domínio                               -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-app-domain" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5b9bd5;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-app" target="layer-domain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-app-domain-label" value="Usa modelos e protocolos" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="760" y="225" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS — Aplicação → Infraestrutura                        -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-app-infra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5b9bd5;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-app" target="layer-infra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-app-infra-label" value="Injeta dependências" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="520" y="390" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS — Domínio → Infraestrutura                          -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-domain-infra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6bbf6b;strokeWidth=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-domain" target="layer-infra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-domain-infra-label" value="Protocolos → Implementações" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="760" y="390" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS — Config → Aplicação, Config → Infra               -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-cfg-app" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e05555;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-config" target="layer-infra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-cfg-app-label" value="Fornece configurações" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="350" y="500" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- SETAS — Infra → SQL Server, Redis, Arquivos              -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="edge-infra-sql" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e8c84a;strokeWidth=2;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-infra" target="ext-sqlserver">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-infra-sql-label" value="ODBC / pyodbc" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="105" y="595" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge-infra-redis" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e8c84a;strokeWidth=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-infra" target="ext-redis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-infra-redis-label" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="245" y="595" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge-infra-out" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e8c84a;strokeWidth=2;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer-infra" target="ext-output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-infra-out-label" value="bytes → download" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#ece8de;" vertex="1" connect="1" parent="1">
+          <mxGeometry x="680" y="595" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- LEGENDA DE CORES                                         -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1f24;strokeColor=#ece8de;fontColor=#ece8de;fontSize=11;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="440" width="280" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="Legenda" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="445" width="280" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-ui" value="Camada de Apresentação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#f0883e;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="480" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-ui-txt" value="Streamlit + Plotly + Tema" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="480" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-app" value="Camada de Aplicação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#5b9bd5;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="512" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-app-txt" value="Serviços + DTOs + Validadores" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="512" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-domain" value="Camada de Domínio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#6bbf6b;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="544" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-domain-txt" value="Modelos + Protocolos + Erros" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="544" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-infra" value="Camada de Infraestrutura" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e8c84a;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="576" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-infra-txt" value="SQL + Cache + Exportadores" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="576" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-config" value="Configuração" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#e05555;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="608" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-config-txt" value="Variáveis de ambiente" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="608" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-ext" value="Sistemas Externos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14181c;strokeColor=#9b8ec4;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="640" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-ext-txt" value="SQL Server / Redis / Arquivos" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="640" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-flow" value="Fluxo de dados" style="html=1;strokeColor=#ece8de;strokeWidth=2;fontColor=#ece8de;fontSize=10;verticalAlign=middle;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="678" width="24" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-flow-txt" value="Dependência / Fluxo" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="672" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-swim" value="Swimlane (container lógico)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1f24;strokeColor=#ece8de;fontColor=#ece8de;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="700" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-swim-txt" value="Agrupamento por camada" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="700" width="130" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- NOTAS INFORMATIVAS                                        -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="note-pip" value="Princípio: Inversão de Dependência&#xa;Domínio define protocolos → Infra implementa" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#e8c84a;" vertex="1" parent="1">
+          <mxGeometry x="710" y="770" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="note-tech" value="Empilhamento técnico: Streamlit 1.37+ · Plotly 5.23+ · pyodbc · ReportLab 4.2+ · Redis 5.0+ · pandas 2.2+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#ece8de;" vertex="1" parent="1">
+          <mxGeometry x="30" y="770" width="640" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
